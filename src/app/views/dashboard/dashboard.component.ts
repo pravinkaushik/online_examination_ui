@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   }
   ngOnInit() {
     debugger;
+    this.examConfigs = []
     this.loading = true;
     this.examConfigService.get_exam_config_list()
     .pipe(first())
@@ -41,4 +42,16 @@ export class DashboardComponent implements OnInit {
             this.loading = false;
         });
   }
+  goToEditExamConfig(id) {
+    this.router.navigate(['/theme/exam_config', id]);
+  } 
+
+  goToCandidates(id) {
+    this.router.navigate(['/theme/candidatelist', id]);
+  }
+
+  goToQuestions(id) {
+    this.router.navigate(['/theme/questionlist', id]);
+  }
+  
 }

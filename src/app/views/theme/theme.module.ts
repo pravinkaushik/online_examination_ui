@@ -7,15 +7,28 @@ import { TypographyComponent } from './typography.component';
 
 // Theme Routing
 import { ThemeRoutingModule } from './theme-routing.module';
-
+import { ExamConfigComponent } from './exam-config.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { CandidateComponent } from './candidate/candidate.component';
+import { CandidateListComponent } from './candidate-list/candidate-list.component';
+ 
 @NgModule({
   imports: [
     CommonModule,
-    ThemeRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    ThemeRoutingModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule    
   ],
   declarations: [
     ColorsComponent,
-    TypographyComponent
-  ]
+    TypographyComponent,
+    ExamConfigComponent,
+    CandidateComponent,
+    CandidateListComponent    
+  ],
+  bootstrap: [ ExamConfigComponent ]
 })
 export class ThemeModule { }

@@ -1,8 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { map, tap, catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
@@ -32,9 +31,15 @@ export class AuthenticationService {
             }));
     }
 
+    validate_login() {
+        return this.http.get<any>(`${environment.apiUrl}/validate_login`);
+    }
+    
+
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+        this.currentUserSubject = null;
     }
 }

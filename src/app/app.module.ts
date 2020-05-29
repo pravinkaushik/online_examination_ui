@@ -65,7 +65,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [
     AppComponent,

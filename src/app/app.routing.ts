@@ -10,7 +10,6 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { AuthGuard } from './_helpers/auth.guard';
 
-
 export const routes: Routes = [
   {
     path: 'dashboard',
@@ -41,13 +40,6 @@ export const routes: Routes = [
   },
   {
     path: 'logout',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
-  },
-  {
-    path: '',
     component: LoginComponent,
     data: {
       title: 'Login Page'
