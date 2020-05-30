@@ -1,0 +1,105 @@
+<div class="animated fadeIn">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <strong>Question</strong>
+          </div>
+          <form class="form-horizontal" >
+          <div class="card-body">
+             <div class="form-group row" *ngIf="!isCreate">
+                <label class="col-md-3 col-form-label">Question ID</label>
+                <div class="col-md-9"> {{exam_question.id}}
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="question">Question</label>
+                <div class="col-md-9">
+                  <input type="text" id="question" name="question" class="form-control" placeholder="Text" [(ngModel)]="exam_question.question">
+                  <span class="help-block">Provide Candidate Name</span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="choice1">Choice 1</label>
+                <div class="col-md-9">
+                  <input type="text" id="choice1" name="choice1" class="form-control" placeholder="Text" [(ngModel)]="exam_question.choice1">
+                  <div class="form-check"><span class="help-block">
+                    <input class="form-check-input" type="checkbox" id="checkboxchoice1" name="checkboxchoice1" [(ngModel)]="exam_question.is_choice1_correct" ng-true-value="1" ng-false-value="0">
+                    <label class="form-check-label" for="checkboxchoice1">Is Above answer correct</label>
+                    </span></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="choice1">Choice 2</label>
+                <div class="col-md-9">
+                  <input type="text" id="choice2" name="choice2" class="form-control" placeholder="Text" [(ngModel)]="exam_question.choice2">
+                  <div class="form-check"><span class="help-block">
+                    <input class="form-check-input" type="checkbox" id="checkboxchoice2" name="checkboxchoice2" [(ngModel)]="exam_question.is_choice2_correct" ng-true-value="1" ng-false-value="0">
+                    <label class="form-check-label" for="checkboxchoice2">Is Above answer correct</label>
+                    </span></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="choice3">Choice 3</label>
+                <div class="col-md-9">
+                  <input type="text" id="choice3" name="choice3" class="form-control" placeholder="Text" [(ngModel)]="exam_question.choice3">
+                  <div class="form-check"><span class="help-block">
+                    <input class="form-check-input" type="checkbox" id="checkboxchoice3" name="checkboxchoice3" [(ngModel)]="exam_question.is_choice3_correct" ng-true-value="1" ng-false-value="0">
+                    <label class="form-check-label" for="checkboxchoice3">Is Above answer correct</label>
+                </span></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="choice4">Choice 4</label>
+                <div class="col-md-9">
+                  <input type="text" id="choice4" name="choice4" class="form-control" placeholder="Text" [(ngModel)]="exam_question.choice4">
+                  <div class="form-check"><span class="help-block">
+                    <input class="form-check-input" type="checkbox" id="checkboxchoice4" name="checkboxchoice4" [(ngModel)]="exam_question.is_choice4_correct" ng-true-value="1" ng-false-value="0">
+                    <label class="form-check-label" for="checkboxchoice4">Is Above answer correct</label>
+                </span></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="choice5">Choice 5</label>
+                <div class="col-md-9">
+                  <input type="text" id="choice5" name="choice5" class="form-control" placeholder="Text" [(ngModel)]="exam_question.choice5">
+                  <div class="form-check"><span class="help-block">
+                    <input class="form-check-input" type="checkbox" id="checkboxchoice5" name="checkboxchoice5" [(ngModel)]="exam_question.is_choice5_correct" ng-true-value="1" ng-false-value="0">
+                    <label class="form-check-label" for="checkboxchoice5">Is Above answer correct</label>
+                </span></div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="positive_marks">Positive marks</label>
+                <div class="col-md-9">
+                  <input type="text" id="positive_marks" name="positive_marks" class="form-control" placeholder="Text" [(ngModel)]="exam_question.positive_marks">
+                  <span class="help-block">Number of marks for correct answer</span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="negative_marks">Negative marks</label>
+                <div class="col-md-9">
+                  <input type="text" id="negative_marks" name="negative_marks" class="form-control" placeholder="negative_marks" [(ngModel)]="exam_question.negative_marks">
+                  <span class="help-block">Number of marks for incorrect answer</span>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="is_multiple_choice">is multiple answer correct</label>
+                <div class="col-md-9">
+                    <input class="form-check-input" type="checkbox" id="is_multiple_choice" name="is_multiple_choice" [(ngModel)]="exam_question.is_multiple_choice" ng-true-value="1" ng-false-value="0">
+                </div>
+              </div>
+          </div>
+          <div class="card-footer">
+            <button *ngIf="isCreate" type="button" (click)="onSubmitCreate()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Create</button>
+            <button *ngIf="!isCreate" type="button" (click)="onSubmitEdit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Edit</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+          </div>
+        </form>
+        </div>
+ 
+    </div><!--/.row-->
+    
+  </div>
+  

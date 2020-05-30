@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
+import { QuestionComponent } from './question/question.component';
+import { QuestionListComponent } from './question-list/question-list.component';
  
 @NgModule({
   imports: [
@@ -27,7 +29,9 @@ import { CandidateListComponent } from './candidate-list/candidate-list.componen
     TypographyComponent,
     ExamConfigComponent,
     CandidateComponent,
-    CandidateListComponent    
+    CandidateListComponent,
+    QuestionComponent,
+    QuestionListComponent    
   ],
   bootstrap: [ ExamConfigComponent ]
 })

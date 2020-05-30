@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit {
       }
   }
   ngOnInit() {
-    debugger;
     this.examConfigs = []
     this.loading = true;
     this.examConfigService.get_exam_config_list()

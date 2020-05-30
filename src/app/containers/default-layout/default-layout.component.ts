@@ -12,12 +12,14 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService
 
   ) {
       // redirect to login if not logged in
+      console.log(this.authenticationService.currentUserValue)
+      debugger
       if (!this.authenticationService.currentUserValue) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['login']);
       }
   }
   toggleMinimize(e) {
@@ -25,6 +27,6 @@ export class DefaultLayoutComponent {
   }
   logout(){
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['login']);
   }
 }

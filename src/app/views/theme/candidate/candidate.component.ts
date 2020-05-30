@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
-import "moment-timezone";
 import { FormControl } from '@angular/forms';
 import { ExamConfigService } from '../../../_services/exam-config.service';
 import { AuthenticationService } from '../../../_services/authentication.service';

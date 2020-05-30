@@ -6,18 +6,19 @@ import { AlertService } from '../../../_services/alert.service';
 import { ExamConfigService } from '../../../_services/exam-config.service';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { first } from 'rxjs/operators';
-import { Candidate } from '../../../_models/candidate';
+import { ExamQuestion } from '../../../_models/exam_question';
 import { ExamConfig } from '../../../_models/exam_config';
 
 @Component({
-  selector: 'app-candidate-list',
-  templateUrl: './candidate-list.component.html',
-  styleUrls: ['./candidate-list.component.css']
+  selector: 'app-question-list',
+  templateUrl: './question-list.component.html',
+  styleUrls: ['./question-list.component.css']
 })
-export class CandidateListComponent implements OnInit {
+export class QuestionListComponent implements OnInit {
+
 
   loading = false;
-  candidates: Candidate[];
+  exam_questions: ExamQuestion[];
   exam_config: ExamConfig = new ExamConfig();
 
   constructor(
@@ -33,30 +34,33 @@ export class CandidateListComponent implements OnInit {
           this.router.navigate(['/login']);
       }
       this.route.paramMap.subscribe(params => {
-        if(params.get('id'))
+        if(params.get('id')){
           this.exam_config.id = Number(params.get('id'));
+          
+          this.examConfigService.get_exam_config(this.exam_config.id)
+          .pipe()
+          .subscribe(
+                  (data: ExamConfig) => {
+                    this.exam_config =  data;  
+                    console.log(this.exam_config);
+                  },
+                  error => {
+                      this.alertService.error(error);
+                      this.loading = false;
+            });
+        }
       });
-      this.examConfigService.get_exam_config(this.exam_config.id)
-      .pipe()
-      .subscribe(
-              (data: ExamConfig) => {
-                this.exam_config =  data;  
-                console.log(this.exam_config);
-              },
-              error => {
-                  this.alertService.error(error);
-                  this.loading = false;
-        });
+
   }
   ngOnInit() {
-    this.candidates = []
+    this.exam_questions = []
     this.loading = true;
-    this.examConfigService.get_candidate_list(this.exam_config.id)
+    this.examConfigService.get_exam_question_list(this.exam_config.id)
     .pipe(first())
     .subscribe(
         data => {      
-          this.candidates = data;  
-          console.log(this.candidates);
+          this.exam_questions = data;  
+          console.log(this.exam_questions);
         },
         error => {
             this.alertService.error(error);
@@ -64,10 +68,15 @@ export class CandidateListComponent implements OnInit {
         });
   }
 
-  addCandidate(exam_config_id){
-    this.router.navigate(['/theme/candidate', exam_config_id]);
+  addExamQuestion(exam_config_id, exam_question_id){
+    this.router.navigate(['/theme/question', exam_config_id, exam_question_id]);
   }
-  deleteCandidate(exam_config_id){
-    this.router.navigate(['/theme/candidate', exam_config_id]);
+
+  editExamQuestion(exam_config_id, exam_question_id){
+    this.router.navigate(['/theme/question', exam_config_id, exam_question_id]);
+  }
+
+  deleteExamQuestion(exam_config_id, exam_question_id){
+    this.router.navigate(['/theme/question', exam_config_id, exam_question_id]);
   }
 }

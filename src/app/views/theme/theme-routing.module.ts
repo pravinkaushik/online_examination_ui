@@ -6,6 +6,8 @@ import { TypographyComponent } from './typography.component';
 import { ExamConfigComponent } from './exam-config.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
+import { QuestionListComponent } from './question-list/question-list.component';
+import { QuestionComponent } from './question/question.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,20 @@ const routes: Routes = [
         component: CandidateComponent,
         data: {
           title: 'Add Candidate'
+        }
+      },
+      {
+        path: 'questionlist/:id',
+        component: QuestionListComponent,
+        data: {
+          title: 'Question list'
+        }
+      },
+      {
+        path: 'question/:exam_config_id/:id',
+        component: QuestionComponent,
+        data: {
+          title: 'Add Question'
         }
       },
       {

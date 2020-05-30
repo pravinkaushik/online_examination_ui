@@ -87,7 +87,6 @@ export class ExamConfigComponent implements OnInit {
   }
 
   onUpdate() {
-    debugger
     this.submitted = true;
     this.loading = true;
     this.exam_config.exam_owner_id = 0;

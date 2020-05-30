@@ -46,6 +46,20 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'error_404',
+    component: P404Component,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
+    path: 'error_500',
+    component: P500Component,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
     path: 'register',
     component: RegisterComponent,
     data: {
