@@ -26,10 +26,6 @@ export class QuestionComponent implements OnInit {
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
-      // redirect to login if not logged in
-      if (!this.authenticationService.currentUserValue) {
-          this.router.navigate(['/login']);
-      }
       this.route.paramMap.subscribe(params => {
         if(params.get('exam_config_id'))
           this.exam_question.exam_config_id = Number(params.get('exam_config_id'));

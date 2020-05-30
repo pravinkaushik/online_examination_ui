@@ -30,10 +30,6 @@ export class ExamConfigComponent implements OnInit {
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
-      // redirect to login if not logged in
-      if (!this.authenticationService.currentUserValue) {
-          this.router.navigate(['/login']);
-      }
       this.end_time = new FormControl(new Date());
       this.start_time = new FormControl(new Date());
   }

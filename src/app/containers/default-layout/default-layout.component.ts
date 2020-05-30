@@ -15,18 +15,15 @@ export class DefaultLayoutComponent {
     private authenticationService: AuthenticationService
 
   ) {
-      // redirect to login if not logged in
-      console.log(this.authenticationService.currentUserValue)
-      debugger
-      if (!this.authenticationService.currentUserValue) {
-          this.router.navigate(['login']);
-      }
+
   }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
   }
   logout(){
+    debugger
     this.authenticationService.logout();
-    this.router.navigate(['login']);
+//    this.router.navigate(['/login']);
+    window.location.reload();
   }
 }

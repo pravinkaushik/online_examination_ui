@@ -21,10 +21,7 @@ export class DashboardComponent implements OnInit {
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
-      // redirect to login if not logged in
-      if (!this.authenticationService.currentUserValue) {
-          this.router.navigate(['/login']);
-      }
+
   }
   ngOnInit() {
     this.examConfigs = []

@@ -23,13 +23,13 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService,
       private alertService: AlertService
   ) {
-      // redirect to home if already logged in
-      if (this.authenticationService.currentUserValue) {
-          this.router.navigate(['/dashboard']);
-      }
+
   }
 
   ngOnInit() {
+    if (this.authenticationService.currentUserValue) {
+        this.router.navigate(['/dashboard']);
+    }
       this.loginForm = this.formBuilder.group({
           email: ['', Validators.required],
           password: ['', Validators.required]
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
+      debugger
       this.submitted = true;
 
       // reset alerts on submit
