@@ -32,17 +32,18 @@ export class ExamConfigComponent implements OnInit {
   ) {
       this.end_time = new FormControl(new Date());
       this.start_time = new FormControl(new Date());
+      this.exam_config = new ExamConfig();
+      this.route.paramMap.subscribe(params => {
+        if(params.get('id'))
+          this.exam_config.id = Number(params.get('id'));
+      });
   }
 
   ngOnInit(): void {
     
     this.timezones = moment.tz.names();
     console.log(moment.tz.names());
-    this.exam_config = new ExamConfig();
-    this.route.paramMap.subscribe(params => {
-      if(params.get('id'))
-        this.exam_config.id = Number(params.get('id'));
-    });
+
 
     if(this.exam_config.id == 0){
       this.isCreate = true
@@ -74,6 +75,8 @@ export class ExamConfigComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
+            this.alertService.success("Successfull created ", true);
+            this.loading = false;
             this.router.navigate(['dashboard']);
         },
         error => {
@@ -93,6 +96,7 @@ export class ExamConfigComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
+            this.alertService.success("Successfull updated ", true);
             this.router.navigate(['dashboard']);
         },
         error => {

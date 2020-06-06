@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { AlertService } from '../../_services/alert.service';
-
+import { AuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+ 
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +23,8 @@ export class LoginComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: AuthenticationService,
-      private alertService: AlertService
+      private alertService: AlertService,
+      private authService: AuthService
   ) {
 
   }
@@ -66,4 +69,66 @@ export class LoginComponent implements OnInit {
                   this.loading = false;
               });
   }
+
+  onSignup() {
+    debugger
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+        return;
+    }
+
+    this.loading = true;
+    this.authenticationService.login(this.f.email.value, this.f.password.value)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
+      console.log(x)
+      this.authenticationService.signupSocialMedia(x.authToken, "GOOGLE")
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+    });
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(x => {
+      console.log(x)
+      this.authenticationService.signupSocialMedia(x.authToken, "FB")
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+    });
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+
 }

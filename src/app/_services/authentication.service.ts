@@ -21,8 +21,38 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    login_exam(exam_config_id, email, password) {
+        return this.http.post<any>(`${environment.apiUrl}/login_exam`, {exam_config_id, email, password })
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
     login(email, password) {
         return this.http.post<any>(`${environment.apiUrl}/login`, { email, password })
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
+    signup(email, password) {
+        return this.http.post<any>(`${environment.apiUrl}/signup`, { email, password })
+            .pipe(map(user => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
+    signupSocialMedia(auth_token, provider) {
+        return this.http.post<any>(`${environment.apiUrl}/signup_social_media`, { auth_token, provider })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));

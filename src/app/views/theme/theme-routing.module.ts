@@ -54,8 +54,8 @@ const routes: Routes = [
         data: {
           title: 'Add Question'
         }
-      },
-      {
+      }
+/*      {
         path: 'colors',
         component: ColorsComponent,
         data: {
@@ -68,7 +68,7 @@ const routes: Routes = [
         data: {
           title: 'Typography'
         }
-      }
+      } */
     ]
   }
 ];

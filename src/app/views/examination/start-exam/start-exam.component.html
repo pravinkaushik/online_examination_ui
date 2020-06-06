@@ -1,0 +1,30 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Online Examination System
+          </div>
+          <div class="card-body">
+            Please refer term and conditions
+          </div>
+        </div>
+      </div><!--/.col-->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">
+            I have accepted all the terms and conditions.
+          </div>
+          <div class="card-body">
+            <button [disabled]="loading" (click)="onSubmit()" class="btn btn-primary px-4">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Start now
+            </button>
+          </div>
+        </div>
+
+      </div><!--/.col-->
+    
+    </div><!--/.row-->
+  </div>
+  

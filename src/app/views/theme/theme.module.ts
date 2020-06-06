@@ -25,8 +25,8 @@ import { QuestionListComponent } from './question-list/question-list.component';
     OwlNativeDateTimeModule    
   ],
   declarations: [
-    ColorsComponent,
-    TypographyComponent,
+//    ColorsComponent,
+//    TypographyComponent,
     ExamConfigComponent,
     CandidateComponent,
     CandidateListComponent,

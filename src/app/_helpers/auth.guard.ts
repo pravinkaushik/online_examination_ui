@@ -6,13 +6,13 @@ import { AuthenticationService } from '../_services/authentication.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
+    
     constructor(
         private router: Router,
         private authenticationService: AuthenticationService
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        debugger
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {
             // authorised so return true
@@ -20,7 +20,11 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        if(state.url === '/landing_exam' || state.url.includes('/start_exam')){
+            this.router.navigate(['/login_exam'], { queryParams: { returnUrl: state.url }});
+        }else{
+            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        }
         return false;
     }
 }

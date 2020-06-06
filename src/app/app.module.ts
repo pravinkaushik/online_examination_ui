@@ -4,9 +4,25 @@ import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+ 
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("675225875182-pdor0og8gb39dqvros607vftvkhlemj8.apps.googleusercontent.com")
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider("181795126486478")
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -40,12 +56,12 @@ import { AppRoutingModule } from './app.routing';
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts';
-
 import { AlertComponent } from './_components/alert.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { ExaminationModule } from './views/examination/examination.module';
+import { HomeModule } from './views/home/home.module';
 
 @NgModule({
   imports: [
@@ -60,12 +76,15 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule,
+//    ChartsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
     CommonModule,
+    SocialLoginModule,
+    ExaminationModule,
+    HomeModule
   ],
   declarations: [
     AppComponent,
@@ -79,7 +98,8 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: AuthServiceConfig, useFactory: provideConfig }
   ],
   bootstrap: [ AppComponent ]
 })

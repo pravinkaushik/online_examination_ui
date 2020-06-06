@@ -9,4 +9,5 @@ export class ExamConfig {
     exam_title: string;
     exam_name: string;
     time_zone: string;
+    total_question: number;
 }
