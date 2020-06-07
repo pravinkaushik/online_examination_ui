@@ -12,7 +12,7 @@ export class ExamQuestion {
     is_choice3_correct: number = 0; 
     is_choice4_correct: number = 0; 
     is_choice5_correct: number = 0;     
-    is_multiple_choice: number = 0;
+    question_type: number = 0;
     exam_config_id: number;
     positive_marks: number;
     negative_marks: number;

@@ -14,7 +14,8 @@ import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
 import { QuestionComponent } from './question/question.component';
 import { QuestionListComponent } from './question-list/question-list.component';
- 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +23,8 @@ import { QuestionListComponent } from './question-list/question-list.component';
     ReactiveFormsModule,
     ThemeRoutingModule,
     OwlDateTimeModule, 
-    OwlNativeDateTimeModule    
+    OwlNativeDateTimeModule,
+    CKEditorModule   
   ],
   declarations: [
 //    ColorsComponent,

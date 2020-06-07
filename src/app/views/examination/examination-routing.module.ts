@@ -5,6 +5,7 @@ import { StartExamComponent } from './start-exam/start-exam.component';
 import { ExamLoginComponent } from './exam-login/exam-login.component';
 import { ExamLandingComponent } from './exam-landing/exam-landing.component';
 import { AuthGuard } from '../../_helpers/auth.guard';
+import { FinishExamComponent } from './finish-exam/finish-exam.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,13 @@ const routes: Routes = [
           title: 'landing examination'
         },
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'finish_exam',
+        component: FinishExamComponent,
+        data: {
+          title: 'Finish examination'
+        }
       }
     ]
   }

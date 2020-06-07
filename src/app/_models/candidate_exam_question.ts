@@ -16,5 +16,6 @@ export class CandidateExamQuestion {
     exam_config_id: number;
     positive_marks: number;
     negative_marks: number;
-    is_multiple_choice: number;
+    question_type: number;
+    radio_button_selected: any;
 }

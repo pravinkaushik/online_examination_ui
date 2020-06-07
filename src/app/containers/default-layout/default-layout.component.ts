@@ -18,7 +18,6 @@ export class DefaultLayoutComponent {
 
   ) {
     const currentUser = this.authenticationService.currentUserValue;
-    debugger
     if (currentUser && currentUser.role ==='exam_owner') {
         // authorised so return true
         this.isLoggedInExamOwner = true;

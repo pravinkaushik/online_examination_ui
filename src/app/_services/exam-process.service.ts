@@ -52,6 +52,15 @@ export class ExamProcessService {
         catchError(this.handleError)
       );
   }
+
+  finish_exam_question(exam_config_id) {
+    return this.http.put<any>(`${environment.apiUrl}/candidate_exam_finish`, JSON.stringify({"exam_config_id":exam_config_id}))
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: any) { 
     let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(error);

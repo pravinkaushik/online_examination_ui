@@ -75,7 +75,7 @@ export class ExamConfigComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-            this.alertService.success("Successfull created ", true);
+            this.alertService.success("successfully created ", true);
             this.loading = false;
             this.router.navigate(['dashboard']);
         },
@@ -96,7 +96,7 @@ export class ExamConfigComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-            this.alertService.success("Successfull updated ", true);
+            this.alertService.success("successfully updated ", true);
             this.router.navigate(['dashboard']);
         },
         error => {

@@ -6,6 +6,7 @@ import { AlertService } from '../../../_services/alert.service';
 import {ExamProcessService} from '../../../_services/exam-process.service'
 import { ExamConfig } from '../../../_models/exam_config';
 import { CandidateExamQuestion } from '../../../_models/candidate_exam_question';
+import { AuthenticationService } from '../../../_services/authentication.service';
 @Component({
   selector: 'app-exam-landing',
   templateUrl: './exam-landing.component.html',
@@ -18,11 +19,12 @@ export class ExamLandingComponent implements OnInit {
   submitted = false;
   page = 1;
   isPreviousDisabled = true;
-  isNextDisabled = true;
+  isFinalPage = false;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    private authenticationService: AuthenticationService,
     private examProcessService: ExamProcessService,
     private alertService: AlertService
     ) { 
@@ -49,7 +51,30 @@ export class ExamLandingComponent implements OnInit {
     this.getQuestions();
   }
 
+  preProcess(){
+    this.candidateExamQuestionArr.forEach(function (value) {
+      if(value.question_type == 1){
+        if(value.radio_button_selected == 1){
+          value.is_choice1_selected = 1
+        }
+        if(value.radio_button_selected == 2){
+          value.is_choice2_selected = 1
+        }
+        if(value.radio_button_selected == 3){
+          value.is_choice3_selected = 1
+        }
+        if(value.radio_button_selected == 4){
+          value.is_choice4_selected = 1
+        }
+        if(value.radio_button_selected == 5){
+          value.is_choice5_selected = 1
+        } 
+      }   
+    }); 
+  }
+
   saveNext(){
+    this.preProcess();
     this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
     .pipe()
     .subscribe(
@@ -65,6 +90,37 @@ export class ExamLandingComponent implements OnInit {
     this.getQuestions();
   }
 
+  saveFinish(){
+    this.preProcess();
+    this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
+    .pipe()
+    .subscribe(
+        (data) => {
+          console.log(data);
+          this.finish();
+        },
+        error => {
+            this.alertService.error(error);
+            this.loading = false;
+        });
+
+
+  }
+  finish(){
+    this.examProcessService.finish_exam_question(this.exam_config.id)
+    .pipe()
+    .subscribe(
+        (data) => {
+          console.log(data);
+          this.alertService.success("Thanks for completing Examination", true);
+          this.authenticationService.logout();
+          this.router.navigate(["finish_exam"]);
+        },
+        error => {
+            this.alertService.error(error);
+            this.loading = false;
+        });
+  }
   previous(){
     this.page = this.page - 1;
     this.getQuestions();
@@ -75,8 +131,30 @@ export class ExamLandingComponent implements OnInit {
     .subscribe(
         (data) => {
           console.log(data);
-          this.candidateExamQuestionArr =  data;  
+          this.candidateExamQuestionArr =  data;
+          this.candidateExamQuestionArr.forEach(function (value) {
+            if(value.question_type == 1){
+              if(value.is_choice1_selected){
+                value.radio_button_selected = 1
+              }
+              if(value.is_choice2_selected){
+                value.radio_button_selected = 2
+              }
+              if(value.is_choice3_selected){
+                value.radio_button_selected = 3
+              }
+              if(value.is_choice4_selected){
+                value.radio_button_selected = 4
+              }
+              if(value.is_choice5_selected){
+                value.radio_button_selected = 5
+              }  
+            }   
+          }); 
+          
           this.isPreviousDisabled = this.page < 2;
+          this.isFinalPage = this.exam_config.total_question <= this.exam_config.question_per_page*this.page;
+          console.log(this.isFinalPage);
         },
         error => {
             this.alertService.error(error);

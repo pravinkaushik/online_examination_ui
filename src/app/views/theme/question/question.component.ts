@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../_services/alert.service';
 import { first } from 'rxjs/operators';
 import { ExamQuestion } from '../../../_models/exam_question';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-question',
@@ -18,7 +19,8 @@ export class QuestionComponent implements OnInit {
   private loading = false;
   private submitted = false;
   isCreate = false;
-
+  public qEditor = ClassicEditor;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -60,7 +62,6 @@ export class QuestionComponent implements OnInit {
     this.loading = true;
     this.exam_question.id = 0;
     this.exam_question.exam_owner_id = 0;
-    debugger;
     this.examConfigService.add_exam_question(this.exam_question)
     .pipe(first())
     .subscribe(
@@ -75,6 +76,9 @@ export class QuestionComponent implements OnInit {
   }
 
   onSubmitEdit() {
+    debugger
+    console.log(this.qEditor)
+    debugger
     this.submitted = true;
     this.loading = true;
     this.exam_question.exam_owner_id = 0;

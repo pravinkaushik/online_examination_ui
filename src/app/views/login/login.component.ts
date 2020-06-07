@@ -46,7 +46,6 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-      debugger
       this.submitted = true;
 
       // reset alerts on submit
@@ -71,7 +70,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSignup() {
-    debugger
     this.submitted = true;
 
     // reset alerts on submit

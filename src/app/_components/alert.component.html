@@ -1,1 +1,9 @@
-﻿<div *ngIf="message" [ngClass]="message.cssClass">{{message.text}}</div>
+﻿<div *ngIf="message" class="row">
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div [ngClass]="message.cssClass"><strong>{{title}}</strong>{{message.text}}</div>
+          </div>
+        </div>
+      </div>
+</div>

@@ -44,8 +44,7 @@ export class StartExamComponent implements OnInit {
         });
 
   }
-onSubmit() {
-    debugger
+  onSubmit() {
     this.submitted = true;
 
     // reset alerts on submit
@@ -61,5 +60,5 @@ onSubmit() {
                 this.alertService.error(error);
                 this.loading = false;
             });
-}
+  }
 }

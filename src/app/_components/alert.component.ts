@@ -7,7 +7,7 @@ import { AlertService } from '../_services/alert.service';
 export class AlertComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
     message: any;
-
+    title: any;
     constructor(private alertService: AlertService) { }
 
     ngOnInit() {
@@ -16,9 +16,11 @@ export class AlertComponent implements OnInit, OnDestroy {
                 switch (message && message.type) {
                     case 'success':
                         message.cssClass = 'alert alert-success';
+                        this.title = "Success!"
                         break;
                     case 'error':
                         message.cssClass = 'alert alert-danger';
+                        this.title = "Danger!"
                         break;
                 }
 
