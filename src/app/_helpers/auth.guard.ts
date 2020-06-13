@@ -18,7 +18,6 @@ export class AuthGuard implements CanActivate {
             // authorised so return true
             return true;
         }
-
         // not logged in so redirect to login page with the return url
         if(state.url === '/landing_exam' || state.url.includes('/start_exam')){
             this.router.navigate(['/login_exam'], { queryParams: { returnUrl: state.url }});

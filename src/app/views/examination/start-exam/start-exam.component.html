@@ -6,7 +6,19 @@
             Online Examination System
           </div>
           <div class="card-body">
-            Please refer term and conditions
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Please refer term and conditions.</label>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Examination Name : </label>
+              <div class="col-md-9"> {{exam_config.exam_name}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">Examination Title : </label>
+              <div class="col-md-9"> {{exam_config.exam_title}}
+              </div>
+            </div>
           </div>
         </div>
       </div><!--/.col-->
@@ -16,13 +28,13 @@
             I have accepted all the terms and conditions.
           </div>
           <div class="card-body">
-            <button [disabled]="loading" (click)="onSubmit()" class="btn btn-primary px-4">
+            <button [disabled]="loading || counter > 0" (click)="onSubmit()" class="btn btn-primary px-4">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                 Start now
             </button>
+            <strong *ngIf="counter > 0" >Start In: {{counter | formatTime}} </strong> 
           </div>
         </div>
-
       </div><!--/.col-->
     
     </div><!--/.row-->

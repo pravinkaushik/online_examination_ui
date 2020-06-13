@@ -37,6 +37,14 @@ export class ExamConfigService {
       );
   }
 
+  delete_exam_config(exam_id) {
+    return this.http.delete<any>(`${environment.apiUrl}/exam_config/`+exam_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
   create_exam_config(exam_config) {
     return this.http.post<any>(`${environment.apiUrl}/exam_config`, JSON.stringify(exam_config))
       .pipe(
@@ -64,6 +72,14 @@ export class ExamConfigService {
 
   add_candidate(candidate) {
     return this.http.post<any>(`${environment.apiUrl}/candidate`, JSON.stringify(candidate))
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
+  delete_candidate(candidate_id) {
+    return this.http.delete<any>(`${environment.apiUrl}/candidate/`+candidate_id)
       .pipe(
         tap(_ => console.log('fetched heroes')),
         catchError(this.handleError)
@@ -101,13 +117,21 @@ export class ExamConfigService {
         catchError(this.handleError)
       );
   }
+
+  delete_exam_question(exam_question_id) {
+    return this.http.delete<any>(`${environment.apiUrl}/exam_question/`+exam_question_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: any) { 
     let errMsg = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return Observable.throw(error);
   }
  /*   private handleError<T>(operation = 'operation', result?: T) {
       
-      debugger
       return (error: any): Observable<T> => {
     
         // TODO: send the error to remote logging infrastructure

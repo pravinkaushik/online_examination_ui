@@ -7,10 +7,10 @@
   [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
     <li *ngIf="isLoggedInExamOwner"  class="nav-item px-3">
-      <a class="nav-link" href="/dashboard">Dashboard</a>
+      <a class="nav-link" href="/#/dashboard">Dashboard</a>
     </li>
     <li *ngIf="!isLoggedInCandidate" class="nav-item px-3">
-      <a class="nav-link" href="/about">About</a>
+      <a class="nav-link" href="/#/about">About</a>
     </li>
     <li *ngIf="!isLoggedInExamOwner && !isLoggedInCandidate" class="nav-item px-3">
       <a class="nav-link" href="/#/login">Login</a>
@@ -19,7 +19,7 @@
       <a class="nav-link" href="/#/login">Signup</a>
     </li>
     <li *ngIf="!isLoggedInCandidate" class="nav-item px-3">
-      <a class="nav-link" href="/contact_us">Contact us</a>
+      <a class="nav-link" href="/#/contact_us">Contact us</a>
     </li>
   </ul>
   <ul *ngIf="isLoggedInExamOwner" class="nav navbar-nav ml-auto">

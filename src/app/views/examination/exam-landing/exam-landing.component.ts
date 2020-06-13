@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { timer, Subscription } from "rxjs";
 import { AlertService } from '../../../_services/alert.service';
-import {ExamProcessService} from '../../../_services/exam-process.service'
+import { ExamProcessService } from '../../../_services/exam-process.service'
 import { ExamConfig } from '../../../_models/exam_config';
 import { CandidateExamQuestion } from '../../../_models/candidate_exam_question';
 import { AuthenticationService } from '../../../_services/authentication.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+
 @Component({
   selector: 'app-exam-landing',
   templateUrl: './exam-landing.component.html',
@@ -20,6 +23,57 @@ export class ExamLandingComponent implements OnInit {
   page = 1;
   isPreviousDisabled = true;
   isFinalPage = false;
+  countDown: Subscription;
+  counter = 0;
+  tick = 1000;
+  isFinished = false;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '10',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+//    uploadUrl: 'v1/image',
+//    uploadUrl: 'http://127.0.0.1:5000/upload-image', 
+//    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+  };
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -43,12 +97,30 @@ export class ExamLandingComponent implements OnInit {
                   this.alertService.error(error);
                   this.loading = false;
               });
+
+          this.examProcessService.get_remain_end_time(this.exam_config.id)
+          .pipe()
+          .subscribe(
+              (data: number) => {
+                this.counter =  data;  
+                this.countDown = timer(0, this.tick).subscribe(() => {
+                  --this.counter;
+                  if(this.counter < 0){
+                    this.finish();
+                  }
+                });
+              },
+              error => {
+                  this.alertService.error(error, false);
+                  this.loading = false;
+              });
         }
       });
     }
 
   ngOnInit(): void {
     this.getQuestions();
+//    this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
   }
 
   preProcess(){
@@ -89,8 +161,23 @@ export class ExamLandingComponent implements OnInit {
     this.page = this.page +1;
     this.getQuestions();
   }
+  
+  save(){
+    this.preProcess();
+    this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
+    .pipe()
+    .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        error => {
+            this.alertService.error(error);
+            this.loading = false;
+        });
+  }
 
   saveFinish(){
+    this.countDown.unsubscribe();
     this.preProcess();
     this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
     .pipe()
@@ -107,19 +194,24 @@ export class ExamLandingComponent implements OnInit {
 
   }
   finish(){
-    this.examProcessService.finish_exam_question(this.exam_config.id)
-    .pipe()
-    .subscribe(
-        (data) => {
-          console.log(data);
-          this.alertService.success("Thanks for completing Examination", true);
-          this.authenticationService.logout();
-          this.router.navigate(["finish_exam"]);
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
+    if(!this.isFinished){
+      this.isFinished = true;
+      this.countDown.unsubscribe();
+      this.examProcessService.finish_exam_question(this.exam_config.id)
+      .pipe()
+      .subscribe(
+          (data) => {
+            console.log(data);
+            this.alertService.success("Thanks for completing Examination", true);
+            this.authenticationService.logout();
+            this.router.navigate(["finish_exam"]);
+          },
+          error => {
+              this.alertService.error(error);
+              this.loading = false;
+          });
+    }
+
   }
   previous(){
     this.page = this.page - 1;
@@ -160,5 +252,18 @@ export class ExamLandingComponent implements OnInit {
             this.alertService.error(error);
             this.loading = false;
         });
+  }
+}
+@Pipe({
+  name: "formatTime"
+})
+export class FormatTimePipe implements PipeTransform {
+  transform(value: number): string {
+    const minutes: number = Math.floor(value / 60);
+    return (
+      ("00" + minutes).slice(-2) +
+      ":" +
+      ("00" + Math.floor(value - minutes * 60)).slice(-2)
+    );
   }
 }

@@ -8,6 +8,9 @@ import { AuthenticationService } from '../../../_services/authentication.service
 import { first } from 'rxjs/operators';
 import { ExamQuestion } from '../../../_models/exam_question';
 import { ExamConfig } from '../../../_models/exam_config';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../../_components/confirm-dialog/confirm-dialog.component';
+
 
 @Component({
   selector: 'app-question-list',
@@ -25,6 +28,7 @@ export class QuestionListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    public dialog: MatDialog,
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
@@ -56,7 +60,7 @@ export class QuestionListComponent implements OnInit {
     .subscribe(
         data => {      
           this.exam_questions = data;  
-          console.log(this.exam_questions);
+          this.loading = false;
         },
         error => {
             this.alertService.error(error);
@@ -72,7 +76,35 @@ export class QuestionListComponent implements OnInit {
     this.router.navigate(['/theme/question', exam_config_id, exam_question_id]);
   }
 
-  deleteExamQuestion(exam_config_id, exam_question_id){
-    this.router.navigate(['/theme/question', exam_config_id, exam_question_id]);
+
+  confirmDialog(exam_question_id): void {
+    const message = `Are you sure you want to do this?`;
+
+    const dialogData = new ConfirmDialogModel("Confirm Action", message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.loading = true;
+      if(dialogResult){
+        this.examConfigService.delete_exam_question(exam_question_id)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.alertService.success("successfully Deleted.");
+                this.loading = false;
+                this.exam_questions = this.exam_questions.filter(item => item.id !== exam_question_id);
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+      }else{
+        this.loading = false;
+      }
+    });
   }
 }

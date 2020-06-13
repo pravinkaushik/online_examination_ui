@@ -45,6 +45,7 @@ export class CandidateComponent implements OnInit {
     .subscribe(
         data => {
             this.router.navigate(['/theme/candidatelist', this.candidate.exam_config_id]);
+            this.loading = false;
         },
         error => {
             this.alertService.error(error);

@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AlertService } from '../../../_services/alert.service';
-import {ExamProcessService} from '../../../_services/exam-process.service'
+import { ExamProcessService } from '../../../_services/exam-process.service'
 import { ExamConfig } from '../../../_models/exam_config';
+import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-start-exam',
@@ -13,10 +14,14 @@ import { ExamConfig } from '../../../_models/exam_config';
 })
 export class StartExamComponent implements OnInit {
 
-  private exam_config: ExamConfig;
+  exam_config: ExamConfig;
   loading = false;
   submitted = false;
 
+  countDown: Subscription;
+  counter = 0;
+  tick = 1000;
+  
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -39,12 +44,24 @@ export class StartExamComponent implements OnInit {
           console.log(this.exam_config);
         },
         error => {
-            this.alertService.error(error);
+            this.alertService.error(error, false);
             this.loading = false;
         });
 
+    this.examProcessService.get_remain_start_time(this.exam_config.id)
+    .pipe()
+    .subscribe(
+        (data: number) => {
+          this.counter =  data;  
+          this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
+        },
+        error => {
+            this.alertService.error(error, false);
+            this.loading = false;
+        });
   }
   onSubmit() {
+    this.countDown.unsubscribe();
     this.submitted = true;
 
     // reset alerts on submit

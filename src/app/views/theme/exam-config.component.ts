@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import "moment-timezone";
 import { ExamConfig } from '../../_models/exam_config';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ExamConfigService } from '../../_services/exam-config.service';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,6 +17,7 @@ import { first } from 'rxjs/operators';
 export class ExamConfigComponent implements OnInit {
   private timezones = []; 
   private isCreate = false;
+  examConfigForm: FormGroup;
   private exam_config: ExamConfig;
   loading = false;
   submitted = false;
@@ -48,13 +49,16 @@ export class ExamConfigComponent implements OnInit {
     if(this.exam_config.id == 0){
       this.isCreate = true
       this.exam_config.random_question =1;
+      this.exam_config.question_per_page =2;
     }else{
       this.examConfigService.get_exam_config(this.exam_config.id)
       .pipe()
       .subscribe(
           (data: ExamConfig) => {
-            this.exam_config =  data;  
-            console.log(this.exam_config);
+            this.exam_config =  data;
+            this.start_time = new FormControl(new Date(this.exam_config.start_time * 1000));
+            this.end_time = new FormControl(new Date(this.exam_config.end_time * 1000));
+            
           },
           error => {
               this.alertService.error(error);
@@ -107,7 +111,7 @@ export class ExamConfigComponent implements OnInit {
 
   convertToTimestamp(date){
     var now_utc =  Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-    date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+    date.getUTCHours(), date.getUTCMinutes(), 0);
     var utc_ts = (new Date(now_utc)).getTime() / 1000
     return utc_ts;
   }

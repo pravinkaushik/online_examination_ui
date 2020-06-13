@@ -3,6 +3,7 @@ export class CandidateExamQuestion {
     candidate_id: number;
     exam_questions_id: number;
     question: string;
+    answer: string;
     choice1: string = "";
     choice2: string = "";
     choice3: string = "";

@@ -14,7 +14,7 @@
                 <tr>
                   <th class="text-center">Question ID</th>
                   <th class="text-center">Question</th>
-                  <th class="text-center">Is Multiple Choice</th>
+                  <th class="text-center">Question Type</th>
                   <th class="text-center">Edit</th>
                   <th class="text-center">Delete</th>
                 </tr>
@@ -25,16 +25,24 @@
                     <div>{{exam_question.id}}</div>
                   </td>
                   <td>
-                    <div>{{exam_question.question}}</div>
+                    <div [innerHTML]="exam_question.question"></div>
                   </td>
                   <td class="text-center">
-                    <strong>{{exam_question.question_type}}</strong>  
+                    <strong *ngIf="exam_question.question_type == 1">Only One answer correct</strong>
+                    <strong *ngIf="exam_question.question_type == 2">Multiple answer can be correct</strong>  
+                    <strong *ngIf="exam_question.question_type == 3">Subjective</strong>  
                   </td>
                   <td>           
-                    <button type="button" (click)="editExamQuestion(exam_question.exam_config_id, exam_question.id)" class="btn btn-block btn-info">Edit</button>                 
+                    <button type="button" (click)="editExamQuestion(exam_question.exam_config_id, exam_question.id)" class="btn btn-block btn-info">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Edit
+                    </button>                 
                   </td>
                   <td>           
-                    <button type="button" (click)="deleteExamQuestion(exam_question.exam_config_id, exam_question.id)" class="btn btn-block btn-danger">Delete</button>                 
+                    <button type="button" (click)="confirmDialog(exam_question.id)" class="btn btn-block btn-danger">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Delete
+                    </button>                 
                   </td>
                 </tr>
               </tbody>

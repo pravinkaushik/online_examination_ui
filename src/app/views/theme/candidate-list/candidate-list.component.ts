@@ -8,6 +8,8 @@ import { AuthenticationService } from '../../../_services/authentication.service
 import { first } from 'rxjs/operators';
 import { Candidate } from '../../../_models/candidate';
 import { ExamConfig } from '../../../_models/exam_config';
+import { ConfirmDialogModel, ConfirmDialogComponent } from '../../../_components/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-candidate-list',
@@ -24,6 +26,7 @@ export class CandidateListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    public dialog: MatDialog,
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
@@ -52,7 +55,7 @@ export class CandidateListComponent implements OnInit {
     .subscribe(
         data => {      
           this.candidates = data;  
-          console.log(this.candidates);
+          this.loading = false;
         },
         error => {
             this.alertService.error(error);
@@ -60,10 +63,39 @@ export class CandidateListComponent implements OnInit {
         });
   }
 
-  addCandidate(exam_config_id){
-    this.router.navigate(['/theme/candidate', exam_config_id]);
+  resendPassword(candidate_id){
+    this.router.navigate(['/theme/candidate', candidate_id]);
   }
-  deleteCandidate(exam_config_id){
-    this.router.navigate(['/theme/candidate', exam_config_id]);
+
+  confirmDialog(candidate_id): void {
+    const message = `Are you sure you want to do this?`;
+
+    const dialogData = new ConfirmDialogModel("Confirm Action", message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.loading = true;
+      if(dialogResult){
+        this.examConfigService.delete_candidate(candidate_id)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.alertService.success("successfully Deleted.");
+                this.loading = false;
+                this.candidates = this.candidates.filter(item => item.id !== candidate_id);
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+      }else{
+        this.loading = false;
+      }
+    });
   }
+
 }

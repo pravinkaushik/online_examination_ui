@@ -5,9 +5,12 @@
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4">
+              <div class="card-header">
+              <h1>Login to Begin</h1>
+            </div>
+              <p class="text-muted">Please provide beloaw details</p>
               <form [formGroup]="loginFormCandidate" (ngSubmit)="onSubmit()">
-                <h1>Login to Begin</h1>
-                <p class="text-muted">Please provide beloaw details</p>
+                <div class="card-body">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-user"></i></span>
@@ -25,22 +28,17 @@
                   </div>
                   <input type="email" formControlName="c_email" class="form-control" placeholder="email" autocomplete="email" required minlength="4">
                   <div *ngIf="f.c_email.invalid && (f.c_email.dirty || f.c_email.touched)" class="text-danger">
-                    <div *ngIf="f.c_email.errors.required">
-                      Email ID is required.
-                    </div>
-                    <div *ngIf="f.c_email.errors.minlength">
-                      Email ID must be at least 4 characters long.
-                    </div>
+                    <div *ngIf="f.c_email.errors.required">required.</div>
+                    <div *ngIf="f.c_email.errors?.email">Invalid Email ID</div> 
                   </div>
-
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-lock"></i></span>
                   </div>
                   <input type="password" formControlName="c_password" class="form-control" placeholder="Password" autocomplete="current-password" required>
-                  <div *ngIf="submitted && f.c_password.errors" class="text-danger">
-                    <div *ngIf="f.c_password.errors.required">Password is required</div>
+                  <div *ngIf="f.c_password.invalid && (f.c_password.dirty || f.c_password.touched)" class="text-danger">
+                    <div *ngIf="f.c_password.errors.required">required</div>
                   </div>
                 </div>
                 <div class="row">
@@ -50,6 +48,7 @@
                       Login
                     </button>
                   </div>
+                </div>
                 </div>
               </form>
             </div>

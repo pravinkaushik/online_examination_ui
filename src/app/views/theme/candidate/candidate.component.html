@@ -4,27 +4,45 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <strong>Basic Form</strong> Elements
+            <strong>Register</strong> Candidate
           </div>
-          <form class="form-horizontal" >
+          <form class="form-horizontal" #candidateForm="ngForm">
           <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="c_name">Examination ID</label>
+              <div class="col-md-9">
+                
+                <p class="form-control-static">{{candidate.exam_config_id}}</p>
+              </div>
+            </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="c_name">Examination Name</label>
+                <label class="col-md-3 col-form-label" for="c_name">Candidate Name</label>
                 <div class="col-md-9">
-                  <input type="text" id="c_name" name="c_name" class="form-control" placeholder="Text" [(ngModel)]="candidate.c_name">
+                  <input type="text" id="c_name" name="c_name" class="form-control" placeholder="Candidate Name" [(ngModel)]="candidate.c_name" #c_name="ngModel" required minlength="4">
                   <span class="help-block">Provide Candidate Name</span>
+                  <div *ngIf="c_name.invalid && (c_name.dirty || c_name.touched)" class="text-danger">
+                    <div *ngIf="c_name.errors.required">required.</div>
+                    <div *ngIf="c_name.errors.minlength">Must be at least 4 characters long.</div>  
+                  </div>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="email">Candidate Email ID</label>
                 <div class="col-md-9">
-                  <input type="text" id="email" name="email" class="form-control" placeholder="Text" [(ngModel)]="candidate.email">
-                  <span class="help-block">Provide Institution name</span>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Email Id" [(ngModel)]="candidate.email"  #email="ngModel" email required>
+                  <span class="help-block">Provide Email Id</span>
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
+                    <div *ngIf="email.errors.required">required.</div>
+                    <div *ngIf="email.errors.email">Please provide valid Email ID.</div>
+                  </div>
                 </div>
               </div>
           </div>
           <div class="card-footer">
-            <button type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+            <button [disabled]="candidateForm.invalid" type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> 
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Submit
+            </button>
             <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
           </div>
         </form>

@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AlertService } from '../../../_services/alert.service';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { DefaultLayoutComponent } from '../../../containers/default-layout/default-layout.component';
+import { CustomValidators } from 'ng2-validation';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class ExamLoginComponent implements OnInit {
     }
       this.loginFormCandidate = this.formBuilder.group({
         c_exam_config_id: ['', Validators.required],
-        c_email: ['', Validators.required],
+        c_email: ['', CustomValidators.email],
         c_password: ['', Validators.required]
       });
 
@@ -47,7 +48,6 @@ export class ExamLoginComponent implements OnInit {
 get f() { return this.loginFormCandidate.controls; }
 
 onSubmit() {
-  debugger
     this.submitted = true;
 
     // reset alerts on submit
@@ -64,11 +64,11 @@ onSubmit() {
         .pipe(first())
         .subscribe(
             data => {
-                this.router.navigate([this.returnUrl,this.f.c_exam_config_id.value]);
+              this.router.navigate([this.returnUrl,this.f.c_exam_config_id.value]);
             },
             error => {
-                this.alertService.error(error);
-                this.loading = false;
+              this.alertService.error(error);
+              this.loading = false;
             });
   }
 

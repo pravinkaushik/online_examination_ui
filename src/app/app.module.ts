@@ -35,7 +35,6 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
@@ -62,6 +61,9 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { ExaminationModule } from './views/examination/examination.module';
 import { HomeModule } from './views/home/home.module';
+import { LoginModule } from './views/login/login.module';
+import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
+import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -80,19 +82,21 @@ import { HomeModule } from './views/home/home.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    CustomMaterialModule,
     FormsModule,
     CommonModule,
     SocialLoginModule,
     ExaminationModule,
-    HomeModule
+    HomeModule,
+    LoginModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent,
     AlertComponent,
+    ConfirmDialogComponent,
     RegisterComponent
   ],
   providers: [
@@ -101,6 +105,7 @@ import { HomeModule } from './views/home/home.module';
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: AuthServiceConfig, useFactory: provideConfig }
   ],
+  entryComponents: [ConfirmDialogComponent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

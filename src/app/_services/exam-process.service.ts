@@ -29,6 +29,22 @@ export class ExamProcessService {
       );
   }
 
+  get_remain_start_time(exam_id) {
+    return this.http.get<any>(`${environment.apiUrl}/remain_start_time/`+exam_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+  
+  get_remain_end_time(exam_id) {
+    return this.http.get<any>(`${environment.apiUrl}/remain_end_time/`+exam_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
   prepare_candidate_exam(exam_config_id) {
     return this.http.post<any>(`${environment.apiUrl}/prepare_candidate_exam`, JSON.stringify({'exam_config_id':exam_config_id}))
       .pipe(

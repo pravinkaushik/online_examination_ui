@@ -7,14 +7,18 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CommonModule } from '@angular/common';
 
+import { ConfirmDialogComponent } from '../../_components/confirm-dialog/confirm-dialog.component';
+import { CustomMaterialModule } from '../../_components/custom-material/custom-material.module';
+
 @NgModule({
   imports: [
     FormsModule,
     DashboardRoutingModule,
     BsDropdownModule,
     CommonModule,
+    CustomMaterialModule,
     ButtonsModule.forRoot()
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [ DashboardComponent]
 })
 export class DashboardModule { }

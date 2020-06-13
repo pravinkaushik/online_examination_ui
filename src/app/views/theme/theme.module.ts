@@ -14,7 +14,11 @@ import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
 import { QuestionComponent } from './question/question.component';
 import { QuestionListComponent } from './question-list/question-list.component';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { HttpClientModule} from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CustomFormsModule } from 'ng2-validation'
+import { ConfirmDialogComponent } from '../../_components/confirm-dialog/confirm-dialog.component';
+import { CustomMaterialModule } from '../../_components/custom-material/custom-material.module';
 
 @NgModule({
   imports: [
@@ -24,7 +28,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ThemeRoutingModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    CKEditorModule   
+    HttpClientModule,
+    AngularEditorModule,
+    CustomMaterialModule,
+    CustomFormsModule
   ],
   declarations: [
 //    ColorsComponent,
