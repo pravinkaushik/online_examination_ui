@@ -24,7 +24,7 @@
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3">
-                <label class="col-md-3 col-form-label" for="total_question">Total Number of Question</label>
+                <label class="col-md-3 col-form-label" for="total_question">Total Number of Options</label>
                 <div class="col-md-9">
                   <select id="total_question" name="total_question" class="form-control" [(ngModel)]="total_question">
                     <option value="1">One</option>
@@ -112,9 +112,10 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="positive_marks">Positive marks</label>
                 <div class="col-md-9">
-                  <input type="text" id="positive_marks" name="positive_marks" class="form-control" placeholder="Positive marks" [(ngModel)]="exam_question.positive_marks" required #positive_marks="ngModel">
+                  <input type="number" id="positive_marks" name="positive_marks" class="form-control" placeholder="Positive marks" [(ngModel)]="exam_question.positive_marks" [range]="[0, 300]" required #positive_marks="ngModel">
                   <div *ngIf="positive_marks.invalid && (positive_marks.dirty || positive_marks.touched)" class="text-danger">
                     <div *ngIf="positive_marks.errors.required">required</div>
+                    <div *ngIf="positive_marks.errors?.range">Must be in between 0 - 300</div>
                   </div>
                   <span class="help-block">Number of marks for fully correct answer</span>
                 </div>
@@ -122,9 +123,10 @@
               <div class="form-group row" *ngIf="exam_question.question_type!=3">
                 <label class="col-md-3 col-form-label" for="negative_marks">Negative marks</label>
                 <div class="col-md-9">
-                  <input type="text" id="negative_marks" name="negative_marks" class="form-control" placeholder="Negative marks" [(ngModel)]="exam_question.negative_marks" required #negative_marks="ngModel">
+                  <input type="number" id="negative_marks" name="negative_marks" class="form-control" placeholder="Negative marks" [(ngModel)]="exam_question.negative_marks" [range]="[0, 300]" required #negative_marks="ngModel">
                   <div *ngIf="negative_marks.invalid && (negative_marks.dirty || negative_marks.touched)" class="text-danger">
                     <div *ngIf="negative_marks.errors.required">required</div>
+                    <div *ngIf="negative_marks.errors?.range">Must be in between 0 - 300</div>
                   </div>
                   <span class="help-block">Number of marks for incorrect answer, Place Zero if no negative marks</span>
                 </div>

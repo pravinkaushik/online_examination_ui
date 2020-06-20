@@ -7,6 +7,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { ActivationComponent } from './views/activation/activation.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,13 @@ export const routes: Routes = [
     component: P500Component,
     data: {
       title: 'Page 500'
+    }
+  },
+  {
+    path: 'activate/:key',
+    component: ActivationComponent,
+    data: {
+      title: 'Activation'
     }
   },
   {

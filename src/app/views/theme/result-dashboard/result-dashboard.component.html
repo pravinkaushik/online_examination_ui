@@ -1,0 +1,64 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Examination Results
+          </div>
+          <div class="card-body">
+            <br>
+            <table class="table table-responsive-sm table-hover table-outline mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th class="text-center"><i class="icon-people"></i></th>
+                  <th class="text-left">Exam ID</th>
+                  <th class="text-left">Exam Name</th>
+                  <th class="text-left">Exam Title</th>
+                  <th class="text-center">total_question</th>
+                  <th class="text-center">duration_minute</th>
+                  <th class="text-center">Start Time</th>
+                  <th class="text-center">End Time</th>
+                  <th>Check and Publish Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let examConfig of examConfigs; let idx = index">
+                  <td class="text-center">
+                    <div>{{idx+1}}</div>
+                  </td>
+                  <td class="text-left">
+                    <div>{{examConfig.id}}</div>
+                  </td>
+                  <td class="text-left">
+                    <div>{{examConfig.exam_name}}</div>
+                  </td>
+                  <td class="text-left">
+                    {{examConfig.exam_title}}
+                  </td>
+                  <td class="text-center">
+                    {{examConfig.total_question}}
+                  </td>
+                  <td class="text-center">
+                    {{examConfig.duration_minute}} 
+                  </td>
+                  <td class="text-center">
+                    {{examConfig.start_time * 1000 | date :'medium'}} 
+                  </td>
+                  <td class="text-center">
+                    {{examConfig.end_time * 1000 | date :'medium'}}
+                  </td>
+                  <td class="text-center">
+                    <button type="button" (click)="goToExamResult(examConfig.id)" class="btn btn-block btn-info">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Show Result
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+  

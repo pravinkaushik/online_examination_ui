@@ -125,6 +125,7 @@ export class ExamLandingComponent implements OnInit {
 
   preProcess(){
     this.candidateExamQuestionArr.forEach(function (value) {
+      value.subjective_mark = 0;
       if(value.question_type == 1){
         if(value.radio_button_selected == 1){
           value.is_choice1_selected = 1

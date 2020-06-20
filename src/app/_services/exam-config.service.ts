@@ -7,6 +7,8 @@ import { User } from '../_models/user';
 import { ExamConfig } from '../_models/exam_config';
 import { Candidate } from '../_models/candidate';
 import { ExamQuestion } from '../_models/exam_question';
+import { ExamResult } from '../_models/exam_result';
+import { Result } from '../_models/result';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +57,30 @@ export class ExamConfigService {
 
   edit_exam_config(exam_config) {
     return this.http.put<any>(`${environment.apiUrl}/exam_config`, JSON.stringify(exam_config))
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
+  get_exam_result_list(exam_config_id) {
+    return this.http.get<ExamResult[]>(`${environment.apiUrl}/exam_result_all/`+exam_config_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
+  get_exam_result(exam_config_id, candidate_id) {
+    return this.http.get<Result[]>(`${environment.apiUrl}/exam_result/`+exam_config_id+`/`+candidate_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        catchError(this.handleError)
+      );
+  }
+
+  update_exam_marks(id, subjective_mark, exam_config_id) {
+    return this.http.put<any>(`${environment.apiUrl}/exam_marks`, JSON.stringify({"id": id, "subjective_mark": subjective_mark, "exam_config_id":exam_config_id}))
       .pipe(
         tap(_ => console.log('fetched heroes')),
         catchError(this.handleError)

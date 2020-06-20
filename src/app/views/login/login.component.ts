@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit {
       }
 
       this.loading = true;
-      debugger
       this.authenticationService.login(this.f.email.value, this.f.password.value)
           .pipe(first())
           .subscribe(
@@ -77,6 +76,31 @@ export class LoginComponent implements OnInit {
                   this.loading = false;
               });
   }
+
+  onForgotPassword() {
+    this.submitted = true;
+
+    // reset alerts on submit
+    this.alertService.clear();
+    debugger
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+        return;
+    }
+
+    this.loading = true;
+    this.authenticationService.forgot_password(this.f.email.value, this.f.password.value)
+        .pipe(first())
+        .subscribe(
+            data => {
+              this.alertService.success(data.message);
+              this.loading = false;
+            },
+            error => {
+                this.alertService.error(error, true);
+                this.loading = false;
+            });
+}
 
   onSignup() {
     this.submitted = true;
@@ -94,11 +118,12 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.authenticationService.login(this.fs.email.value, this.fs.password.value)
+    this.authenticationService.signup(this.fs.email.value, this.fs.password.value)
         .pipe(first())
         .subscribe(
             data => {
-                this.router.navigate([this.returnUrl]);
+              this.alertService.success(data.message);
+              this.loading = false;
             },
             error => {
                 this.alertService.error(error);

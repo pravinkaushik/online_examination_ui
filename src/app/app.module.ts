@@ -64,6 +64,7 @@ import { HomeModule } from './views/home/home.module';
 import { LoginModule } from './views/login/login.module';
 import { CustomMaterialModule } from './_components/custom-material/custom-material.module';
 import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
+import { ActivationComponent } from './views/activation/activation.component';
 
 @NgModule({
   imports: [
@@ -95,9 +96,11 @@ import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dia
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
+    ActivationComponent,
     AlertComponent,
     ConfirmDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    ActivationComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

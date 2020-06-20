@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          Traffic &amp; Sales
+          Dashboard Examination Configuration
         </div>
         <div class="card-body">
           <br>
@@ -11,24 +11,24 @@
             <thead class="thead-light">
               <tr>
                 <th class="text-center"><i class="icon-people"></i></th>
-                <th>Exam Name</th>
-                <th class="text-center">Exam Title</th>
-                <th>Candidate</th>
+                <th class="text-left">Exam Name</th>
+                <th class="text-left">Exam Title</th>
+                <th class="text-center">Candidate</th>
                 <th class="text-center">Question</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let examConfig of examConfigs">
+              <tr *ngFor="let examConfig of examConfigs; let idx = index">
                 <td class="text-center">
-                  <div>{{examConfig.id}}</div>
+                  <div>{{idx +1}}</div>
                 </td>
-                <td>
+                <td class="text-left">
                   <div>{{examConfig.exam_name}}</div>
                 </td>
-                <td class="text-center">
-                  <strong>{{examConfig.exam_title}}</strong>  
+                <td class="text-left">
+                  {{examConfig.exam_title}}
                 </td>
                 <td>
                   <button type="button" (click)="goToCandidates(examConfig.id)" class="btn btn-block btn-warning">

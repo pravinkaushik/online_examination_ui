@@ -9,13 +9,13 @@
                 <h1>Login</h1>
               </div>
                 <p class="text-muted">Sign In to your account</p>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="loginForm" >
                   <div class="card-body">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="email" formControlName="email" class="form-control" placeholder="Username" autocomplete="username" required>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email ID" autocomplete="username" required>
                     <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="text-danger">
                       <div *ngIf="f.email.errors.required">required</div>
                       <div *ngIf="f.email.errors?.email">Invalid Email ID</div>  
@@ -33,13 +33,16 @@
                   <div class="card-footer">
                   <div class="row">
                     <div class="col-6 text-center">
-                      <button [disabled]="loading || this.loginForm.invalid" class="btn btn-primary px-4">
+                      <button [disabled]="loading || this.loginForm.invalid" class="btn btn-primary px-4" (click)="onSubmit()">
                         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                         Login
                       </button>
                     </div>
                     <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                      <button [disabled]="loading || this.loginForm.invalid" class="btn btn-primary px-4" (click)="onForgotPassword()">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Forgot
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -71,7 +74,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">@</span>
                     </div>
-                    <input type="text" formControlName="email" class="form-control" placeholder="Username" autocomplete="username" required>
+                    <input type="text" formControlName="email" class="form-control" placeholder="Email ID" autocomplete="username" required>
                     <div *ngIf="fs.email.invalid && (fs.email.dirty || fs.email.touched)" class="text-danger">
                       <div *ngIf="fs.email.errors.required">required</div>
                     </div>

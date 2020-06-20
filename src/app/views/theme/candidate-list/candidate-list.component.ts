@@ -67,6 +67,10 @@ export class CandidateListComponent implements OnInit {
     this.router.navigate(['/theme/candidate', candidate_id]);
   }
 
+  addCandidate(id){
+    this.router.navigate(['/theme/candidate', id]);
+  }
+
   confirmDialog(candidate_id): void {
     const message = `Are you sure you want to do this?`;
 

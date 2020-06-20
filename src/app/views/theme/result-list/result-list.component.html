@@ -1,0 +1,79 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Candidate Result List of Examination Title: {{exam_config.exam_title}}
+          </div>
+          <div class="card-body">
+            <table class="table table-responsive-sm table-hover table-outline mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th class="text-center"><i class="icon-people"></i></th>
+                  <th class="text-left">Candidate ID</th>
+                  <th class="text-left">Name</th>
+                  <th class="text-left">Email</th>
+                  <th class="text-center">Start Time</th>
+                  <th class="text-center">End Time</th>
+                  <th class="text-center">Total Earn Objective Marks</th>
+                  <th class="text-center">Total Earn Negative Marks</th>
+                  <th class="text-center">Total Earn Subjective Marks</th>
+                  <th class="text-center">Overall Marks</th>
+                  <th class="text-center">Check and Review Result</th>
+                  <th class="text-center">Publish Result</th>      
+                </tr> 
+              </thead>
+              <tbody>
+                 <tr *ngFor="let exam_result of exam_results; let idx = index" class="danger">
+                  <td class="text-center">
+                    <strong>{{idx+1}}</strong>  
+                  </td>
+                  <td class="text-left">
+                    <strong>{{exam_result.candidate_id}}</strong>  
+                  </td>
+                  <td class="text-left">
+                    <strong>{{exam_result.c_name}}</strong>  
+                  </td>
+                  <td class="text-left">
+                    <strong>{{exam_result.email}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{exam_result.start_time * 1000 | date :'medium'}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{exam_result.end_time * 1000 | date :'medium'}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{exam_result.total_pos}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{exam_result.total_neg}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{exam_result.total_sub}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong *ngIf="exam_result.is_completed == '0'">{{exam_result.total_pos + exam_result.total_sub - exam_result.total_neg}}</strong>
+                    <strong *ngIf="exam_result.is_completed == '-1'">Subjective Question Review Pending</strong> 
+                  </td>
+                  <td>           
+                    <button type="button" (click)="reviewResult(exam_result.candidate_id)" class="btn btn-block btn-info">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Check and Review Result
+                    </button>                 
+                  </td>
+                  <td>
+                    <button [disabled]= "exam_result.is_completed == '-1'" type="button" (click)="publishResult(exam_result.candidate_id)" class="btn btn-block btn-warning">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Publish Result
+                    </button>                
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+  

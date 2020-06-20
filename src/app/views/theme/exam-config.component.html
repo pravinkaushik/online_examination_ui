@@ -20,10 +20,10 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="exam_name">Examination Name</label>
                 <div class="col-md-9">
-                  <input type="text" id="exam_name" name="exam_name" class="form-control" placeholder="Provide Name of the Examination " [(ngModel)]="exam_config.exam_name" required minlength="4" #exam_name="ngModel">
+                  <input type="text" id="exam_name" name="exam_name" class="form-control" placeholder="Provide Name of the Examination " [(ngModel)]="exam_config.exam_name" required minlength="2" #exam_name="ngModel">
                   <div *ngIf="exam_name.invalid && (exam_name.dirty || exam_name.touched)" class="text-danger">
                     <div *ngIf="exam_name.errors.required">required</div>
-                    <div *ngIf="exam_name.errors.minlength">Must be at least 4 characters long.</div>
+                    <div *ngIf="exam_name.errors.minlength">Must be at least 2 characters long.</div>
                   </div>
                   <span class="help-block">Provide Examination Name</span>    
                 </div>
@@ -31,10 +31,10 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="exam_title">Examination Title</label>
                 <div class="col-md-9">
-                  <input type="text" id="exam_title" name="exam_title" class="form-control" placeholder="Provide Institution name" [(ngModel)]="exam_config.exam_title" required minlength="4" #exam_title="ngModel">
+                  <input type="text" id="exam_title" name="exam_title" class="form-control" placeholder="Provide Institution name" [(ngModel)]="exam_config.exam_title" required minlength="2" #exam_title="ngModel">
                   <div *ngIf="exam_title.invalid && (exam_title.dirty || exam_title.touched)" class="text-danger">
                     <div *ngIf="exam_title.errors.required">required</div>
-                    <div *ngIf="exam_title.errors.minlength">Must be at least 4 characters long.</div>
+                    <div *ngIf="exam_title.errors.minlength">Must be at least 2 characters long.</div>
                   </div>
                   <span class="help-block">Provide Institution name</span>
                 </div>

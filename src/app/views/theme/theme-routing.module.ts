@@ -8,6 +8,9 @@ import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';
 import { QuestionListComponent } from './question-list/question-list.component';
 import { QuestionComponent } from './question/question.component';
+import { ResultDashboardComponent } from './result-dashboard/result-dashboard.component';
+import { ResultListComponent } from './result-list/result-list.component';
+import { ResultComponent } from './result/result.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,27 @@ const routes: Routes = [
         component: ExamConfigComponent,
         data: {
           title: 'Create Examination'
+        }
+      },
+      {
+        path: 'result_dashboard',
+        component: ResultDashboardComponent,
+        data: {
+          title: 'Result Dashboard'
+        }
+      },
+      {
+        path: 'exam_results/:id',
+        component: ResultListComponent,
+        data: {
+          title: 'Examination Results'
+        }
+      },
+      {
+        path: 'exam_result/:exam_config_id/:candidate_id',
+        component: ResultComponent,
+        data: {
+          title: 'Examination Result'
         }
       },
       {

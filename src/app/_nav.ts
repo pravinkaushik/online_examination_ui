@@ -5,6 +5,7 @@ export const navItems: INavData[] = [
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer',
+    variant: 'success',
     badge: {
       variant: 'info',
       text: ''
@@ -16,9 +17,24 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Add Examination',
-    variant: 'danger',
+    variant: 'info',
     url: '/theme/exam_config/0',
     icon: 'cui-note'
+  }, 
+  {
+    name: 'Bulk upload (comming soon)',
+    url: 'bulk_upload',
+    icon: 'icon-layers',
+    variant: 'danger',
+    attributes: { target: '_blank', rel: 'noopener' }
+  }, 
+  {
+    name: 'Question bank (comming soon)',
+    url: 'question_bank',
+    icon: 'icon-cloud-download',
+//    class: 'mt-auto',
+    variant: 'danger',
+    attributes: { target: '_blank', rel: 'noopener' }
   },
 /*  {
     name: 'Colors',
@@ -38,18 +54,9 @@ export const navItems: INavData[] = [
     divider: true
   },
   {
-    name: 'Bulk upload (commig soon)',
-    url: 'bulk_upload',
-    icon: 'icon-layers',
-    variant: 'danger',
-    attributes: { target: '_blank', rel: 'noopener' }
-  }, 
-  {
-    name: 'Question bank (commig soon)',
-    url: 'question_bank',
-    icon: 'icon-cloud-download',
-    class: 'mt-auto',
-    variant: 'success',
-    attributes: { target: '_blank', rel: 'noopener' }
+    name: 'Results',
+    url: '/theme/result_dashboard',
+    icon: 'icon-drop',
+    variant: 'success'
   }
 ];

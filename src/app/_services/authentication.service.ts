@@ -31,6 +31,15 @@ export class AuthenticationService {
             }));
     }
 
+    activate(key) {
+        return this.http.post<any>(`${environment.apiUrl}/activate`, { "key": key })
+            .pipe(map(user => {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                return user;
+        }));
+    }
+
     login(email, password) {
         return this.http.post<any>(`${environment.apiUrl}/login`, { email, password })
             .pipe(map(user => {
@@ -38,6 +47,13 @@ export class AuthenticationService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 return user;
+            }));
+    }
+
+    forgot_password(email, password) {
+        return this.http.post<any>(`${environment.apiUrl}/forgot_password`, { email, password })
+            .pipe(map(ret => {
+                return ret;
             }));
     }
 

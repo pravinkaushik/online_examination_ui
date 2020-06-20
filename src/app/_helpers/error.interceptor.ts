@@ -24,7 +24,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                     this.router.navigate(['/login']);
                 }
             }
-            debugger
             const error = err.error.error || err.statusText;
             return throwError(error);
         }))

@@ -19,4 +19,5 @@ export class CandidateExamQuestion {
     negative_marks: number;
     question_type: number;
     radio_button_selected: any;
+    subjective_mark: number = 0;
 }

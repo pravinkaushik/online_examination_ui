@@ -1,0 +1,90 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Result of Examination ID: {{exam_config_id}} Candidate ID: {{candidate_id}} 
+          </div>
+
+          <div class="card-body">
+            <table class="table table-responsive-sm table-hover table-outline mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th class="text-center"><i class="icon-people"></i></th>
+                  <th class="text-center">Question ID</th>
+                  <th class="text-center">Question Type</th>
+                  <th class="text-center">Positive Marks</th>
+                  <th class="text-center">Negative Marks</th>
+                  <th class="text-center">Selected Option</th>
+                  <th class="text-center">Correct Option</th>
+                  <th class="text-center">Subjective Answer</th>
+                  <th class="text-center">Earn Marks</th>
+                  <th class="text-center">Update Mark</th>      
+                </tr>
+              </thead>
+              <tbody>   
+                 <tr *ngFor="let result of results; let idx = index" class="danger">
+                  <td class="text-center">
+                    <strong>{{idx+1}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{result.exam_questions_id}}</strong>  
+                  </td>
+                  <td>
+                    <strong *ngIf="result.question_type == 1">Only One answer correct</strong>
+                    <strong *ngIf="result.question_type == 2">Multiple answer can be correct</strong>  
+                    <strong *ngIf="result.question_type == 3">Subjective</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong>{{result.positive_marks}}</strong> 
+                  </td>
+                  <td class="text-center">
+                    <strong>{{result.negative_marks}}</strong>  
+                  </td>
+                  <td class="text-center">
+                    <strong *ngIf="result.is_choice1_selected ==1">A</strong>
+                    <strong *ngIf="result.is_choice2_selected ==1">B</strong> 
+                    <strong *ngIf="result.is_choice3_selected ==1">C</strong> 
+                    <strong *ngIf="result.is_choice4_selected ==1">D</strong> 
+                    <strong *ngIf="result.is_choice5_selected ==1">E</strong>   
+                  </td>
+                  <td class="text-center">
+                    <strong *ngIf="result.is_choice1_correct ==1">A</strong>
+                    <strong *ngIf="result.is_choice2_correct ==1">B</strong> 
+                    <strong *ngIf="result.is_choice3_correct ==1">C</strong> 
+                    <strong *ngIf="result.is_choice4_correct ==1">D</strong> 
+                    <strong *ngIf="result.is_choice5_correct ==1">E</strong>   
+                  </td>
+                  <td class="text-center">
+                    <div [innerHTML]="result.answer"></div>
+                  </td>
+                  <td class="text-center" *ngIf="result.question_type == 3">
+                    <input type="text" id="subjective_mark" name="subjective_mark" class="form-control" placeholder="Marks" [(ngModel)]="result.subjective_mark">
+                  </td>
+                  <td class="text-center" *ngIf="result.question_type != 3">             
+                    <strong *ngIf="result.is_choice1_selected == 0 && result.is_choice2_selected == 0 && result.is_choice3_selected == 0 &&
+                    result.is_choice4_selected == 0 && result.is_choice5_selected == 0 ">0</strong>
+                    <strong *ngIf="result.is_choice1_selected == result.is_choice1_correct && result.is_choice2_selected == result.is_choice2_correct 
+                    && result.is_choice3_selected == result.is_choice3_correct && result.is_choice4_selected == result.is_choice4_correct && 
+                    result.is_choice5_selected == result.is_choice5_correct ">{{result.positive_marks}}</strong>  
+                    <strong *ngIf="!(result.is_choice1_selected == result.is_choice1_correct && result.is_choice2_selected == result.is_choice2_correct 
+                    && result.is_choice3_selected == result.is_choice3_correct && result.is_choice4_selected == result.is_choice4_correct && 
+                    result.is_choice5_selected == result.is_choice5_correct) && 
+                    (result.is_choice1_selected != 0 || result.is_choice2_selected != 0 || result.is_choice3_selected != 0 ||  
+                    result.is_choice4_selected != 0 || result.is_choice5_selected != 0 ) ">-{{result.negative_marks}}</strong> 
+                  </td>
+                  <td>
+                    <button *ngIf="result.question_type == 3" type="button" (click)="updateMarks(result.id, result.subjective_mark)" class="btn btn-block btn-warning">
+                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      Update
+                    </button>                
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div><!--/.col-->
+    </div><!--/.row-->
+  </div>
+  
