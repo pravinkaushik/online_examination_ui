@@ -67,6 +67,7 @@ export class StartExamComponent implements OnInit {
     // reset alerts on submit
     this.alertService.clear();
     this.loading = true;
+    debugger
     this.examProcessService.prepare_candidate_exam(this.exam_config.id)
         .pipe(first())
         .subscribe(

@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import { ExamQuestion } from '../../../_models/exam_question';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CustomValidators } from 'ng2-validation';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-question',
@@ -76,6 +77,7 @@ export class QuestionComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
+    public translate: TranslateService,
     private alertService: AlertService
   ) {
       this.route.paramMap.subscribe(params => {
@@ -127,7 +129,7 @@ export class QuestionComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-            this.alertService.success("Success fully Created", true);
+            this.alertService.success("SUC0007", true);
             this.router.navigate(['/theme/questionlist', this.exam_question.exam_config_id]);
         },
         error => {
@@ -145,7 +147,7 @@ export class QuestionComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-            this.alertService.success("Success fully Updated", true);
+            this.alertService.success("SUC0007", true);
             this.router.navigate(['/theme/questionlist', this.exam_question.exam_config_id]);
         },
         error => {

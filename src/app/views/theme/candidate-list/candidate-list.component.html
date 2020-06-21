@@ -3,12 +3,12 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            Candidate List of {{exam_config.exam_title}}
+            {{'candidate_list' | translate}} {{exam_config.exam_title}}
           </div>
           <div class="card-header">
             <button type="button" (click)="addCandidate(exam_config.id)" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
               <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-              Add Candidate
+              {{'add_candidate' | translate}}
             </button>
           </div>
           <div class="card-body">
@@ -16,11 +16,11 @@
               <thead class="thead-light">
                 <tr>
                   <th class="text-left"><i class="icon-people"></i></th>
-                  <th class="text-left">Candidate ID</th>
-                  <th class="text-left">Name</th>
-                  <th class="text-left">Email</th>
-                  <th class="text-left">Resend Password</th>
-                  <th class="text-left">Delete</th>
+                  <th class="text-left">{{'candidate_id' | translate}}</th>
+                  <th class="text-left">{{'name' | translate}}</th>
+                  <th class="text-left">{{'email' | translate}}</th>
+                  <th class="text-left">{{'resend_password' | translate}}</th>
+                  <th class="text-left">{{'delete' | translate}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -40,13 +40,13 @@
                   <td>           
                     <button type="button" (click)="resendPassword(candidate.id)" class="btn btn-block btn-info">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Resend Password
+                      {{'resend_password' | translate}}
                     </button>                 
                   </td>
                   <td>           
                     <button type="button" (click)="confirmDialog(candidate.id)" class="btn btn-block btn-danger">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Delete
+                      {{'delete' | translate}}
                     </button>                
                   </td>
                 </tr>

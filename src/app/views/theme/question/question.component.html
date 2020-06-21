@@ -4,74 +4,74 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <strong>Question</strong>
+            <strong>{{'question' | translate}}</strong>
           </div>
           <form #questionForm="ngForm">
           <div class="card-body">
              <div class="form-group row" *ngIf="!isCreate">
-                <label class="col-md-3 col-form-label">Question ID</label>
+                <label class="col-md-3 col-form-label">{{'question_id' | translate}}</label>
                 <div class="col-md-9"> {{exam_question.id}}
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="question_type">Question type</label>
+                <label class="col-md-3 col-form-label" for="question_type">{{'question_type' | translate}}</label>
                 <div class="col-md-9">
                   <select id="question_type" name="question_type" class="form-control" [(ngModel)]="exam_question.question_type">
-                    <option value="1">Only One answer correct</option>
-                    <option value="2">Multiple answer can be correct</option>
-                    <option value="3">Subjective</option>
+                    <option value="1">{{'question_type_1' | translate}}</option>
+                    <option value="2">{{'question_type_2' | translate}}</option>
+                    <option value="3">{{'question_type_3' | translate}}</option>
                   </select>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3">
-                <label class="col-md-3 col-form-label" for="total_question">Total Number of Options</label>
+                <label class="col-md-3 col-form-label" for="total_question">{{'number_option' | translate}}</label>
                 <div class="col-md-9">
                   <select id="total_question" name="total_question" class="form-control" [(ngModel)]="total_question">
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                   </select>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="question">Question</label>
+                <label class="col-md-3 col-form-label" for="question">{{'question' | translate}}</label>
                 <div class="col-md-9">               
                   <angular-editor [placeholder]="'Enter Question here...'" [config]="editorConfig" [(ngModel)]="exam_question.question" name="question" required #question="ngModel"></angular-editor>                     
                   <div *ngIf="question.invalid && (question.dirty || question.touched)" class="text-danger">
-                    <div *ngIf="question.errors.required">required</div>
+                    <div *ngIf="question.errors.required">{{'required' | translate}}</div>
                   </div>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >0">
-                <label class="col-md-3 col-form-label" for="choice1">Choice 1</label>
+                <label class="col-md-3 col-form-label" for="choice1">{{'choice' | translate}} 1</label>
                 <div class="col-md-9">
                   <angular-editor [placeholder]="'Enter choice 1 here...'" [config]="editorConfig" [(ngModel)]="exam_question.choice1" name="choice1" required #choice1="ngModel"></angular-editor>   
                   <div *ngIf="choice1.invalid && (choice1.dirty || choice1.touched)" class="text-danger">
-                    <div *ngIf="choice1.errors.required">required</div>
+                    <div *ngIf="choice1.errors.required">{{'required' | translate}}</div>
                   </div>
                   <div class="form-check"><span class="help-block">
                     <input class="form-check-input" type="checkbox" id="checkboxchoice1" name="checkboxchoice1" [(ngModel)]="exam_question.is_choice1_correct" ng-true-value="1" ng-false-value="0">
-                    <label class="form-check-label" for="checkboxchoice1">Is Above answer correct</label>
+                    <label class="form-check-label" for="checkboxchoice1">{{'is_above_correct' | translate}}</label>
                     </span></div>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >1">
-                <label class="col-md-3 col-form-label" for="choice1">Choice 2</label>
+                <label class="col-md-3 col-form-label" for="choice1">{{'choice' | translate}} 2</label>
                 <div class="col-md-9">
                   <angular-editor [placeholder]="'Enter choice 2 here...'" [config]="editorConfig" [(ngModel)]="exam_question.choice2" name="choice2" required #choice2="ngModel"></angular-editor>   
                   <div *ngIf="choice2.invalid && (choice2.dirty || choice2.touched)" class="text-danger">
-                    <div *ngIf="choice2.errors.required">required</div>
+                    <div *ngIf="choice2.errors.required">{{'register' | translate}}required</div>
                   </div>
                   <div class="form-check"><span class="help-block">
                     <input class="form-check-input" type="checkbox" id="checkboxchoice2" name="checkboxchoice2" [(ngModel)]="exam_question.is_choice2_correct" ng-true-value="1" ng-false-value="0">
-                    <label class="form-check-label" for="checkboxchoice2">Is Above answer correct</label>
+                    <label class="form-check-label" for="checkboxchoice2">{{'is_above_correct' | translate}}</label>
                     </span></div>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >2">
-                <label class="col-md-3 col-form-label" for="choice3">Choice 3</label>
+                <label class="col-md-3 col-form-label" for="choice3">{{'choice' | translate}} 3</label>
                 <div class="col-md-9">
                   <angular-editor [placeholder]="'Enter choice 3 here...'" [config]="editorConfig" [(ngModel)]="exam_question.choice3" name="choice3" required #choice3="ngModel"></angular-editor>   
                   <div *ngIf="choice3.invalid && (choice3.dirty || choice3.touched)" class="text-danger">
@@ -79,12 +79,12 @@
                   </div>
                   <div class="form-check"><span class="help-block">
                     <input class="form-check-input" type="checkbox" id="checkboxchoice3" name="checkboxchoice3" [(ngModel)]="exam_question.is_choice3_correct" ng-true-value="1" ng-false-value="0">
-                    <label class="form-check-label" for="checkboxchoice3">Is Above answer correct</label>
+                    <label class="form-check-label" for="checkboxchoice3">{{'is_above_correct' | translate}}</label>
                 </span></div>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >3">
-                <label class="col-md-3 col-form-label" for="choice4">Choice 4</label>
+                <label class="col-md-3 col-form-label" for="choice4">{{'choice' | translate}} 4</label>
                 <div class="col-md-9">
                   <angular-editor [placeholder]="'Enter choice 4 here...'" [config]="editorConfig" [(ngModel)]="exam_question.choice4" name="choice4" required #choice4="ngModel"></angular-editor>   
                   <div *ngIf="choice4.invalid && (choice4.dirty || choice4.touched)" class="text-danger">
@@ -92,50 +92,50 @@
                   </div>
                   <div class="form-check"><span class="help-block">
                     <input class="form-check-input" type="checkbox" id="checkboxchoice4" name="checkboxchoice4" [(ngModel)]="exam_question.is_choice4_correct" ng-true-value="1" ng-false-value="0">
-                    <label class="form-check-label" for="checkboxchoice4">Is Above answer correct</label>
+                    <label class="form-check-label" for="checkboxchoice4">{{'is_above_correct' | translate}}</label>
                 </span></div>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >4">
-                <label class="col-md-3 col-form-label" for="choice5">Choice 5</label>
+                <label class="col-md-3 col-form-label" for="choice5">{{'choice' | translate}} 5</label>
                 <div class="col-md-9">
                   <angular-editor [placeholder]="'Enter choice 5 here...'" [config]="editorConfig" [(ngModel)]="exam_question.choice5" name="choice5" required #choice5="ngModel"></angular-editor>   
                   <div *ngIf="choice5.invalid && (choice5.dirty || choice5.touched)" class="text-danger">
-                    <div *ngIf="choice5.errors.required">required</div>
+                    <div *ngIf="choice5.errors.required">{{'required' | translate}}</div>
                   </div>
                   <div class="form-check"><span class="help-block">
                     <input class="form-check-input" type="checkbox" id="checkboxchoice5" name="checkboxchoice5" [(ngModel)]="exam_question.is_choice5_correct" ng-true-value="1" ng-false-value="0">
-                    <label class="form-check-label" for="checkboxchoice5">Is Above answer correct</label>
+                    <label class="form-check-label" for="checkboxchoice5">{{'is_above_correct' | translate}}</label>
                 </span></div>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="positive_marks">Positive marks</label>
+                <label class="col-md-3 col-form-label" for="positive_marks">{{'pos_marks' | translate}}</label>
                 <div class="col-md-9">
-                  <input type="number" id="positive_marks" name="positive_marks" class="form-control" placeholder="Positive marks" [(ngModel)]="exam_question.positive_marks" [range]="[0, 300]" required #positive_marks="ngModel">
+                  <input type="number" id="positive_marks" name="positive_marks" class="form-control" placeholder="{{'pos_marks' | translate}}" [(ngModel)]="exam_question.positive_marks" [range]="[0, 300]" required #positive_marks="ngModel">
                   <div *ngIf="positive_marks.invalid && (positive_marks.dirty || positive_marks.touched)" class="text-danger">
-                    <div *ngIf="positive_marks.errors.required">required</div>
-                    <div *ngIf="positive_marks.errors?.range">Must be in between 0 - 300</div>
+                    <div *ngIf="positive_marks.errors.required">{{'required' | translate}}</div>
+                    <div *ngIf="positive_marks.errors?.range">{{'must_inbetween' | translate}} 0 - 300</div>
                   </div>
-                  <span class="help-block">Number of marks for fully correct answer</span>
+                  <span class="help-block">{{'correct_note' | translate}}</span>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3">
-                <label class="col-md-3 col-form-label" for="negative_marks">Negative marks</label>
+                <label class="col-md-3 col-form-label" for="negative_marks">{{'neg_marks' | translate}}</label>
                 <div class="col-md-9">
-                  <input type="number" id="negative_marks" name="negative_marks" class="form-control" placeholder="Negative marks" [(ngModel)]="exam_question.negative_marks" [range]="[0, 300]" required #negative_marks="ngModel">
+                  <input type="number" id="negative_marks" name="negative_marks" class="form-control" placeholder="{{'neg_marks' | translate}}" [(ngModel)]="exam_question.negative_marks" [range]="[0, 300]" required #negative_marks="ngModel">
                   <div *ngIf="negative_marks.invalid && (negative_marks.dirty || negative_marks.touched)" class="text-danger">
-                    <div *ngIf="negative_marks.errors.required">required</div>
-                    <div *ngIf="negative_marks.errors?.range">Must be in between 0 - 300</div>
+                    <div *ngIf="negative_marks.errors.required">{{'required' | translate}}</div>
+                    <div *ngIf="negative_marks.errors?.range">{{'must_inbetween' | translate}} 0 - 300</div>
                   </div>
-                  <span class="help-block">Number of marks for incorrect answer, Place Zero if no negative marks</span>
+                  <span class="help-block"> {{'incorrect_note' | translate}}</span>
                 </div>
               </div>
           </div>
           <div class="card-footer">
-            <button [disabled]="questionForm.invalid" *ngIf="isCreate" type="button" (click)="onSubmitCreate()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Create</button>
-            <button [disabled]="questionForm.invalid" *ngIf="!isCreate" type="button" (click)="onSubmitEdit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Update</button>
-            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            <button [disabled]="questionForm.invalid" *ngIf="isCreate" type="button" (click)="onSubmitCreate()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'create' | translate}}</button>
+            <button [disabled]="questionForm.invalid" *ngIf="!isCreate" type="button" (click)="onSubmitEdit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'update' | translate}}</button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> {{'reset' | translate}}</button>
           </div>
         </form>
         </div>

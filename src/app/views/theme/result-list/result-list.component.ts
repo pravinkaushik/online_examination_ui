@@ -7,6 +7,7 @@ import { AlertService } from '../../../_services/alert.service';
 import { ExamConfig } from '../../../_models/exam_config';
 import { first } from 'rxjs/operators';
 import { ExamResult } from '../../../_models/exam_result';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-result-list',
@@ -23,7 +24,7 @@ export class ResultListComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public translate: TranslateService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {

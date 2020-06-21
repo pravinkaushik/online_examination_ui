@@ -3,50 +3,50 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            Contact us - Online Examination System
+            {{'contact' | translate}} - {{'site_name' | translate}}
           </div>
           <div class="card-body">
             <form class="form-horizontal" #myForm="ngForm">
               <div class="card-body">
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="name">Name</label>
+                  <label class="col-md-3 col-form-label" for="name">{{'name' | translate}}</label>
                   <div class="col-md-9">
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Provide Name" [(ngModel)]="enquiry.name" required minlength="2" #name="ngModel">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="{{'provide_name' | translate}}" [(ngModel)]="enquiry.name" required minlength="2" #name="ngModel">
                     <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
-                      <div *ngIf="name.errors.required">required</div>
-                      <div *ngIf="name.errors.minlength">Must be at least 2 characters long.</div>
+                      <div *ngIf="name.errors.required">{{'required' | translate}}</div>
+                      <div *ngIf="name.errors.minlength">{{'val_2_char' | translate}}</div>
                     </div>
-                    <span class="help-block">Name</span>    
+                    <span class="help-block">{{'provide_name' | translate}}</span>    
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label class="col-md-3 col-form-label" for="email">Candidate Email ID</label>
+                  <label class="col-md-3 col-form-label" for="email">{{'email' | translate}}</label>
                   <div class="col-md-9">
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email Id" [(ngModel)]="enquiry.email"  #email="ngModel" email required>
-                    <span class="help-block">Provide Email Id</span>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="{{'email' | translate}}" [(ngModel)]="enquiry.email"  #email="ngModel" email required>
+                    <span class="help-block">{{'email' | translate}}</span>
                     <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger">
-                      <div *ngIf="email.errors.required">required.</div>
-                      <div *ngIf="email.errors.email">Please provide valid Email ID.</div>
+                      <div *ngIf="email.errors.required">{{'required' | translate}}.</div>
+                      <div *ngIf="email.errors.email">{{'val_email' | translate}}</div>
                     </div>
                   </div>
                 </div>
 
                   <div class="form-group row">
-                    <label class="col-md-3 col-form-label" for="message">Message</label>
+                    <label class="col-md-3 col-form-label" for="message">{{'message' | translate}}</label>
                     <div class="col-md-9">
-                      <input type="text" id="message" name="message" class="form-control" placeholder="Place query and message" [(ngModel)]="enquiry.message" required minlength="2" #message="ngModel">
+                      <input type="text" id="message" name="message" class="form-control" placeholder="{{'query_message' | translate}}" [(ngModel)]="enquiry.message" required minlength="2" #message="ngModel">
                       <div *ngIf="message.invalid && (message.dirty || message.touched)" class="text-danger">
-                        <div *ngIf="message.errors.required">required</div>
-                        <div *ngIf="message.errors.minlength">Must be at least 2 characters long.</div>
+                        <div *ngIf="message.errors.required">{{'required' | translate}}</div>
+                        <div *ngIf="message.errors.minlength">{{'val_2_char' | translate}}</div>
                       </div>
-                      <span class="help-block">Place query and message</span>
+                      <span class="help-block">{{'query_message' | translate}}</span>
                     </div>
                   </div>
 
               </div>
               <div class="card-footer">
-                <button [disabled]="myForm.invalid" type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                <button [disabled]="myForm.invalid" type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'submit' | translate}}</button>
+                <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>{{'reset' | translate}}</button>
               </div>
             </form>
           </div>

@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { CustomMaterialModule } from '../../_components/custom-material/custom-material.module';
 import { CustomFormsModule } from 'ng2-validation';
 import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '../../shared.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     ButtonsModule.forRoot(),
     HomeRoutingModule,
     CustomMaterialModule,
-    CustomFormsModule
+    CustomFormsModule,
+    SharedModule
   ],
   bootstrap: [ HomeComponent ]
 })

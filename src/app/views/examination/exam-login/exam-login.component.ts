@@ -55,11 +55,12 @@ onSubmit() {
 
     // stop here if form is invalid
     if (this.loginFormCandidate.invalid) {
-      this.alertService.error("Invalid Credential");
+      this.alertService.error("ERR0008");
       return;
     }
 
     this.loading = true;
+    debugger
     this.authenticationService.login_exam(this.f.c_exam_config_id.value, this.f.c_email.value, this.f.c_password.value)
         .pipe(first())
         .subscribe(

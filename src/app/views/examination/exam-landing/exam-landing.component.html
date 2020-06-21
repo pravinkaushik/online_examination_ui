@@ -3,28 +3,28 @@
         <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                <button [disabled]="isPreviousDisabled" type="button" (click)="previous()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Previous</button>
+                <button [disabled]="isPreviousDisabled" type="button" (click)="previous()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'previous' | translate}}</button>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                <button *ngIf="!isFinalPage" type="button" (click)="saveNext()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Save and Next</button>              
+                <button *ngIf="!isFinalPage" type="button" (click)="saveNext()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'save_next' | translate}}</button>              
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">               
-                <button *ngIf="isFinalPage" type="button" (click)="saveFinish()" class="btn btn-sm btn-danger"><i class="fa fa-dot-circle-o"></i> Save and Finish</button>
+                <button *ngIf="isFinalPage" type="button" (click)="saveFinish()" class="btn btn-sm btn-danger"><i class="fa fa-dot-circle-o"></i>{{'save_finish' | translate}}</button>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                Remain Time: {{counter | formatTime}} 
+                {{'remain_time' | translate}}: {{counter | formatTime}} 
               </div>
             </div>
           </div>
@@ -36,7 +36,7 @@
                 <label class="col-md-3 col-form-label">{{exam_question.id}}:<div [innerHTML]="exam_question.question"></div> </label>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type == 3" >
-              <label class="col-md-3 col-form-label" for="answer">Answer</label>
+              <label class="col-md-3 col-form-label" for="answer">{{'answer' | translate}}</label>
               <div class="col-md-9">               
                 <angular-editor [placeholder]="'Enter Question here...'" [config]="editorConfig" [(ngModel)]="exam_question.answer"></angular-editor>                     
               </div>
@@ -85,29 +85,29 @@
         <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                <button [disabled]="isPreviousDisabled" type="button" (click)="previous()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Previous</button>
+                <button [disabled]="isPreviousDisabled" type="button" (click)="previous()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'previous' | translate}}</button>
               </div>
             </div>
           </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                <button *ngIf="!isFinalPage" type="button" (click)="saveNext()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Save and Next</button>
-                <button *ngIf="isFinalPage" type="button" (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Save</button>
+                <button *ngIf="!isFinalPage" type="button" (click)="saveNext()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'save_next' | translate}}</button>
+                <button *ngIf="isFinalPage" type="button" (click)="save()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'save' | translate}}</button>
               </div>
             </div>    
           </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                <button *ngIf="isFinalPage" type="button" (click)="saveFinish()" class="btn btn-sm btn-danger"><i class="fa fa-dot-circle-o"></i> Save and Finish</button>
+                <button *ngIf="isFinalPage" type="button" (click)="saveFinish()" class="btn btn-sm btn-danger"><i class="fa fa-dot-circle-o"></i>{{'save_finish' | translate}}</button>
               </div>
             </div>    
           </div>
           <div class="col-md-3">
             <div class="card">
               <div class="card-header">
-                Remain Time: {{counter | formatTime}} 
+                {{'remain_time' | translate}}: {{counter | formatTime}} 
               </div>
             </div>
           </div>

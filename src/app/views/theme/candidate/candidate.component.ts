@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../_services/alert.service';
 import { first } from 'rxjs/operators';
 import { Candidate } from '../../../_models/candidate';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-candidate',
@@ -15,13 +16,13 @@ import { Candidate } from '../../../_models/candidate';
 export class CandidateComponent implements OnInit {
 
   candidate: Candidate = new Candidate();
-  private loading = false;
-  private submitted = false;
+  loading = false;
+  submitted = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public translate: TranslateService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
@@ -46,7 +47,7 @@ export class CandidateComponent implements OnInit {
         data => {
             this.router.navigate(['/theme/candidatelist', this.candidate.exam_config_id]);
             this.loading = false;
-            this.alertService.success("Successfully Updated", true);
+            this.alertService.success("SUC0009", true);
         },
         error => {
             this.alertService.error(error);

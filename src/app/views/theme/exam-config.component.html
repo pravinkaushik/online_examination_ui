@@ -4,66 +4,66 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <strong>Examination Configuration - </strong> 
-            <strong *ngIf ="isCreate">Create</strong>
-            <strong *ngIf ="!isCreate">Update</strong>
+            <strong>{{'test_configuration' | translate}} - </strong> 
+            <strong *ngIf ="isCreate">{{'create' | translate}}</strong>
+            <strong *ngIf ="!isCreate">{{'update' | translate}}</strong>
           </div>
           <form class="form-horizontal" #myForm="ngForm">
           <div class="card-body">
             
               <div class="form-group row" *ngIf ="!isCreate">
-                <label class="col-md-3 col-form-label">Exam ID</label>
+                <label class="col-md-3 col-form-label">{{'test_id' | translate}}</label>
                 <div class="col-md-9">
                   <p class="form-control-static">{{exam_config.id}}</p>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="exam_name">Examination Name</label>
+                <label class="col-md-3 col-form-label" for="exam_name">{{'test_name' | translate}}</label>
                 <div class="col-md-9">
-                  <input type="text" id="exam_name" name="exam_name" class="form-control" placeholder="Provide Name of the Examination " [(ngModel)]="exam_config.exam_name" required minlength="2" #exam_name="ngModel">
+                  <input type="text" id="exam_name" name="exam_name" class="form-control" placeholder="{{'test_name' | translate}}" [(ngModel)]="exam_config.exam_name" required minlength="2" #exam_name="ngModel">
                   <div *ngIf="exam_name.invalid && (exam_name.dirty || exam_name.touched)" class="text-danger">
-                    <div *ngIf="exam_name.errors.required">required</div>
-                    <div *ngIf="exam_name.errors.minlength">Must be at least 2 characters long.</div>
+                    <div *ngIf="exam_name.errors.required">{{'required' | translate}}</div>
+                    <div *ngIf="exam_name.errors.minlength">{{'val_2_char' | translate}}</div>
                   </div>
-                  <span class="help-block">Provide Examination Name</span>    
+                  <span class="help-block">{{'test_name' | translate}}</span>    
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="exam_title">Examination Title</label>
+                <label class="col-md-3 col-form-label" for="exam_title">{{'test_title' | translate}}</label>
                 <div class="col-md-9">
-                  <input type="text" id="exam_title" name="exam_title" class="form-control" placeholder="Provide Institution name" [(ngModel)]="exam_config.exam_title" required minlength="2" #exam_title="ngModel">
+                  <input type="text" id="exam_title" name="exam_title" class="form-control" placeholder="{{'test_title' | translate}}" [(ngModel)]="exam_config.exam_title" required minlength="2" #exam_title="ngModel">
                   <div *ngIf="exam_title.invalid && (exam_title.dirty || exam_title.touched)" class="text-danger">
-                    <div *ngIf="exam_title.errors.required">required</div>
-                    <div *ngIf="exam_title.errors.minlength">Must be at least 2 characters long.</div>
+                    <div *ngIf="exam_title.errors.required">{{'required' | translate}}</div>
+                    <div *ngIf="exam_title.errors.minlength">{{'val_2_char' | translate}}</div>
                   </div>
-                  <span class="help-block">Provide Institution name</span>
+                  <span class="help-block">{{'institute_name' | translate}}</span>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="duration_minute">Examination Duration</label>
+                <label class="col-md-3 col-form-label" for="duration_minute">{{'test_duration' | translate}}</label>
                 <div class="col-md-9">
-                  <input type="number" id="duration_minute" name="duration_minute" class="form-control" placeholder="Provide In minutes" [(ngModel)]="exam_config.duration_minute" required [range]="[1, 3600]" #duration_minute="ngModel">
+                  <input type="number" id="duration_minute" name="duration_minute" class="form-control" placeholder="{{'test_duration' | translate}}" [(ngModel)]="exam_config.duration_minute" required [range]="[1, 3600]" #duration_minute="ngModel">
                   <div *ngIf="duration_minute.invalid && (duration_minute.dirty || duration_minute.touched)" class="text-danger">
-                    <div *ngIf="duration_minute.errors.required">Please provide valid input</div>
-                    <div *ngIf="duration_minute.errors?.range">Must be in between 1 - 3600</div>
+                    <div *ngIf="duration_minute.errors.required">{{'val_invalid' | translate}}</div>
+                    <div *ngIf="duration_minute.errors?.range">{{'must_inbetween' | translate}} 1 - 3600</div>
                   </div>
-                  <span class="help-block">Duration in minutes</span>
+                  <span class="help-block">{{'test_duration' | translate}}</span>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="total_question">Total Questions</label>
+                <label class="col-md-3 col-form-label" for="total_question">{{'total_questions' | translate}}</label>
                 <div class="col-md-9">
-                  <input type="number" id="total_question" name="total_question" class="form-control" placeholder="Total number of Questions" [(ngModel)]="exam_config.total_question" [range]="[1, 300]" required #total_question="ngModel">
+                  <input type="number" id="total_question" name="total_question" class="form-control" placeholder="{{'total_questions' | translate}}" [(ngModel)]="exam_config.total_question" [range]="[1, 300]" required #total_question="ngModel">
                   <div *ngIf="total_question.invalid && (total_question.dirty || total_question.touched)" class="text-danger">
-                    <div *ngIf="total_question.errors.required">Please provide valid input</div>
-                    <div *ngIf="total_question.errors?.range">Must be in between 1 - 300</div>
+                    <div *ngIf="total_question.errors.required">{{'val_invalid' | translate}}</div>
+                    <div *ngIf="total_question.errors?.range">{{'must_inbetween' | translate}} 1 - 300</div>
                   </div>
-                  <span class="help-block">Total number of Questions</span>
+                  <span class="help-block">{{'total_questions' | translate}}</span>
                 </div>
               </div>
               
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="question_per_page">Questions per page</label>
+                <label class="col-md-3 col-form-label" for="question_per_page">{{'question_per_page' | translate}}</label>
                 <div class="col-md-9">
                   <select id="question_per_page" name="question_per_page" class="form-control" [(ngModel)]="exam_config.question_per_page" required #question_per_page="ngModel">
                     <option value="1" selected>1</option>
@@ -73,13 +73,13 @@
                     <option value="5">5</option>
                   </select>
                   <div *ngIf="question_per_page.invalid && (question_per_page.dirty || question_per_page.touched)" class="text-danger">
-                    <div *ngIf="question_per_page.errors.required">required</div>
+                    <div *ngIf="question_per_page.errors.required">{{'required' | translate}}</div>
                   </div>
                 </div>
               </div>
 
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="sDate">Start Date Time</label>
+                <label class="col-md-3 col-form-label" for="sDate">{{'stime' | translate}}</label>
                 <div class="col-md-9">
                   <input class="form-control" [formControl]="start_time"
                          [owlDateTimeTrigger]="dtPicker1" [owlDateTime]="dtPicker1">
@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="eDate">End Date Time</label>
+                <label class="col-md-3 col-form-label" for="eDate">{{'etime' | translate}}</label>
                 <div class="col-md-9">
                   <input class="form-control" [formControl]="end_time"
                          [owlDateTimeTrigger]="dtPicker2" [owlDateTime]="dtPicker2">
@@ -96,35 +96,35 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="time_zone">Select timezone</label>
+                <label class="col-md-3 col-form-label" for="time_zone">{{'select_timezone' | translate}}</label>
                 <div class="col-md-9">
                   <select id="time_zone" name="time_zone" class="form-control" [(ngModel)]="exam_config.time_zone" required #time_zone="ngModel">
                     <option [value]="time_zone" *ngFor="let time_zone of timezones"> {{time_zone}}</option>
                   </select>
                   <div *ngIf="time_zone.invalid && (time_zone.dirty || time_zone.touched)" class="text-danger">
-                    <div *ngIf="time_zone.errors.required">required</div>
+                    <div *ngIf="time_zone.errors.required">{{'required' | translate}}</div>
                   </div>
                 </div>
               </div>
               
               <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="select2">Random question</label>
+                <label class="col-md-3 col-form-label" for="select2">{{'random_question' | translate}}</label>
                 <div class="col-md-9">
                   <select id="random_question" name="random_question" class="form-control" [(ngModel)]="exam_config.random_question" required #random_question="ngModel">
-                    <option value="1" selected>Yes</option>
-                    <option value="2">No</option>
+                    <option value="1" selected>{{'yes' | translate}}</option>
+                    <option value="2">{{'no' | translate}}</option>
                   </select>
                   <div *ngIf="random_question.invalid && (random_question.dirty || random_question.touched)" class="text-danger">
-                    <div *ngIf="random_question.errors.required">required</div>
+                    <div *ngIf="random_question.errors.required">{{'required' | translate}}</div>
                   </div>
                 </div>
               </div>
             
           </div>
           <div class="card-footer">
-            <button [disabled]="myForm.invalid" *ngIf ="isCreate" type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
-            <button [disabled]="myForm.invalid" *ngIf ="!isCreate" type="button" (click)="onUpdate()" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Update</button>
-            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            <button [disabled]="myForm.invalid" *ngIf ="isCreate" type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'submit' | translate}} </button>
+            <button [disabled]="myForm.invalid" *ngIf ="!isCreate" type="button" (click)="onUpdate()" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i>{{'update' | translate}} </button>
+            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i>{{'reset' | translate}} </button>
           </div>
         </form>
         </div>

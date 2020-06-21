@@ -10,6 +10,7 @@ import { ExamQuestion } from '../../../_models/exam_question';
 import { ExamConfig } from '../../../_models/exam_config';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../../_components/confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class QuestionListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private authenticationService: AuthenticationService,
+    public translate: TranslateService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
@@ -78,7 +79,7 @@ export class QuestionListComponent implements OnInit {
 
 
   confirmDialog(exam_question_id): void {
-    const message = `Are you sure you want to do this?`;
+    const message = `confirm_delete`;
 
     const dialogData = new ConfirmDialogModel("Confirm Action", message);
 
@@ -94,7 +95,7 @@ export class QuestionListComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                this.alertService.success("successfully Deleted.");
+                this.alertService.success("SUC0006");
                 this.loading = false;
                 this.exam_questions = this.exam_questions.filter(item => item.id !== exam_question_id);
             },

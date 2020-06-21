@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../_services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../_services/alert.service';
 import { first } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -15,19 +16,19 @@ import { first } from 'rxjs/operators';
   templateUrl: './exam-config.component.html'
 })
 export class ExamConfigComponent implements OnInit {
-  private timezones = []; 
-  private isCreate = false;
+  timezones = []; 
+  isCreate = false;
   examConfigForm: FormGroup;
-  private exam_config: ExamConfig;
+  exam_config: ExamConfig;
   loading = false;
   submitted = false;
-  private start_time;
-  private end_time;
+  start_time;
+  end_time;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public translate: TranslateService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
@@ -79,7 +80,7 @@ export class ExamConfigComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-            this.alertService.success("successfully created ", true);
+            this.alertService.success("SUC0002", true);
             this.loading = false;
             this.router.navigate(['dashboard']);
         },
@@ -100,7 +101,7 @@ export class ExamConfigComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-            this.alertService.success("successfully updated ", true);
+            this.alertService.success("SUC0003", true);
             this.router.navigate(['dashboard']);
         },
         error => {

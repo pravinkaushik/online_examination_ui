@@ -7,6 +7,7 @@ import { ExamLandingComponent, FormatTimePipe } from './exam-landing/exam-landin
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FinishExamComponent } from './finish-exam/finish-exam.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { SharedModule } from '../../shared.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ExaminationRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    SharedModule
   ]
 })
 export class ExaminationModule { }

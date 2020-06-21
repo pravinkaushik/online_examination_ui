@@ -203,7 +203,7 @@ export class ExamLandingComponent implements OnInit {
       .subscribe(
           (data) => {
             console.log(data);
-            this.alertService.success("Thanks for completing Examination", true);
+            this.alertService.success("SUC0013", true);
             this.authenticationService.logout();
             this.router.navigate(["finish_exam"]);
           },

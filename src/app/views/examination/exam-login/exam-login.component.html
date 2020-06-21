@@ -6,30 +6,28 @@
           <div class="card mx-4">
             <div class="card-body p-4">
               <div class="card-header">
-              <h1>Login to Begin</h1>
+              <h1>{{'test_login_header' | translate}}</h1>
             </div>
-              <p class="text-muted">Please provide beloaw details</p>
+              <p class="text-muted">{{'test_login_subheader' | translate}}</p>
               <form [formGroup]="loginFormCandidate" (ngSubmit)="onSubmit()">
                 <div class="card-body">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="icon-user"></i></span>
                   </div>
-                  <input type="text" formControlName="c_exam_config_id" class="form-control" placeholder="Examination ID" autocomplete="Examination ID" required>
+                  <input type="text" formControlName="c_exam_config_id" class="form-control" placeholder="{{'test_id' | translate}}" autocomplete="Test ID" required>
                   <div *ngIf="f.c_exam_config_id.invalid && (f.c_exam_config_id.dirty || f.c_exam_config_id.touched)" class="text-danger">
-                    <div *ngIf="f.c_exam_config_id.errors.required">
-                      Examination ID is required.
-                    </div>
+                    <div *ngIf="f.c_exam_config_id.errors.required">{{'required' | translate}}</div>
                   </div>
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>
-                  <input type="email" formControlName="c_email" class="form-control" placeholder="email" autocomplete="email" required minlength="4">
+                  <input type="email" formControlName="c_email" class="form-control" placeholder="{{'email' | translate}}" autocomplete="email" required minlength="4">
                   <div *ngIf="f.c_email.invalid && (f.c_email.dirty || f.c_email.touched)" class="text-danger">
-                    <div *ngIf="f.c_email.errors.required">required.</div>
-                    <div *ngIf="f.c_email.errors?.email">Invalid Email ID</div> 
+                    <div *ngIf="f.c_email.errors.required">{{'required' | translate}}</div>
+                    <div *ngIf="f.c_email.errors?.email">{{'val_email' | translate}}</div> 
                   </div>
                 </div>
                 <div class="input-group mb-4">
@@ -38,14 +36,14 @@
                   </div>
                   <input type="password" formControlName="c_password" class="form-control" placeholder="Password" autocomplete="current-password" required>
                   <div *ngIf="f.c_password.invalid && (f.c_password.dirty || f.c_password.touched)" class="text-danger">
-                    <div *ngIf="f.c_password.errors.required">required</div>
+                    <div *ngIf="f.c_password.errors.required">{{'required' | translate}}</div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-6">
                     <button [disabled]="loading || this.loginFormCandidate.invalid" class="btn btn-primary px-4">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Login
+                      {{'login' | translate}}
                     </button>
                   </div>
                 </div>

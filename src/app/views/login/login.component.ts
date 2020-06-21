@@ -7,6 +7,7 @@ import { AlertService } from '../../_services/alert.service';
 import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { CustomValidators } from 'ng2-validation';
+import { TranslateService } from '@ngx-translate/core';
  
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
       private router: Router,
       private authenticationService: AuthenticationService,
       private alertService: AlertService,
-      private authService: AuthService
+      private authService: AuthService,
+      public translate: TranslateService
   ) {
 
   }
@@ -82,7 +84,6 @@ export class LoginComponent implements OnInit {
 
     // reset alerts on submit
     this.alertService.clear();
-    debugger
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
@@ -114,7 +115,7 @@ export class LoginComponent implements OnInit {
     }
     
     if(this.fs.password.value != this.fs.retype_password.value){
-      this.alertService.error("Password and Retype Password should be same.");
+      this.alertService.error("ERR0001");
       return;
     }
     this.loading = true;

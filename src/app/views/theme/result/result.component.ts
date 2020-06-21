@@ -7,6 +7,7 @@ import { AlertService } from '../../../_services/alert.service';
 import { ExamConfig } from '../../../_models/exam_config';
 import { first } from 'rxjs/operators';
 import { Result } from '../../../_models/result';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-result',
@@ -23,7 +24,7 @@ export class ResultComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public translate: TranslateService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService) { 
       this.route.paramMap.subscribe(params => {
@@ -41,7 +42,6 @@ export class ResultComponent implements OnInit {
     .subscribe(
         (data) => {
           this.results =  data;
-          console.log(data)
           this.loading = false;
         },
         error => {
@@ -57,7 +57,7 @@ export class ResultComponent implements OnInit {
         (data) => {
           this.results =  data;
           this.loading = false;
-          alert("Successfully Updated ")
+          alert(this.translate.instant('SUC0005'))
         },
         error => {
             this.alertService.error(error);

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ColorsComponent } from './colors.component';
-import { TypographyComponent } from './typography.component';
 import { ExamConfigComponent } from './exam-config.component';
 import { CandidateComponent } from './candidate/candidate.component';
 import { CandidateListComponent } from './candidate-list/candidate-list.component';

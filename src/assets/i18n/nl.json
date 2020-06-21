@@ -1,0 +1,112 @@
+{
+ 
+
+"site_name" : "Easy Online Test" ,
+
+"welcome_header" : "Welkom bij het echt gratis online onderzoekssysteem." ,
+
+"welcome_header_detail1" : "Voer gratis kosteloze online uitgebreide tests uit voor deelnemers." ,
+
+"welcome_header_detail2" : "Motief achter om het gratis te maken, lagere kosten zullen de deelnemers voorwoord brengen." ,
+
+"donate_header" : "Om dit echt gratis online testplatform te maken, waren er veel inspanningen en infrastructuurkosten nodig." ,
+
+"donate_detail1" : "Doneer als dit helpt." ,
+
+"key_features" : "Belangrijkste kenmerken" ,
+
+"key1" : "Ondersteuning van subjectieve en objectieve test." ,
+
+"key2" : "Ondersteuning van verschillende tijdzones en talen" ,
+
+"key3" : "Slimme werkbalken die verschillende functies bieden op basis van context." ,
+
+"key4" : "Ondersteuning voor het toevoegen / uploaden van afbeeldingen." ,
+
+"key5" : "Ondersteuning voor ingesloten videolinks ." ,
+
+"key6" : "Snel en lichtgewicht." ,
+
+"key7" : "Ondersteuning voor tekstuitlijning." ,
+
+"key8" : "Ondersteuning voor HTML en Markdown." ,
+
+"easy_use" : "Makkelijk te gebruiken." ,
+
+"how_use" : "Hoe te gebruiken?" ,
+
+"how_use_step1" : "Log in of meld u aan bij Easy Online Test." ,
+
+"how_use_step2" : "Onderzoek toevoegen." ,
+
+"how_use_step3" : "Vragen toevoegen." ,
+
+"how_use_step4" : "Kandidaat toevoegen (krijgt bericht via e-mail)." ,
+
+"how_use_step5" : "Proost !!!! Test is gepubliceerd." ,
+
+"how_use_step6" : "Bekijk en verifieer resultaten." ,
+
+"free_api" : "Gratis API - Rustgevende webservices en White Label-service" ,
+
+"api_detail1" : "Eenvoudige en betrouwbare Restful API." ,
+
+"api_detail2" : "Microservices-architectuur." ,
+
+"api_detail3" : "White Label-service, voeg iframe toe aan uw website." ,
+
+"api_detail4" : "U kunt uw eigen gebruikersinterface bouwen en API gebruiken." ,
+
+"api_detail5" : "En nog veel meer .. Blijf genieten !!!!" ,
+
+"dashboard" : "Dashboard" ,
+
+"login_signup" : "Inloggen of Aanmelden" ,
+
+"contact" : "Neem contact met ons op" ,
+
+"home" : "Home" ,
+
+"settings" : "Instellingen" ,
+
+"profile" : "Profiel" ,
+
+"select_language" : "Selecteer taal" ,
+
+"logout" : "Logout" ,
+
+"powered_by" : "Powered by" ,
+
+"create_name" : "Geef naam op" ,
+
+"message" : "Bericht" ,
+
+ 
+
+"query_message" : "Plaats query en bericht" ,
+
+"email" : "E-mailadres" ,
+
+"PhoneNo" : "Phone No" ,
+
+"Password" : "Wachtwoord" ,
+
+"Bio" : "Voer bio in" ,
+
+"TermsConditions" : "Ik ga akkoord met de algemene voorwaarden." ,
+
+ 
+
+"val_email" : "Geef een geldig e-mailadres op." ,
+
+"required" : "Vereist" ,
+
+"val_2_char" : "Moet minimaal 2 tekens lang zijn." ,
+
+"submit" : "Submit" ,
+
+"reset" : "Reset"
+
+ 
+
+}

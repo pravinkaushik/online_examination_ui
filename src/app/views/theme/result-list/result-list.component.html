@@ -3,24 +3,24 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            Candidate Result List of Examination Title: {{exam_config.exam_title}}
+            {{'c_result_header' | translate}}: {{exam_config.exam_title}}
           </div>
           <div class="card-body">
             <table class="table table-responsive-sm table-hover table-outline mb-0">
               <thead class="thead-light">
                 <tr>
                   <th class="text-center"><i class="icon-people"></i></th>
-                  <th class="text-left">Candidate ID</th>
-                  <th class="text-left">Name</th>
-                  <th class="text-left">Email</th>
-                  <th class="text-center">Start Time</th>
-                  <th class="text-center">End Time</th>
-                  <th class="text-center">Total Earn Objective Marks</th>
-                  <th class="text-center">Total Earn Negative Marks</th>
-                  <th class="text-center">Total Earn Subjective Marks</th>
-                  <th class="text-center">Overall Marks</th>
-                  <th class="text-center">Check and Review Result</th>
-                  <th class="text-center">Publish Result</th>      
+                  <th class="text-left">{{'candidate_id' | translate}}</th>
+                  <th class="text-left">{{'name' | translate}}</th>
+                  <th class="text-left">{{'email' | translate}}</th>
+                  <th class="text-center">{{'stime' | translate}}</th>
+                  <th class="text-center">{{'etime' | translate}}</th>
+                  <th class="text-center">{{'te_om' | translate}}</th>
+                  <th class="text-center">{{'te_nm' | translate}}</th>
+                  <th class="text-center">{{'te_sm' | translate}}</th>
+                  <th class="text-center">{{'overall_m' | translate}}</th>
+                  <th class="text-center">{{'check_review_result' | translate}}</th>
+                  <th class="text-center">{{'publish_result' | translate}}</th>      
                 </tr> 
               </thead>
               <tbody>
@@ -54,18 +54,18 @@
                   </td>
                   <td class="text-center">
                     <strong *ngIf="exam_result.is_completed == '0'">{{exam_result.total_pos + exam_result.total_sub - exam_result.total_neg}}</strong>
-                    <strong *ngIf="exam_result.is_completed == '-1'">Subjective Question Review Pending</strong> 
+                    <strong *ngIf="exam_result.is_completed == '-1'">{{'review_pending' | translate}}</strong> 
                   </td>
                   <td>           
                     <button type="button" (click)="reviewResult(exam_result.candidate_id)" class="btn btn-block btn-info">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Check and Review Result
+                      {{'check_review_result' | translate}}
                     </button>                 
                   </td>
                   <td>
                     <button [disabled]= "exam_result.is_completed == '-1'" type="button" (click)="publishResult(exam_result.candidate_id)" class="btn btn-block btn-warning">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Publish Result
+                      {{'publish_result' | translate}}
                     </button>                
                   </td>
                 </tr>

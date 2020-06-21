@@ -2,9 +2,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { ColorsComponent } from './colors.component';
-import { TypographyComponent } from './typography.component';
-
 // Theme Routing
 import { ThemeRoutingModule } from './theme-routing.module';
 import { ExamConfigComponent } from './exam-config.component';
@@ -22,6 +19,7 @@ import { CustomMaterialModule } from '../../_components/custom-material/custom-m
 import { ResultListComponent } from './result-list/result-list.component';
 import { ResultComponent } from './result/result.component';
 import { ResultDashboardComponent } from './result-dashboard/result-dashboard.component';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   imports: [
@@ -34,11 +32,10 @@ import { ResultDashboardComponent } from './result-dashboard/result-dashboard.co
     HttpClientModule,
     AngularEditorModule,
     CustomMaterialModule,
-    CustomFormsModule
+    CustomFormsModule,
+    SharedModule
   ],
   declarations: [
-//    ColorsComponent,
-//    TypographyComponent,
     ExamConfigComponent,
     CandidateComponent,
     CandidateListComponent,

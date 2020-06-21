@@ -10,6 +10,7 @@ import { Candidate } from '../../../_models/candidate';
 import { ExamConfig } from '../../../_models/exam_config';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../../_components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-candidate-list',
@@ -27,8 +28,8 @@ export class CandidateListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
+    public translate: TranslateService,
     private alertService: AlertService
   ) {
       this.route.paramMap.subscribe(params => {
@@ -72,7 +73,7 @@ export class CandidateListComponent implements OnInit {
   }
 
   confirmDialog(candidate_id): void {
-    const message = `Are you sure you want to do this?`;
+    const message = `confirm_delete`;
 
     const dialogData = new ConfirmDialogModel("Confirm Action", message);
 
@@ -88,7 +89,7 @@ export class CandidateListComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                this.alertService.success("successfully Deleted.");
+                this.alertService.success("SUC0010");
                 this.loading = false;
                 this.candidates = this.candidates.filter(item => item.id !== candidate_id);
             },

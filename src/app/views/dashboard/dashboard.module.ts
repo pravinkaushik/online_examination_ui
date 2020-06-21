@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 
 import { ConfirmDialogComponent } from '../../_components/confirm-dialog/confirm-dialog.component';
 import { CustomMaterialModule } from '../../_components/custom-material/custom-material.module';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { CustomMaterialModule } from '../../_components/custom-material/custom-m
     BsDropdownModule,
     CommonModule,
     CustomMaterialModule,
-    ButtonsModule.forRoot()
+    ButtonsModule.forRoot(),
+    SharedModule
   ],
   declarations: [ DashboardComponent]
 })

@@ -2,8 +2,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header">
-            Examination Results
+          <div class="card-header">       
+            {{'test_results' | translate}}
           </div>
           <div class="card-body">
             <br>
@@ -11,14 +11,14 @@
               <thead class="thead-light">
                 <tr>
                   <th class="text-center"><i class="icon-people"></i></th>
-                  <th class="text-left">Exam ID</th>
-                  <th class="text-left">Exam Name</th>
-                  <th class="text-left">Exam Title</th>
-                  <th class="text-center">total_question</th>
-                  <th class="text-center">duration_minute</th>
-                  <th class="text-center">Start Time</th>
-                  <th class="text-center">End Time</th>
-                  <th>Check and Publish Result</th>
+                  <th class="text-left">{{'test_id' | translate}}</th>
+                  <th class="text-left">{{'test_name' | translate}}</th>
+                  <th class="text-left">{{'test_title' | translate}}</th>
+                  <th class="text-center">{{'total_question' | translate}}</th>
+                  <th class="text-center">{{'duration_minute' | translate}}</th>
+                  <th class="text-center">{{'stime' | translate}}</th>
+                  <th class="text-center">{{'etime' | translate}}</th>
+                  <th>{{'check_publish' | translate}}</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,7 +50,7 @@
                   <td class="text-center">
                     <button type="button" (click)="goToExamResult(examConfig.id)" class="btn btn-block btn-info">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      Show Result
+                      {{'show_result' | translate}}
                     </button>
                   </td>
                 </tr>

@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <div [ngClass]="message.cssClass"><strong>{{title}}&nbsp;</strong>{{message.text}}</div>
+            <div [ngClass]="message.cssClass"><strong>{{title | translate}}&nbsp;</strong>{{message.text | translate}}</div>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -13,7 +14,8 @@ import { LoginComponent } from './login.component';
     ReactiveFormsModule,
     CommonModule,
     ButtonsModule.forRoot(),
-    LoginRoutingModule
+    LoginRoutingModule,
+    SharedModule
   ]
 })
 

@@ -3,20 +3,30 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            Online Examination System
+            {{'site_name' | translate}}
           </div>
           <div class="card-body">
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">Please refer term and conditions.</label>
+              <label class="col-md-3 col-form-label">{{'term_condition' | translate}}</label>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">Examination Name : </label>
+              <label class="col-md-3 col-form-label">{{'test_name' | translate}} : </label>
               <div class="col-md-9"> {{exam_config.exam_name}}
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-md-3 col-form-label">Examination Title : </label>
+              <label class="col-md-3 col-form-label">{{'test_title' | translate}} : </label>
               <div class="col-md-9"> {{exam_config.exam_title}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">{{'duration_minute' | translate}} : </label>
+              <div class="col-md-9"> {{exam_config.duration_minute}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label">{{'total_question' | translate}} : </label>
+              <div class="col-md-9"> {{exam_config.total_question}}
               </div>
             </div>
           </div>
@@ -25,14 +35,14 @@
       <div class="col-md-6">
         <div class="card">
           <div class="card-header">
-            I have accepted all the terms and conditions.
+            {{'TermsConditions' | translate}}
           </div>
           <div class="card-body">
             <button [disabled]="loading || counter > 0" (click)="onSubmit()" class="btn btn-primary px-4">
                 <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                Start now
+                {{'start_now' | translate}}
             </button>
-            <strong *ngIf="counter > 0" >Start In: {{counter | formatTime}} </strong> 
+            <strong *ngIf="counter > 0" >{{'start_in' | translate}}: {{counter | formatTime}} </strong> 
           </div>
         </div>
       </div><!--/.col-->

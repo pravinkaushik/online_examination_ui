@@ -9,6 +9,7 @@ import { ExamConfig } from '../../_models/exam_config';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../../_components/confirm-dialog/confirm-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'dashboard.component.html'
@@ -24,7 +25,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    public translate: TranslateService
   ) {
 
   }
@@ -45,7 +47,9 @@ export class DashboardComponent implements OnInit {
   goToEditExamConfig(id) {
     this.router.navigate(['/theme/exam_config', id]);
   } 
-
+  goToAddExamConfig() {
+    this.router.navigate(['/theme/exam_config', 0]);
+  }
   goToCandidates(id) {
     this.router.navigate(['/theme/candidatelist', id]);
   }
@@ -55,7 +59,7 @@ export class DashboardComponent implements OnInit {
   }
 
   confirmDialog(exam_config_id): void {
-    const message = `Are you sure you want to do this?`;
+    const message = `confirm_delete`;
 
     const dialogData = new ConfirmDialogModel("Confirm Action", message);
 
@@ -71,7 +75,7 @@ export class DashboardComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
-                this.alertService.success("successfully Deleted.");
+                this.alertService.success("SUC0004");
                 this.loading = false;
                 this.examConfigs = this.examConfigs.filter(item => item.id !== exam_config_id);
                 this.router.navigate(['dashboard']);

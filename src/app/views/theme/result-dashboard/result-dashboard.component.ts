@@ -8,6 +8,7 @@ import { ExamConfig } from '../../../_models/exam_config';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { ExamConfigService } from '../../../_services/exam-config.service';
 import { AlertService } from '../../../_services/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-result-dashboard',
@@ -23,7 +24,7 @@ export class ResultDashboardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public translate: TranslateService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
@@ -37,7 +38,6 @@ export class ResultDashboardComponent implements OnInit {
     .subscribe(
         data => {      
           this.examConfigs = data;  
-          console.log(this.examConfigs);
         },
         error => {
             this.alertService.error(error);

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../_services/alert.service';
-import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { tap, catchError } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Enquiry } from '../../../_models/enquiry';
+import { UserService } from '../../../_services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
@@ -15,26 +15,30 @@ import { Enquiry } from '../../../_models/enquiry';
 export class ContactComponent implements OnInit {
 
   enquiry: Enquiry = new Enquiry();
+  loading = false
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: AlertService
+    private userService: UserService,
+    private alertService: AlertService,
+    public translate: TranslateService
   ) { }
 
   ngOnInit(): void {
   }
   onSubmit(){
-
-    this.http.post<any>(`${environment.apiUrl}/contact`, JSON.stringify(this.enquiry))
-      .pipe(
-        tap(_ => {
-          console.log('fetched heroes')
-          this.alertService.success("Thanks for contact us. Will review sortly.", true);
-        }),
-        catchError(this.handleError)
-      );
-
+    this.loading = true;
+      this.userService.contact(this.enquiry)
+      .pipe(first())
+      .subscribe(
+          data => {
+            this.alertService.success("SUC0012", true);
+            this.loading = false;
+          },
+          error => {
+              this.alertService.error(error);
+              this.loading = false;
+          });
   }
 
   private handleError(error: any) { 
