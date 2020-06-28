@@ -39,6 +39,8 @@ export class CandidateComponent implements OnInit {
     this.submitted = true;
     this.loading = true;
     this.candidate.id = 0;
+    this.candidate.start_time = 1593340264;
+    this.candidate.end_time = 1593340264;
     this.candidate.exam_owner_id = 0;
     this.candidate.password_hash = "test";
     this.examConfigService.add_candidate(this.candidate)

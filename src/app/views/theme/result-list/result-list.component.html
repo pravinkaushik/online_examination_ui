@@ -20,7 +20,7 @@
                   <th class="text-center">{{'te_sm' | translate}}</th>
                   <th class="text-center">{{'overall_m' | translate}}</th>
                   <th class="text-center">{{'check_review_result' | translate}}</th>
-                  <th class="text-center">{{'publish_result' | translate}}</th>      
+     <!--       <th class="text-center">{{'publish_result' | translate}}</th>      -->      
                 </tr> 
               </thead>
               <tbody>
@@ -62,15 +62,19 @@
                       {{'check_review_result' | translate}}
                     </button>                 
                   </td>
-                  <td>
+        <!--          <td>
                     <button [disabled]= "exam_result.is_completed == '-1'" type="button" (click)="publishResult(exam_result.candidate_id)" class="btn btn-block btn-warning">
                       <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'publish_result' | translate}}
-                    </button>                
-                  </td>
+                    </button>              
+                  </td> --> 
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="card-footer">
+            <angular2csv [data]="exam_results" filename="{{exam_config.exam_title}}.csv" [options]="options" class="btn btn-sm btn-primary">
+            </angular2csv>
           </div>
         </div>
       </div><!--/.col-->

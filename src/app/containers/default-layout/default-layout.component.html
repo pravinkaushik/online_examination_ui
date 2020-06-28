@@ -1,8 +1,8 @@
 <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 89, height: 25, alt: 'Easy Online Test'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.png', width: 30, height: 30, alt: 'Easy Online Test'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/sygnet.png', width: 30, height: 25, alt: 'Easy Online Exam'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.png', width: 30, height: 30, alt: 'Easy Online Exam'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
@@ -67,8 +67,32 @@
       <router-outlet></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
+  <app-aside [fixed]="true" [display]="false" [ngClass]="'test'">
+    <tabset>
+      <tab>
+        <ng-template tabHeading><i class="icon-list"></i></ng-template>
+        
+        <div class="list-group list-group-accent">
+      
+          <div *ngIf="!isLoggedInExamOwner && !isLoggedInCandidate" class="list-group-item list-group-item-accent-warning list-group-item-divider">
+            <a class="nav-link" href="/#/">{{'home' | translate}}</a>
+          </div>
+          <div *ngIf="isLoggedInExamOwner" class="list-group-item list-group-item-accent-warning list-group-item-divider">
+            <a class="nav-link" href="/#/dashboard">{{'dashboard' | translate}}</a>
+          </div>
+          <div *ngIf="!isLoggedInExamOwner && !isLoggedInCandidate" class="list-group-item list-group-item-accent-warning list-group-item-divider">
+            <a class="nav-link" href="/#/login">{{'login_signup' | translate}}</a>
+          </div>
+          <div *ngIf="!isLoggedInCandidate" class="list-group-item list-group-item-accent-warning list-group-item-divider">
+            <a class="nav-link" href="/#/contact_us">{{'contact' | translate}}</a>
+          </div>
+          <div class="list-group-item list-group-item-accent-secondary bg-light text-center font-weight-bold text-muted text-uppercase small"></div>
+        </div>
+      </tab>
+    </tabset>
+  </app-aside>
 </div>
 <app-footer>
-  <span><a href="https://easyonlinetest.com">Easy Online Test</a> &copy; 2020 easyonlinetest.com</span>
-  <span class="ml-auto">{{'powered_by' | translate}}<a href="https://easyonlinetest.com"> Easy Online Test</a></span>
+  <span><a href="https://www.easyonlineexam.com">Easy Online Exam</a> &copy; 2020 easyonlineexam.com</span>
+  <span class="ml-auto">{{'powered_by' | translate}}<a href="https://www.easyonlineexam.com"> Easy Online Exam</a></span>
 </app-footer>

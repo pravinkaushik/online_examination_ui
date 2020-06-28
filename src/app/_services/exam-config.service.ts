@@ -100,7 +100,13 @@ export class ExamConfigService {
         tap(_ => console.log('fetched heroes'))
       );
   }
-
+  resend_password(candidate_id) {
+    return this.http.get<any>(`${environment.apiUrl}/resend_invitation/`+candidate_id)
+      .pipe(
+        tap(_ => console.log('fetched heroes'))
+      );
+  }
+  
   // exam_question Changes
   get_exam_question_list(exam_config_id) {
     return this.http.get<ExamQuestion[]>(`${environment.apiUrl}/exam_question_all/`+exam_config_id)

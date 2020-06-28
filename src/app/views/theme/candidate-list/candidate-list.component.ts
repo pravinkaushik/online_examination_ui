@@ -65,7 +65,18 @@ export class CandidateListComponent implements OnInit {
   }
 
   resendPassword(candidate_id){
-    this.router.navigate(['/theme/candidate', candidate_id]);
+    this.loading = true;
+    this.examConfigService.resend_password(candidate_id)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.alertService.success("SUC0014");
+                this.loading = false;
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
   }
 
   addCandidate(id){

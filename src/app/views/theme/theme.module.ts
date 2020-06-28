@@ -20,6 +20,7 @@ import { ResultListComponent } from './result-list/result-list.component';
 import { ResultComponent } from './result/result.component';
 import { ResultDashboardComponent } from './result-dashboard/result-dashboard.component';
 import { SharedModule } from '../../shared.module';
+import { Angular2CsvModule } from 'angular2-csv';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { SharedModule } from '../../shared.module';
     AngularEditorModule,
     CustomMaterialModule,
     CustomFormsModule,
-    SharedModule
+    SharedModule,
+    Angular2CsvModule
   ],
   declarations: [
     ExamConfigComponent,
