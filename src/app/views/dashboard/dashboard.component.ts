@@ -10,12 +10,12 @@ import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../../_components/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  loading = false;
   examConfigs: ExamConfig[];
 
   constructor(
@@ -26,22 +26,24 @@ export class DashboardComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService,
+    private spinner: NgxSpinnerService,
     public translate: TranslateService
   ) {
 
   }
   ngOnInit() {
+    this.spinner.show();
     this.examConfigs = []
     this.examConfigService.get_exam_config_list()
     .pipe(first())
     .subscribe(
         data => {      
           this.examConfigs = data;  
-          console.log(this.examConfigs);
+          this.spinner.hide();
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
   goToEditExamConfig(id) {
@@ -69,23 +71,23 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(dialogResult => {
-      this.loading = true;
+      this.spinner.show();
       if(dialogResult){
         this.examConfigService.delete_exam_config(exam_config_id)
         .pipe(first())
         .subscribe(
             data => {
                 this.alertService.success("SUC0004");
-                this.loading = false;
+                this.spinner.hide();
                 this.examConfigs = this.examConfigs.filter(item => item.id !== exam_config_id);
                 this.router.navigate(['dashboard']);
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
       }else{
-        this.loading = false;
+        this.spinner.hide();
       }
     });
   }

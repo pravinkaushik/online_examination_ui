@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Enquiry } from '../../../_models/enquiry';
 import { UserService } from '../../../_services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-contact',
@@ -15,11 +16,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class ContactComponent implements OnInit {
 
   enquiry: Enquiry = new Enquiry();
-  loading = false
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
+    private spinner: NgxSpinnerService,
     private alertService: AlertService,
     public translate: TranslateService
   ) { }
@@ -27,17 +28,18 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(){
-    this.loading = true;
+    this.spinner.show();
       this.userService.contact(this.enquiry)
       .pipe(first())
       .subscribe(
           data => {
             this.alertService.success("SUC0012", true);
-            this.loading = false;
+            this.spinner.hide();
+            this.enquiry = new Enquiry();
           },
           error => {
               this.alertService.error(error);
-              this.loading = false;
+              this.spinner.hide();
           });
   }
 

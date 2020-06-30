@@ -8,6 +8,7 @@ import { ExamConfig } from '../../../_models/exam_config';
 import { first } from 'rxjs/operators';
 import { Result } from '../../../_models/result';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-result',
@@ -15,7 +16,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./result.component.css']
 })
 export class ResultComponent implements OnInit {
-  loading = false;
   results: Result[];
   exam_config_id: any;
   candidate_id: any;
@@ -25,6 +25,7 @@ export class ResultComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public translate: TranslateService,
+    private spinner: NgxSpinnerService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService) { 
       this.route.paramMap.subscribe(params => {
@@ -37,31 +38,33 @@ export class ResultComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.examConfigService.get_exam_result(this.exam_config_id, this.candidate_id)
     .pipe()
     .subscribe(
         (data) => {
           this.results =  data;
-          this.loading = false;
+          this.spinner.hide();
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
 
   updateMarks(id, subjective_mark){
+    this.spinner.hide();
     this.examConfigService.update_exam_marks(id, subjective_mark, this.exam_config_id)
     .pipe()
     .subscribe(
         (data) => {
           this.results =  data;
-          this.loading = false;
+          this.spinner.hide();
           alert(this.translate.instant('SUC0005'))
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
 }

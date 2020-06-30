@@ -6,6 +6,7 @@ import { AlertService } from '../../../_services/alert.service';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { DefaultLayoutComponent } from '../../../containers/default-layout/default-layout.component';
 import { CustomValidators } from 'ng2-validation';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -16,7 +17,6 @@ import { CustomValidators } from 'ng2-validation';
 export class ExamLoginComponent implements OnInit {
 
   loginFormCandidate: FormGroup;
-  loading = false;
   submitted = false;
   returnUrl: string;
 
@@ -26,6 +26,7 @@ export class ExamLoginComponent implements OnInit {
       private router: Router,
       private authenticationService: AuthenticationService,
       private alertService: AlertService,
+      private spinner: NgxSpinnerService,
       private defaultLayoutComponent: DefaultLayoutComponent
   ) {
     defaultLayoutComponent.isLoggedInCandidate =true;
@@ -59,17 +60,18 @@ onSubmit() {
       return;
     }
 
-    this.loading = true;
+    this.spinner.show();
     debugger
     this.authenticationService.login_exam(this.f.c_exam_config_id.value, this.f.c_email.value, this.f.c_password.value)
         .pipe(first())
         .subscribe(
             data => {
+              this.spinner.hide();
               this.router.navigate([this.returnUrl,this.f.c_exam_config_id.value]);
             },
             error => {
               this.alertService.error(error);
-              this.loading = false;
+              this.spinner.hide();
             });
   }
 

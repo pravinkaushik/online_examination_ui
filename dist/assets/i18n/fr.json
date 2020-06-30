@@ -144,7 +144,7 @@
     "ERR0007" : "Candidat non valide!" ,
     "ERR0008" : "Informations d' identification non valides" ,
     "ERR0009" : "Utilisateur non valide" ,
-    "ERR0010" : "" ,
+    "ERR0010" : "La question et la réponse ne doivent pas dépasser 50 Ko" ,
     "ERR0011" : "" ,
     "ERR0012" : "" ,
     "ERR0013" : "" ,
@@ -161,10 +161,11 @@
     "SUC0011" : "Test terminé avec succès" ,
     "SUC0012" : "Merci de nous avoir contactés. Je reverrai avec tri." ,
     "SUC0013" : "Merci d'avoir terminé l'examen." ,
-    "SUC0014" : "" ,
+    "SUC0014" : "Renvoyez le mot de passe avec succès. S'il n'est pas trouvé dans la boîte de réception, veuillez vérifier le spam." ,
     "SUC0015" : "" ,
     "SUC0016" : "" ,
     "success" : "Succès!" ,
-    "danger" : "Danger!"
+    "danger" : "Danger!",
+    "donate_now" : "Faire un don maintenant"
 }
  

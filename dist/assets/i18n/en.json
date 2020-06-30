@@ -145,7 +145,7 @@
     "ERR0007": "Not valid candidate!",
     "ERR0008": "Invalid Credential",
     "ERR0009": "Invalid User",
-    "ERR0010": "",
+    "ERR0010": "Question and answer should not be more then 50 KB",
     "ERR0011": "",
     "ERR0012": "",
     "ERR0013": "",
@@ -162,11 +162,11 @@
     "SUC0011": "Successfully completed the Test",
     "SUC0012": "Thanks for contact us. Will review sortly.",
     "SUC0013": "Thanks for completing Examination.",
+    "SUC0014": "Successfully resend the password. If not found in Inbox then please check Spam.",
     "SUC0015": "",
     "SUC0016": "",
-   
     "success": "Success! ",
     "danger": "Danger! ",
-
-    "SUC0014": "Successfully resend the password. If not found in Inbox then please check Spam."
+    "donate_now": "Donate Now"
+    
 }

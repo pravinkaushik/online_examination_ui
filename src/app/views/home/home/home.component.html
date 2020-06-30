@@ -21,7 +21,14 @@
             <strong>{{'donate_header' | translate}}</strong>
           </div>
           <div class="card-body">
-            {{'donate_detail1' | translate}}
+            <strong>
+              <ul class="list-group">
+                <li class="list-group-item">{{'donate_detail1' | translate}}</li>
+                <li class="list-group-item">
+                  <button type="button" (click)="donateNow()" class="btn btn-lg btn-danger">{{'donate_now' | translate}}</button>
+                </li>
+              </ul>
+            </strong>
           </div>
         </div>
       </div><!--/.col-->

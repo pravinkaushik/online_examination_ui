@@ -1,112 +1,173 @@
 {
- 
+    "site_name": "Easy Online Test",
+    "welcome_header": "Welkom bij het echt gratis online onderzoekssysteem.",
+    "welcome_header_detail1": "Voer gratis kosteloze online uitgebreide tests uit voor deelnemers.",
+    "welcome_header_detail2": "Motief achter om het gratis te maken, verlaagde kosten zullen de deelnemers voorwoord brengen.",
+    "donate_header": "Om dit echt gratis online testplatform te maken, waren er veel inspanningen en infrastructuurkosten nodig.",
+    "donate_detail1": "Als dit helpt, doneer dan alstublieft.",
+    "key_features": "Belangrijkste kenmerken",
+    "key1": "Ondersteun subjectieve en objectieve test.",
+    "key2": "Ondersteuning van verschillende tijdzones en talen",
+    "key3": "Slimme werkbalken die verschillende functies bieden op basis van context.",
+    "key4": "Ondersteuning voor het toevoegen / uploaden van afbeeldingen.",
+    "key5": "Ondersteuning voor ingesloten videolinks.",
+    "key6": "Snel en lichtgewicht.",
+    "key7": "Ondersteuning voor tekstuitlijning.",
+    "key8": "HTML- en Markdown-ondersteuning.",
+    "easy_use": "Makkelijk te gebruiken.",
+    "how_use": "Hoe te gebruiken?",
+    "how_use_step1": "Log in of meld u aan bij Easy Online Test.",
+    "how_use_step2": "Test toevoegen.",
+    "how_use_step3": "Vragen toevoegen.",
+    "how_use_step4": "Kandidaat toevoegen (krijgt bericht via e-mail).",
+    "how_use_step5": "Proost !!!! Test is gepubliceerd.",
+    "how_use_step6": "Resultaten bekijken en verifiëren.",
+    "free_api": "Gratis API - Rustgevende webservices en White Label-service",
+    "api_detail1": "Eenvoudige en betrouwbare Restful API.",
+    "api_detail2": "Microservices-architectuur.",
+    "api_detail3": "White Label-service, voeg iframe toe aan uw website.",
+    "api_detail4": "U kunt uw eigen gebruikersinterface bouwen en API gebruiken.",
+    "api_detail5": "En nog veel meer. Blijf genieten !!!!",
+    "dashboard": "Dashboard",
+    "login_signup": "Inloggen of Aanmelden",
+    "contact": "Neem contact met ons op",
+    "home": "huis",
+    "settings": "Instellingen",
+    "profile": "Profiel",
+    "select_language": "Selecteer taal",
+    "logout": "Logout",
+    "powered_by": "Powered by",
+    "provide_name": "Geef naam op", 
+    "message": "Bericht",
+    "name": "naam",
+    "query_message": "Plaats query en bericht",
+    "email": "E-mailadres",
+    "password": "Wachtwoord",
+    "re_password": "Wachtwoord opnieuw typen",
+    "login_subheader": "Meld u aan bij uw account",  
+    "register_subheader": "Maak uw account aan",
+    "register": "Register",
+    "TermsConditions": "Ik ga akkoord met de algemene voorwaarden.",
+    "dashboard_header": "Configuratie dashboardtest",
+    "test_name": "Testnaam",
+    "test_title": "Testtitel",
+    "candidate_list": "Kandidaatslijst van",
+    "add_candidate": "Kandidaat toevoegen",
+    "candidate_id": "Kandidaat-ID",
+    "resend_password": "Wachtwoord opnieuw verzenden",
+    "candidate_name": "Naam kandidaat",
+    "test_id": "Test-ID",
+    "is_above_correct": "Is het bovenstaande antwoord juist?",
+    "incorrect_note": "Aantal punten voor onjuist antwoord, nul plaatsen als er geen negatieve punten zijn",
+    "neg_marks": "Negatieve markeringen",
+    "correct_note": "Aantal punten voor volledig correct antwoord",
+    "pos_marks": "Positieve cijfers",
+    "number_option": "Totaal aantal opties",  
+    "question_type_1": "Slechts één antwoord correct",
+    "question_type_2": "Meerdere antwoorden kunnen correct zijn",
+    "question_type_3": "Subjectief",
+    "question_type": "Vraagtype",
+    "selected_option": "Geselecteerde optie",
+    "correct_option": "Correcte optie",
+    "sub_answer": "Subjectief antwoord",
+    "earn_marks": "Verdien punten",
+    "update_marks": "Markering bijwerken",
+    "result_eid": "Resultaat van test-ID",
+    "show_result": "Show Result",
+    "check_publish": "Resultaat controleren en publiceren",
+    "duration_minute": "Duur in minuten",
+    "total_question": "Totale vraag",
+    "test_results": "Testresultaten",
+    "c_result_header": "Kandidaat-resultatenlijst met onderzoekstitel",
+    "publish_result": "Publicatieresultaat",
+    "check_review_result": "Resultaat controleren en controleren",
+    "review_pending": "Subjectieve vraagbeoordeling in behandeling",
+    "stime": "Startdatum Tijd",
+    "etime": "Einddatum tijd",
+    "te_om": "Totaal aantal doelpunten behaald",
+    "te_nm": "Totaal aantal negatieve punten behaald",
+    "te_sm": "Totaal verdiende subjectieve cijfers",
+    "overall_m": "Overall Marks",
+    "test_configuration": "Testconfiguratie",
+    "institute_name": "Geef de naam van de instelling op",
+    "test_duration": "Testduur in minuten",
+    "total_questions": "Totaal aantal vragen",
+    "select_timezone": "Selecteer tijdzone",
+    "random_question": "Willekeurige vraag",
+    "add_question": "Vraag toevoegen",
+    "add_test": "Test toevoegen",
+    "question_list_of": "Vragenlijst van",
+    "answer": "Answer",
+    "test_login_header": "Log in om te beginnen",
+    "test_login_subheader": "Geef beloaw details",
+    "term_condition": "Raadpleeg de voorwaarden.",
+    "start_now": "Start nu",
+    "start_in": "Start In",
+    "remain_time": "Remain Time",
+    "confirm_delete": "Weet u zeker dat u dit wilt doen?",
 
-"site_name" : "Easy Online Test" ,
+    "submit": "Submit",
+    "reset": "Reset",
+    "create_account": "Create Account",
+    "forgot": "Forgot",
+    "login": "log in",
+    "facebook": "Facebook",
+    "google": "Google",
+    "delete": "Delete",
+    "edit": "Bewerken",
+    "create": "Create",
+    "update": "Update", 
+    "question": "Vraag",
+    "question_id": "Vraag-ID",
+    "candidate": "Candidate",
+    "questions": "Vragen",
+    "candidates": "Kandidaten",
+    "choice": "Choice",
+    "yes": "YES",
+    "no": "nee",
+    "save_finish": "Opslaan en voltooien",
+    "save_next": "Opslaan en volgende",
+    "previous": "Vorige",
+    "save": "Opslaan", 
 
-"welcome_header" : "Welkom bij het echt gratis online onderzoekssysteem." ,
+    "val_email": "Geef een geldig e-mailadres op.",
+    "required": "Vereist",
+    "val_2_char": "Moet minimaal 2 tekens lang zijn.",
+    "must_inbetween": "Moet tussenin zitten",
+    "val_invalid": "Geef geldige invoer op",
+    "question_per_page": "Aantal vragen per pagina",
+    "ERR0001": "Wachtwoord en wachtwoord opnieuw invoeren moeten hetzelfde zijn.",
+    "ERR0002": "U bent te laat, het onderzoeksinterval is verstreken.",
+    "ERR0003": "Onderzoek is nog niet begonnen.",
+    "ERR0004": "We kunnen het ingevoerde e-mailadres niet vinden. Meld u aan om door te gaan.",
+    "ERR0005": "Ongeldige gebruikersnaam of wachtwoord",
+    "ERR0006": "U bent al klaar met het onderzoek.",
+    "ERR0007": "Geen geldige kandidaat!",
+    "ERR0008": "Ongeldige referentie",
+    "ERR0009": "Ongeldige gebruiker",
+    "ERR0010": "Vraag en antwoord mogen niet groter zijn dan 50 KB",
+    "ERR0011": "",
+    "ERR0012": "",
+    "ERR0013": "",
+    "SUC0001": "De activeringslink is naar uw e-mailadres gestuurd.",
+    "SUC0002": "Test succesvol gemaakt.",
+    "SUC0003": "Test succesvol bijgewerkt.",
+    "SUC0004": "Test succesvol verwijderd.",
+    "SUC0005": "Markeringen met succes bijgewerkt",
+    "SUC0006": "Vraag succesvol verwijderd.",
+    "SUC0007": "Vraag succesvol gemaakt.",
+    "SUC0008": "Vraag succesvol bijgewerkt.",
+    "SUC0009": "Kandidaat succesvol aangemaakt.",
+    "SUC0010": "Kandidaat succesvol verwijderd.",
+    "SUC0011": "De test is succesvol afgerond",
+    "SUC0012": "Bedankt dat u contact met ons heeft opgenomen. We zullen het op de juiste manier beoordelen.",
+    "SUC0013": "Bedankt voor het voltooien van het onderzoek.",
+    "SUC0014": "Verzend het wachtwoord opnieuw. Als u dit niet vindt in Inbox, controleer dan Spam.",
+    "SUC0015": "",
+    "SUC0016": "",
 
-"welcome_header_detail1" : "Voer gratis kosteloze online uitgebreide tests uit voor deelnemers." ,
-
-"welcome_header_detail2" : "Motief achter om het gratis te maken, lagere kosten zullen de deelnemers voorwoord brengen." ,
-
-"donate_header" : "Om dit echt gratis online testplatform te maken, waren er veel inspanningen en infrastructuurkosten nodig." ,
-
-"donate_detail1" : "Doneer als dit helpt." ,
-
-"key_features" : "Belangrijkste kenmerken" ,
-
-"key1" : "Ondersteuning van subjectieve en objectieve test." ,
-
-"key2" : "Ondersteuning van verschillende tijdzones en talen" ,
-
-"key3" : "Slimme werkbalken die verschillende functies bieden op basis van context." ,
-
-"key4" : "Ondersteuning voor het toevoegen / uploaden van afbeeldingen." ,
-
-"key5" : "Ondersteuning voor ingesloten videolinks ." ,
-
-"key6" : "Snel en lichtgewicht." ,
-
-"key7" : "Ondersteuning voor tekstuitlijning." ,
-
-"key8" : "Ondersteuning voor HTML en Markdown." ,
-
-"easy_use" : "Makkelijk te gebruiken." ,
-
-"how_use" : "Hoe te gebruiken?" ,
-
-"how_use_step1" : "Log in of meld u aan bij Easy Online Test." ,
-
-"how_use_step2" : "Onderzoek toevoegen." ,
-
-"how_use_step3" : "Vragen toevoegen." ,
-
-"how_use_step4" : "Kandidaat toevoegen (krijgt bericht via e-mail)." ,
-
-"how_use_step5" : "Proost !!!! Test is gepubliceerd." ,
-
-"how_use_step6" : "Bekijk en verifieer resultaten." ,
-
-"free_api" : "Gratis API - Rustgevende webservices en White Label-service" ,
-
-"api_detail1" : "Eenvoudige en betrouwbare Restful API." ,
-
-"api_detail2" : "Microservices-architectuur." ,
-
-"api_detail3" : "White Label-service, voeg iframe toe aan uw website." ,
-
-"api_detail4" : "U kunt uw eigen gebruikersinterface bouwen en API gebruiken." ,
-
-"api_detail5" : "En nog veel meer .. Blijf genieten !!!!" ,
-
-"dashboard" : "Dashboard" ,
-
-"login_signup" : "Inloggen of Aanmelden" ,
-
-"contact" : "Neem contact met ons op" ,
-
-"home" : "Home" ,
-
-"settings" : "Instellingen" ,
-
-"profile" : "Profiel" ,
-
-"select_language" : "Selecteer taal" ,
-
-"logout" : "Logout" ,
-
-"powered_by" : "Powered by" ,
-
-"create_name" : "Geef naam op" ,
-
-"message" : "Bericht" ,
-
- 
-
-"query_message" : "Plaats query en bericht" ,
-
-"email" : "E-mailadres" ,
-
-"PhoneNo" : "Phone No" ,
-
-"Password" : "Wachtwoord" ,
-
-"Bio" : "Voer bio in" ,
-
-"TermsConditions" : "Ik ga akkoord met de algemene voorwaarden." ,
-
- 
-
-"val_email" : "Geef een geldig e-mailadres op." ,
-
-"required" : "Vereist" ,
-
-"val_2_char" : "Moet minimaal 2 tekens lang zijn." ,
-
-"submit" : "Submit" ,
-
-"reset" : "Reset"
-
- 
+    "success": "Succes!",
+    "danger": "Danger!",
+    "donate_now": "Doneer nu"
 
 }

@@ -33,14 +33,12 @@
                   <div class="card-footer">
                   <div class="row">
                     <div class="col-6 text-center">
-                      <button [disabled]="loading || this.loginForm.invalid" class="btn btn-primary px-4" (click)="onSubmit()">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      <button [disabled]="this.loginForm.invalid" class="btn btn-primary px-4" (click)="onSubmit()">
                         {{'login' | translate}}
                       </button>
                     </div>
                     <div class="col-6 text-right">
-                      <button [disabled]="loading || this.loginForm.invalid" class="btn btn-primary px-4" (click)="onForgotPassword()">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                      <button [disabled]="this.loginForm.invalid" class="btn btn-primary px-4" (click)="onForgotPassword()">
                         {{'forgot' | translate}}
                       </button>
                     </div>
@@ -99,7 +97,7 @@
                     </div>
                   </div>
                   <div class="card-footer text-center">
-                    <button [disabled]="loading || this.signUpForm.invalid" (click)="onSignup()" type="button" class="btn btn-primary px-4">{{'create_account' | translate}}</button>
+                    <button [disabled]="this.signUpForm.invalid" (click)="onSignup()" type="button" class="btn btn-primary px-4">{{'create_account' | translate}}</button>
                   </div>
                   <div class="card-footer"></div>
                 </div>

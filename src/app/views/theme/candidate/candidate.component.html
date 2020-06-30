@@ -39,7 +39,6 @@
           </div>
           <div class="card-footer">
             <button [disabled]="candidateForm.invalid" type="button" (click)="onSubmit()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> 
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
               {{'submit' | translate}}
             </button>
             <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> {{'reset' | translate}}</button>

@@ -35,25 +35,21 @@
                 </td>
                 <td>
                   <button type="button" (click)="goToCandidates(examConfig.id)" class="btn btn-block btn-warning">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     {{'candidates' | translate}}
                   </button>
                 </td>
                 <td>
                   <button type="button" (click)="goToQuestions(examConfig.id)" class="btn btn-block btn-warning">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     {{'questions' | translate}}
                   </button>
                 </td>
                 <td class="text-center">
                   <button type="button" (click)="goToEditExamConfig(examConfig.id)" class="btn btn-block btn-info">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     {{'edit' | translate}}
                   </button>
                 </td>
                 <td>           
                   <button type="button" (click)="confirmDialog(examConfig.id)" class="btn btn-block btn-danger">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     {{'delete' | translate}}
                   </button>                 
                 </td>

@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { ExamResult } from '../../../_models/exam_result';
 import { TranslateService } from '@ngx-translate/core';
 import { ExamResultHeader } from '../../../_models/exam_result_header';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-result-list',
@@ -18,7 +19,6 @@ import { ExamResultHeader } from '../../../_models/exam_result_header';
 export class ResultListComponent implements OnInit {
 
   exam_config: ExamConfig = new ExamConfig();
-  loading = false;
   examResultHeader: ExamResultHeader  = new ExamResultHeader();
   exam_results: ExamResult[];
   options: any;
@@ -28,6 +28,7 @@ export class ResultListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public translate: TranslateService,
+    private spinner: NgxSpinnerService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
@@ -35,16 +36,17 @@ export class ResultListComponent implements OnInit {
         if(params.get('id'))
           this.exam_config.id = Number(params.get('id'));
       });
+      this.spinner.show();
       this.examConfigService.get_exam_config(this.exam_config.id)
       .pipe()
       .subscribe(
               (data: ExamConfig) => {
                 this.exam_config =  data;  
-                this.loading = false;
+                this.spinner.hide();
               },
               error => {
                   this.alertService.error(error);
-                  this.loading = false;
+                  this.spinner.hide();
         });
   }
 
@@ -56,7 +58,7 @@ export class ResultListComponent implements OnInit {
     this.translate.get('te_nm').subscribe((text:string) => {this.examResultHeader.total_neg = text})
     this.translate.get('te_sm').subscribe((text:string) => {this.examResultHeader.total_sub = text})
     this.exam_results = []
-    this.loading = true;
+    this.spinner.show();
     console.log(this.examResultHeader)
     this.examConfigService.get_exam_result_list(this.exam_config.id)
     .pipe(first())
@@ -75,11 +77,11 @@ export class ResultListComponent implements OnInit {
             removeNewLines: true,
             keys: ['candidate_id','c_name','email', 'total_pos', 'total_neg','total_sub']
           };
-          this.loading = false;
+          this.spinner.hide();
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
   publishResult(candidate_id){

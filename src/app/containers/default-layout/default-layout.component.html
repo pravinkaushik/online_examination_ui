@@ -1,10 +1,12 @@
 <app-header
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
+  [mobileSidebarToggler]="false"
+  [mobileAsideMenuToggler]="false"
   [navbarBrandFull]="{src: 'assets/img/brand/sygnet.png', width: 30, height: 25, alt: 'Easy Online Exam'}"
   [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.png', width: 30, height: 30, alt: 'Easy Online Exam'}"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [asideMenuToggler]="false">
   <ul class="nav navbar-nav d-md-down-none">
     <li *ngIf="!isLoggedInExamOwner && !isLoggedInCandidate" class="nav-item px-3">
       <a class="nav-link" href="/#/">{{'home' | translate}}</a>
@@ -22,7 +24,7 @@
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="fa fa-language" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-       Language
+       <div class="d-none d-lg-block">Language</div> 
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>{{'select_language' | translate}}</strong></div>
@@ -43,14 +45,42 @@
         <a class="dropdown-item" (click)="switchLang('es')"><i class="fa fa-globe"></i>Spanish</a>
       </div>
     </li>
-    <li *ngIf="isLoggedInExamOwner" class="nav-item dropdown" dropdown placement="bottom right">
+    <li class="nav-item dropdown" dropdown placement="bottom right" *ngIf="!isLoggedInCandidate">
       <a class="fa fa-user-circle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <div class="dropdown-header text-center"><strong>{{'settings' | translate}}</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-user"></i>{{'profile' | translate}}</a>
-        <div class="divider"></div>
-        <a class="dropdown-item" (click)="logout()" href="#"><i class="fa fa-sign-out"></i>{{'logout' | translate}}</a>
+        <div>
+          <a class="dropdown-item" href="/#/"><i class="fa fa-globe"></i>{{'home' | translate}}</a>  
+          <div class="divider"></div>	
+        </div>
+        <div *ngIf="!isLoggedInExamOwner">
+          <a class="dropdown-item" href="/#/login"><i class="fa fa-globe"></i>{{'login_signup' | translate}}</a>  
+          <div class="divider"></div>
+        </div>
+        <div *ngIf="!isLoggedInExamOwner">
+          <a class="dropdown-item" href="/#/login_exam"><i class="fa fa-globe"></i>{{'login' | translate}}&nbsp;{{'candidate' | translate}}</a>  
+          <div class="divider"></div>
+        </div>
+        <div *ngIf="isLoggedInExamOwner">
+          <a class="dropdown-item" href="/#/dashboard"><i class="fa fa-globe"></i>{{'dashboard' | translate}}</a> 
+          <div class="divider"></div>
+        </div>
+        <div *ngIf="isLoggedInExamOwner">
+          <a class="dropdown-item" href="/#/theme/exam_config/0"><i class="fa fa-globe"></i>{{'add_test' | translate}}</a>
+          <div class="divider"></div>
+        </div>
+        <div *ngIf="isLoggedInExamOwner">
+          <a class="dropdown-item" href="/#/theme/result_dashboard"><i class="fa fa-globe"></i>{{'test_results' | translate}}</a>
+          <div class="divider"></div>
+        </div>
+        <div>
+          <a class="dropdown-item" href="/#/contact_us"><i class="fa fa-globe"></i>{{'contact' | translate}}</a>
+          <div class="divider"></div>
+        </div>
+        <div *ngIf="isLoggedInExamOwner">
+          <a class="dropdown-item" (click)="logout()" href="#"><i class="fa fa-sign-out"></i>{{'logout' | translate}}</a>      
+        </div>
       </div>
     </li>
   </ul>
@@ -96,3 +126,4 @@
   <span><a href="https://www.easyonlineexam.com">Easy Online Exam</a> &copy; 2020 easyonlineexam.com</span>
   <span class="ml-auto">{{'powered_by' | translate}}<a href="https://www.easyonlineexam.com"> Easy Online Exam</a></span>
 </app-footer>
+<ngx-spinner bdColor ="rgba(0, 0, 0, 0.8)" size = "medium" color = "#0ada6a" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

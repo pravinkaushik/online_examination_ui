@@ -9,6 +9,7 @@ import { AuthenticationService } from '../../../_services/authentication.service
 import { ExamConfigService } from '../../../_services/exam-config.service';
 import { AlertService } from '../../../_services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-result-dashboard',
@@ -17,7 +18,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ResultDashboardComponent implements OnInit {
 
-  loading = false;
   examConfigs: ExamConfig[];
 
   constructor(
@@ -25,6 +25,7 @@ export class ResultDashboardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public translate: TranslateService,
+    private spinner: NgxSpinnerService,
     private examConfigService: ExamConfigService,
     private alertService: AlertService
   ) {
@@ -32,16 +33,18 @@ export class ResultDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.examConfigs = []
     this.examConfigService.get_exam_config_list()
     .pipe(first())
     .subscribe(
         data => {      
           this.examConfigs = data;  
+          this.spinner.hide();
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
   goToExamResult(id) {

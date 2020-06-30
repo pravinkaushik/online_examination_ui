@@ -8,6 +8,7 @@ import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { CustomValidators } from 'ng2-validation';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
  
 
 @Component({
@@ -17,7 +18,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   signUpForm: FormGroup;
-  loading = false;
   submitted = false;
   returnUrl: string;
 
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       private authenticationService: AuthenticationService,
       private alertService: AlertService,
       private authService: AuthService,
+      private spinner: NgxSpinnerService,
       public translate: TranslateService
   ) {
 
@@ -66,16 +67,17 @@ export class LoginComponent implements OnInit {
           return;
       }
 
-      this.loading = true;
+      this.spinner.show();
       this.authenticationService.login(this.f.email.value, this.f.password.value)
           .pipe(first())
           .subscribe(
               data => {
-                  this.router.navigate([this.returnUrl]);
+                this.spinner.hide();
+                this.router.navigate([this.returnUrl]);
               },
               error => {
                   this.alertService.error(error, true);
-                  this.loading = false;
+                  this.spinner.hide();
               });
   }
 
@@ -89,17 +91,17 @@ export class LoginComponent implements OnInit {
         return;
     }
 
-    this.loading = true;
+    this.spinner.show();
     this.authenticationService.forgot_password(this.f.email.value, this.f.password.value)
         .pipe(first())
         .subscribe(
             data => {
               this.alertService.success(data.message);
-              this.loading = false;
+              this.spinner.hide();
             },
             error => {
                 this.alertService.error(error, true);
-                this.loading = false;
+                this.spinner.hide();
             });
 }
 
@@ -118,48 +120,50 @@ export class LoginComponent implements OnInit {
       this.alertService.error("ERR0001");
       return;
     }
-    this.loading = true;
+    this.spinner.show();
     this.authenticationService.signup(this.fs.email.value, this.fs.password.value)
         .pipe(first())
         .subscribe(
             data => {
               this.alertService.success(data.message);
-              this.loading = false;
+              this.spinner.hide();
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
   }
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x => {
-      console.log(x)
+      this.spinner.show();
       this.authenticationService.signupSocialMedia(x.authToken, "GOOGLE")
         .pipe(first())
         .subscribe(
             data => {
-                this.router.navigate([this.returnUrl]);
+              this.spinner.hide();
+              this.router.navigate([this.returnUrl]);
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
     });
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then(x => {
-      console.log(x)
+      this.spinner.show();
       this.authenticationService.signupSocialMedia(x.authToken, "FB")
         .pipe(first())
         .subscribe(
             data => {
-                this.router.navigate([this.returnUrl]);
+              this.spinner.hide();
+              this.router.navigate([this.returnUrl]);
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
     });
   }

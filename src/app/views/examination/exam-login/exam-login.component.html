@@ -41,8 +41,7 @@
                 </div>
                 <div class="row">
                   <div class="col-6">
-                    <button [disabled]="loading || this.loginFormCandidate.invalid" class="btn btn-primary px-4">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <button [disabled]="this.loginFormCandidate.invalid" class="btn btn-primary px-4">
                       {{'login' | translate}}
                     </button>
                   </div>

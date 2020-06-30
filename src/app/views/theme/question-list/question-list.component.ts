@@ -11,6 +11,7 @@ import { ExamConfig } from '../../../_models/exam_config';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../../_components/confirm-dialog/confirm-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -20,8 +21,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class QuestionListComponent implements OnInit {
 
-
-  loading = false;
   exam_questions: ExamQuestion[];
   exam_config: ExamConfig = new ExamConfig();
 
@@ -32,22 +31,23 @@ export class QuestionListComponent implements OnInit {
     public dialog: MatDialog,
     public translate: TranslateService,
     private examConfigService: ExamConfigService,
+    private spinner: NgxSpinnerService,
     private alertService: AlertService
   ) {
       this.route.paramMap.subscribe(params => {
         if(params.get('id')){
           this.exam_config.id = Number(params.get('id'));
-          
+          this.spinner.show();
           this.examConfigService.get_exam_config(this.exam_config.id)
           .pipe()
           .subscribe(
                   (data: ExamConfig) => {
                     this.exam_config =  data;  
-                    console.log(this.exam_config);
+                    this.spinner.hide();
                   },
                   error => {
                       this.alertService.error(error);
-                      this.loading = false;
+                      this.spinner.hide();
             });
         }
       });
@@ -55,17 +55,17 @@ export class QuestionListComponent implements OnInit {
   }
   ngOnInit() {
     this.exam_questions = []
-    this.loading = true;
+    this.spinner.show();
     this.examConfigService.get_exam_question_list(this.exam_config.id)
     .pipe(first())
     .subscribe(
         data => {      
           this.exam_questions = data;  
-          this.loading = false;
+          this.spinner.hide();
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
 
@@ -89,22 +89,22 @@ export class QuestionListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(dialogResult => {
-      this.loading = true;
+      this.spinner.show();
       if(dialogResult){
         this.examConfigService.delete_exam_question(exam_question_id)
         .pipe(first())
         .subscribe(
             data => {
                 this.alertService.success("SUC0006");
-                this.loading = false;
+                this.spinner.hide();
                 this.exam_questions = this.exam_questions.filter(item => item.id !== exam_question_id);
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
       }else{
-        this.loading = false;
+        this.spinner.hide();
       }
     });
   }

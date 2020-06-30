@@ -7,6 +7,7 @@ import { AlertService } from '../../../_services/alert.service';
 import { first } from 'rxjs/operators';
 import { Candidate } from '../../../_models/candidate';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-candidate',
@@ -16,7 +17,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class CandidateComponent implements OnInit {
 
   candidate: Candidate = new Candidate();
-  loading = false;
   submitted = false;
 
   constructor(
@@ -24,6 +24,7 @@ export class CandidateComponent implements OnInit {
     private router: Router,
     public translate: TranslateService,
     private examConfigService: ExamConfigService,
+    private spinner: NgxSpinnerService,
     private alertService: AlertService
   ) {
       this.route.paramMap.subscribe(params => {
@@ -37,7 +38,7 @@ export class CandidateComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    this.loading = true;
+    this.spinner.show();
     this.candidate.id = 0;
     this.candidate.start_time = 1593340264;
     this.candidate.end_time = 1593340264;
@@ -48,12 +49,12 @@ export class CandidateComponent implements OnInit {
     .subscribe(
         data => {
             this.router.navigate(['/theme/candidatelist', this.candidate.exam_config_id]);
-            this.loading = false;
+            this.spinner.hide();
             this.alertService.success("SUC0009", true);
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
 }

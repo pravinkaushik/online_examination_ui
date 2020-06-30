@@ -143,7 +143,7 @@
 "ERR0007" : "¡Candidato no válido!" ,
 "ERR0008" : "Credencial inválida" ,
 "ERR0009" : "Usuario no válido" ,
-"ERR0010" : "" ,
+"ERR0010" : "La pregunta y la respuesta no deben superar los 50 KB." ,
 "ERR0011" : "" ,
 "ERR0012" : "" ,
 "ERR0013" : "" ,
@@ -160,9 +160,10 @@
 "SUC0011" : "Completó con éxito la prueba" ,
 "SUC0012" : "Gracias por contactarnos. Lo revisaremos de manera ordenada" ,
 "SUC0013" : "Gracias por completar el examen",
-"SUC0014" : "" ,
+"SUC0014" : "Vuelva a enviar la contraseña correctamente. Si no se encuentra en la Bandeja de entrada, marque Spam." ,
 "SUC0015" : "" ,
 "SUC0016" : "" ,
 "success" : "Success!" ,
-"danger" : "¡Peligro!"
+"danger" : "¡Peligro!",
+"donate_now": "Done ahora"
 }

@@ -38,8 +38,7 @@
             {{'TermsConditions' | translate}}
           </div>
           <div class="card-body">
-            <button [disabled]="loading || counter > 0" (click)="onSubmit()" class="btn btn-primary px-4">
-                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <button [disabled]="counter > 0" (click)="onSubmit()" class="btn btn-primary px-4">
                 {{'start_now' | translate}}
             </button>
             <strong *ngIf="counter > 0" >{{'start_in' | translate}}: {{counter | formatTime}} </strong> 

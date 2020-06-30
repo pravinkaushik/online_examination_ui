@@ -9,6 +9,7 @@ import { ExamConfig } from '../../../_models/exam_config';
 import { CandidateExamQuestion } from '../../../_models/candidate_exam_question';
 import { AuthenticationService } from '../../../_services/authentication.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-exam-landing',
@@ -18,7 +19,6 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 export class ExamLandingComponent implements OnInit {
   private exam_config: ExamConfig;
   candidateExamQuestionArr: CandidateExamQuestion[];
-  loading = false;
   submitted = false;
   page = 1;
   isPreviousDisabled = true;
@@ -80,6 +80,7 @@ export class ExamLandingComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private examProcessService: ExamProcessService,
+    private spinner: NgxSpinnerService,
     private alertService: AlertService
     ) { 
       this.exam_config = new ExamConfig();
@@ -95,7 +96,7 @@ export class ExamLandingComponent implements OnInit {
               },
               error => {
                   this.alertService.error(error);
-                  this.loading = false;
+                  
               });
 
           this.examProcessService.get_remain_end_time(this.exam_config.id)
@@ -112,7 +113,6 @@ export class ExamLandingComponent implements OnInit {
               },
               error => {
                   this.alertService.error(error, false);
-                  this.loading = false;
               });
         }
       });
@@ -124,75 +124,86 @@ export class ExamLandingComponent implements OnInit {
   }
 
   preProcess(){
+    this.alertService.clear();
+    var returnval = true;
     this.candidateExamQuestionArr.forEach(function (value) {
-      value.subjective_mark = 0;
-      if(value.question_type == 1){
-        if(value.radio_button_selected == 1){
-          value.is_choice1_selected = 1
-        }
-        if(value.radio_button_selected == 2){
-          value.is_choice2_selected = 1
-        }
-        if(value.radio_button_selected == 3){
-          value.is_choice3_selected = 1
-        }
-        if(value.radio_button_selected == 4){
-          value.is_choice4_selected = 1
-        }
-        if(value.radio_button_selected == 5){
-          value.is_choice5_selected = 1
+      if(null != value.answer && value.answer.length > 50000){
+        returnval = false;
+      }else{
+        value.subjective_mark = 0;
+        if(value.question_type == 1){
+          if(value.radio_button_selected == 1){
+            value.is_choice1_selected = 1
+          }
+          if(value.radio_button_selected == 2){
+            value.is_choice2_selected = 1
+          }
+          if(value.radio_button_selected == 3){
+            value.is_choice3_selected = 1
+          }
+          if(value.radio_button_selected == 4){
+            value.is_choice4_selected = 1
+          }
+          if(value.radio_button_selected == 5){
+            value.is_choice5_selected = 1
+          } 
         } 
-      }   
+      }
     }); 
+    if(!returnval){
+      this.alertService.error("ERR0010", true);
+    }
+    return returnval;
   }
 
   saveNext(){
-    this.preProcess();
-    this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
-    .pipe()
-    .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
+    if(this.preProcess()){
+      this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
+      .pipe()
+      .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          error => {
+              this.alertService.error(error);
+          });
+  
+      this.page = this.page +1;
+      this.getQuestions();
+    }
 
-    this.page = this.page +1;
-    this.getQuestions();
   }
   
   save(){
-    this.preProcess();
-    this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
-    .pipe()
-    .subscribe(
-        (data) => {
-          console.log(data);
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
+    if(this.preProcess()){
+      this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
+      .pipe()
+      .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          error => {
+              this.alertService.error(error);
+          });
+    }
+
   }
 
   saveFinish(){
-    this.countDown.unsubscribe();
-    this.preProcess();
-    this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
-    .pipe()
-    .subscribe(
-        (data) => {
-          console.log(data);
-          this.finish();
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
-
-
+    if(this.preProcess()){
+      this.countDown.unsubscribe();
+      this.preProcess();
+      this.examProcessService.update_exam_question(this.candidateExamQuestionArr)
+      .pipe()
+      .subscribe(
+          (data) => {
+            console.log(data);
+            this.finish();
+          },
+          error => {
+              this.alertService.error(error);
+          }); 
+    }
   }
   finish(){
     if(!this.isFinished){
@@ -209,7 +220,6 @@ export class ExamLandingComponent implements OnInit {
           },
           error => {
               this.alertService.error(error);
-              this.loading = false;
           });
     }
 
@@ -251,7 +261,6 @@ export class ExamLandingComponent implements OnInit {
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
         });
   }
 }

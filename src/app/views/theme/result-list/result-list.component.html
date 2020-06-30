@@ -58,16 +58,9 @@
                   </td>
                   <td>           
                     <button type="button" (click)="reviewResult(exam_result.candidate_id)" class="btn btn-block btn-info">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'check_review_result' | translate}}
                     </button>                 
                   </td>
-        <!--          <td>
-                    <button [disabled]= "exam_result.is_completed == '-1'" type="button" (click)="publishResult(exam_result.candidate_id)" class="btn btn-block btn-warning">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                      {{'publish_result' | translate}}
-                    </button>              
-                  </td> --> 
                 </tr>
               </tbody>
             </table>

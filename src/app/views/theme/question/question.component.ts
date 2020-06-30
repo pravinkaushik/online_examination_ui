@@ -9,6 +9,7 @@ import { ExamQuestion } from '../../../_models/exam_question';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CustomValidators } from 'ng2-validation';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-question',
@@ -18,7 +19,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class QuestionComponent implements OnInit {
 
   exam_question: ExamQuestion = new ExamQuestion();
-  private loading = false;
   private submitted = false;
   isCreate = false;
   total_question = 4;
@@ -77,10 +77,12 @@ export class QuestionComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
+    private spinner: NgxSpinnerService,
     public translate: TranslateService,
     private alertService: AlertService
   ) {
       this.route.paramMap.subscribe(params => {
+        this.spinner.show();
         if(params.get('exam_config_id'))
           this.exam_question.exam_config_id = Number(params.get('exam_config_id'));
         if(params.get('id')){
@@ -95,15 +97,15 @@ export class QuestionComponent implements OnInit {
                 (data: ExamQuestion) => {
                   this.exam_question =  data;  
                   this.updateTotalQuestion();
-                  console.log(this.exam_question);
+                  this.spinner.hide();
                 },
                 error => {
                     this.alertService.error(error);
-                    this.loading = false;
+                    this.spinner.hide();
                 });
           }
         }else{
-          
+          this.spinner.hide();
         }       
       });
   }
@@ -120,42 +122,54 @@ export class QuestionComponent implements OnInit {
   }
 
   onSubmitCreate() {
-    this.preProcess()
-    this.submitted = true;
-    this.loading = true;
-    this.exam_question.id = 0;
-    this.exam_question.exam_owner_id = 0;
-    this.examConfigService.add_exam_question(this.exam_question)
-    .pipe(first())
-    .subscribe(
-        data => {
-            this.alertService.success("SUC0007", true);
-            this.router.navigate(['/theme/questionlist', this.exam_question.exam_config_id]);
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
+    if(this.preProcess()){
+      this.submitted = true;
+      this.spinner.show();
+      this.exam_question.id = 0;
+      this.exam_question.exam_owner_id = 0;
+      this.examConfigService.add_exam_question(this.exam_question)
+      .pipe(first())
+      .subscribe(
+          data => {
+              this.alertService.success("SUC0007", true);
+              this.spinner.hide();
+              this.router.navigate(['/theme/questionlist', this.exam_question.exam_config_id]);
+          },
+          error => {
+              this.alertService.error(error);
+              this.spinner.hide();
+          });
+    }
+
   }
 
   onSubmitEdit() {
-    this.preProcess()
-    this.submitted = true;
-    this.loading = true;
-    this.exam_question.exam_owner_id = 0;
-    this.examConfigService.edit_exam_question(this.exam_question)
-    .pipe(first())
-    .subscribe(
-        data => {
-            this.alertService.success("SUC0007", true);
-            this.router.navigate(['/theme/questionlist', this.exam_question.exam_config_id]);
-        },
-        error => {
-            this.alertService.error(error);
-            this.loading = false;
-        });
+    if(this.preProcess()){
+      this.submitted = true;
+      this.spinner.show();
+      this.exam_question.exam_owner_id = 0;
+      this.examConfigService.edit_exam_question(this.exam_question)
+      .pipe(first())
+      .subscribe(
+          data => {
+              this.alertService.success("SUC0007", true);
+              this.spinner.hide();
+              this.router.navigate(['/theme/questionlist', this.exam_question.exam_config_id]);
+          },
+          error => {
+              this.alertService.error(error);
+              this.spinner.hide();
+          });
+    }
+  
   }
   preProcess(){
+    this.alertService.clear();
+    if(this.exam_question.choice1.length > 50000 || this.exam_question.choice2.length > 50000 || this.exam_question.choice3.length > 50000
+      || this.exam_question.choice4.length > 50000 || this.exam_question.choice5.length > 50000 || this.exam_question.question.length > 50000){
+      this.alertService.error("ERR0010", true);
+      return false;
+    }
     if(this.exam_question.question_type == 3){
       this.exam_question.choice1 = "";
       this.exam_question.choice2 = "";
@@ -180,6 +194,7 @@ export class QuestionComponent implements OnInit {
         this.exam_question.choice5 = "";
       }
     }
+    return true;
   }
   updateTotalQuestion() {
     if(this.exam_question.question_type != 3){

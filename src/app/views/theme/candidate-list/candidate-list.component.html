@@ -7,7 +7,6 @@
           </div>
           <div class="card-header">
             <button type="button" (click)="addCandidate(exam_config.id)" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
-              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
               {{'add_candidate' | translate}}
             </button>
           </div>
@@ -39,13 +38,11 @@
                   </td>
                   <td>           
                     <button type="button" (click)="resendPassword(candidate.id)" class="btn btn-block btn-info">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'resend_password' | translate}}
                     </button>                 
                   </td>
                   <td>           
                     <button type="button" (click)="confirmDialog(candidate.id)" class="btn btn-block btn-danger">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'delete' | translate}}
                     </button>                
                   </td>

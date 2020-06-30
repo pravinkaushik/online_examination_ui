@@ -75,7 +75,6 @@
                   </td>
                   <td>
                     <button *ngIf="result.question_type == 3" type="button" (click)="updateMarks(result.id, result.subjective_mark)" class="btn btn-block btn-warning">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'update' | translate}}
                     </button>                
                   </td>

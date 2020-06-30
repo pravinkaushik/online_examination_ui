@@ -38,13 +38,11 @@
                   </td>
                   <td>           
                     <button type="button" (click)="editExamQuestion(exam_question.exam_config_id, exam_question.id)" class="btn btn-block btn-info">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'edit' | translate}}
                     </button>                 
                   </td>
                   <td>           
                     <button type="button" (click)="confirmDialog(exam_question.id)" class="btn btn-block btn-danger">
-                      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                       {{'delete' | translate}}
                     </button>                 
                   </td>

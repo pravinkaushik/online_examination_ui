@@ -11,6 +11,7 @@ import { ExamConfig } from '../../../_models/exam_config';
 import { ConfirmDialogModel, ConfirmDialogComponent } from '../../../_components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-candidate-list',
@@ -19,7 +20,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CandidateListComponent implements OnInit {
 
-  loading = false;
   candidates: Candidate[];
   exam_config: ExamConfig = new ExamConfig();
 
@@ -29,6 +29,7 @@ export class CandidateListComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     private examConfigService: ExamConfigService,
+    private spinner: NgxSpinnerService,
     public translate: TranslateService,
     private alertService: AlertService
   ) {
@@ -36,46 +37,47 @@ export class CandidateListComponent implements OnInit {
         if(params.get('id'))
           this.exam_config.id = Number(params.get('id'));
       });
+      this.spinner.show();
       this.examConfigService.get_exam_config(this.exam_config.id)
       .pipe()
       .subscribe(
               (data: ExamConfig) => {
                 this.exam_config =  data;  
-                console.log(this.exam_config);
+                this.spinner.hide();
               },
               error => {
                   this.alertService.error(error);
-                  this.loading = false;
+                  this.spinner.hide();
         });
   }
   ngOnInit() {
     this.candidates = []
-    this.loading = true;
+    this.spinner.show();
     this.examConfigService.get_candidate_list(this.exam_config.id)
     .pipe(first())
     .subscribe(
         data => {      
           this.candidates = data;  
-          this.loading = false;
+          this.spinner.hide();
         },
         error => {
             this.alertService.error(error);
-            this.loading = false;
+            this.spinner.hide();
         });
   }
 
   resendPassword(candidate_id){
-    this.loading = true;
+    this.spinner.show();
     this.examConfigService.resend_password(candidate_id)
         .pipe(first())
         .subscribe(
             data => {
                 this.alertService.success("SUC0014");
-                this.loading = false;
+                this.spinner.hide();
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
   }
 
@@ -94,22 +96,22 @@ export class CandidateListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(dialogResult => {
-      this.loading = true;
+      this.spinner.show();
       if(dialogResult){
         this.examConfigService.delete_candidate(candidate_id)
         .pipe(first())
         .subscribe(
             data => {
                 this.alertService.success("SUC0010");
-                this.loading = false;
+                this.spinner.hide();
                 this.candidates = this.candidates.filter(item => item.id !== candidate_id);
             },
             error => {
                 this.alertService.error(error);
-                this.loading = false;
+                this.spinner.hide();
             });
       }else{
-        this.loading = false;
+        this.spinner.hide();
       }
     });
   }

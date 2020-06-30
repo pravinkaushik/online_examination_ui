@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HomeComponent implements OnInit {
   name:string;
-  video: any = {id: 'LSnbM9gF9Y0'};
+  video: any = {id: 'S-lKVSkfCZQ'};
   url: any;
   baseUrl:string = 'https://www.youtube.com/embed/';
   constructor(private sanitizer: DomSanitizer,
@@ -19,5 +19,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  donateNow(){
+    window.open("https://donorbox.org/easy-online-exam-support", "_blank");
+}
 }

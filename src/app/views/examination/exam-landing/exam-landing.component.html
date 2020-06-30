@@ -44,35 +44,35 @@
             <div class="card-body" *ngIf="exam_question.question_type != 3 && exam_question.choice1" >
                 <div class="form-check"><span class="help-block">
                     <input *ngIf="exam_question.question_type == 2" class="form-check-input" type="checkbox" id="checkboxchoice1" name="checkboxchoice1" [(ngModel)]="exam_question.is_choice1_selected" ng-true-value="1" ng-false-value="0">                   
-                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice" [(ngModel)]="exam_question.radio_button_selected" [value]="1">
+                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice{{exam_question.id}}" [(ngModel)]="exam_question.radio_button_selected" [value]="1">
                     <label class="form-check-label" for="checkboxchoice1"><div [innerHTML]="exam_question.choice1"></div></label>                  
                 </span></div>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type != 3 && exam_question.choice2" >
                 <div class="form-check"><span class="help-block">
                     <input *ngIf="exam_question.question_type == 2" class="form-check-input" type="checkbox" id="checkboxchoice2" name="checkboxchoice2" [(ngModel)]="exam_question.is_choice2_selected" ng-true-value="1" ng-false-value="0">
-                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice" [(ngModel)]="exam_question.radio_button_selected" [value]="2">
+                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice{{exam_question.id}}" [(ngModel)]="exam_question.radio_button_selected" [value]="2">
                     <label class="form-check-label" for="checkboxchoice2"><div [innerHTML]="exam_question.choice2"></div></label>                   
                 </span></div>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type != 3 && exam_question.choice3" >
                 <div class="form-check"><span class="help-block">
                     <input *ngIf="exam_question.question_type == 2" class="form-check-input" type="checkbox" id="checkboxchoice3" name="checkboxchoice3" [(ngModel)]="exam_question.is_choice3_selected" ng-true-value="1" ng-false-value="0">
-                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice" [(ngModel)]="exam_question.radio_button_selected" [value]="3">
+                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice{{exam_question.id}}" [(ngModel)]="exam_question.radio_button_selected" [value]="3">
                     <label class="form-check-label" for="checkboxchoice3"><div [innerHTML]="exam_question.choice3"></div></label>
                 </span></div>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type != 3 && exam_question.choice4" >
                 <div class="form-check"><span class="help-block">
                     <input *ngIf="exam_question.question_type == 2" class="form-check-input" type="checkbox" id="checkboxchoice4" name="checkboxchoice4" [(ngModel)]="exam_question.is_choice4_selected" ng-true-value="1" ng-false-value="0">
-                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice" [(ngModel)]="exam_question.radio_button_selected" [value]="4">
+                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice{{exam_question.id}}" [(ngModel)]="exam_question.radio_button_selected" [value]="4">
                     <label class="form-check-label" for="checkboxchoice4"><div [innerHTML]="exam_question.choice4"></div></label>
                 </span></div>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type != 3 && exam_question.choice5" >
                 <div class="form-check"><span class="help-block">
                     <input *ngIf="exam_question.question_type == 2" class="form-check-input" type="checkbox" id="checkboxchoice5" name="checkboxchoice5" [(ngModel)]="exam_question.is_choice5_selected" ng-true-value="1" ng-false-value="0">
-                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice" [(ngModel)]="exam_question.radio_button_selected" [value]="5"> 
+                    <input *ngIf="exam_question.question_type == 1" type="radio" name="redioboxchoice{{exam_question.id}}" [(ngModel)]="exam_question.radio_button_selected" [value]="5"> 
                     <label class="form-check-label" for="checkboxchoice5"><div [innerHTML]="exam_question.choice5"></div></label>
                 </span></div>
             </div>

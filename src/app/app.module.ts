@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -10,6 +10,7 @@ import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 let config = new AuthServiceConfig([
   {
@@ -92,6 +93,7 @@ import { ActivationComponent } from './views/activation/activation.component';
     ExaminationModule,
     HomeModule,
     LoginModule,
+    NgxSpinnerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -118,6 +120,7 @@ import { ActivationComponent } from './views/activation/activation.component';
     { provide: AuthServiceConfig, useFactory: provideConfig }
   ],
   entryComponents: [ConfirmDialogComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
