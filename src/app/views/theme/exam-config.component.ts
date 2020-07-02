@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import "moment-timezone";
 import { ExamConfig } from '../../_models/exam_config';
@@ -7,10 +7,11 @@ import { ExamConfigService } from '../../_services/exam-config.service';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../_services/alert.service';
-import { first } from 'rxjs/operators';
+import { first, debounceTime, distinctUntilChanged, map, filter } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { Subject, Observable, merge } from 'rxjs';
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-exam-config',
@@ -33,6 +34,7 @@ export class ExamConfigComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private alertService: AlertService
   ) {
+      this.timezones = moment.tz.names();
       this.end_time = new FormControl(new Date());
       this.start_time = new FormControl(new Date());
       this.exam_config = new ExamConfig();
@@ -43,8 +45,7 @@ export class ExamConfigComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.timezones = moment.tz.names();
+
     this.spinner.show();
     if(this.exam_config.id == 0){
       this.isCreate = true
@@ -113,10 +114,26 @@ export class ExamConfigComponent implements OnInit {
   }
 
 convertToTimestamp(d){
+  //var x= moment().tz(this.exam_config.time_zone).zone()
   var localOffset = d.getTimezoneOffset() * 60000;
   var utcTime = d.getTime() - localOffset;
   var utc_ts = utcTime/1000
   return utc_ts;
 }
+model: any;
 
+@ViewChild('instance', {static: true}) instance: NgbTypeahead;
+focus$ = new Subject<string>();
+click$ = new Subject<string>();
+
+search = (text$: Observable<string>) => {
+  const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+  const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
+  const inputFocus$ = this.focus$;
+
+  return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+    map(term => (term === '' ? this.timezones
+      : this.timezones.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)))
+  );
+}
 }

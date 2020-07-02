@@ -38,7 +38,12 @@
             <div class="card-body" *ngIf="exam_question.question_type == 3" >
               <label class="col-md-3 col-form-label" for="answer">{{'answer' | translate}}</label>
               <div class="col-md-9">               
-                <angular-editor [placeholder]="'Enter Question here...'" [config]="editorConfig" [(ngModel)]="exam_question.answer"></angular-editor>                     
+                <angular-editor [placeholder]="'Enter Answer here...'" [config]="editorConfig" [(ngModel)]="exam_question.answer"></angular-editor>                     
+                <span class="help-block">
+                  {{'image_upload_hint1' | translate}}<a target='_blank' href='https://imgbb.com'>https://imgbb.com</a>
+                  {{'image_upload_hint2' | translate}}
+                  {{'image_upload_hint3' | translate}}<a target='_blank' href='https://youtu.be/srdYUSjbBGs'>{{'image_upload_hint4' | translate}}</a>
+                </span>
               </div>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type != 3 && exam_question.choice1" >

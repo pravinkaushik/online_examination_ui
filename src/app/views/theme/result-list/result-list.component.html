@@ -38,10 +38,14 @@
                     <strong>{{exam_result.email}}</strong>  
                   </td>
                   <td class="text-center">
-                    <strong>{{exam_result.start_time * 1000 | date :'medium'}}</strong>  
+                    <strong>
+                      {{exam_result.start_time| date :'longDate' : '+0000'}} {{exam_result.start_time | date :'shortTime' : '+0000'}}
+                    </strong>  
                   </td>
                   <td class="text-center">
-                    <strong>{{exam_result.end_time * 1000 | date :'medium'}}</strong>  
+                    <strong>
+                      {{exam_result.end_time | date :'longDate' : '+0000'}} {{exam_result.end_time | date :'shortTime' : '+0000'}}
+                    </strong>  
                   </td>
                   <td class="text-center">
                     <strong>{{exam_result.total_pos}}</strong>  

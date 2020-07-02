@@ -18,6 +18,7 @@
                   <th class="text-center">{{'duration_minute' | translate}}</th>
                   <th class="text-center">{{'stime' | translate}}</th>
                   <th class="text-center">{{'etime' | translate}}</th>
+                  <th class="text-center">{{'timezone' | translate}}</th>
                   <th>{{'check_publish' | translate}}</th>
                 </tr>
               </thead>
@@ -42,10 +43,13 @@
                     {{examConfig.duration_minute}} 
                   </td>
                   <td class="text-center">
-                    {{examConfig.start_time * 1000 | date :'medium'}} 
+                    {{examConfig.start_time | date :'longDate' : '+0000'}} {{examConfig.start_time | date :'shortTime' : '+0000'}}
                   </td>
                   <td class="text-center">
-                    {{examConfig.end_time * 1000 | date :'medium'}}
+                    {{examConfig.end_time | date :'longDate' : '+0000'}} {{examConfig.end_time | date :'shortTime' : '+0000'}}
+                  </td>
+                  <td class="text-center">
+                    {{examConfig.time_zone}} 
                   </td>
                   <td class="text-center">
                     <button type="button" (click)="goToExamResult(examConfig.id)" class="btn btn-block btn-info">

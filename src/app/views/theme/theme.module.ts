@@ -21,6 +21,7 @@ import { ResultComponent } from './result/result.component';
 import { ResultDashboardComponent } from './result-dashboard/result-dashboard.component';
 import { SharedModule } from '../../shared.module';
 import { Angular2CsvModule } from 'angular2-csv';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { Angular2CsvModule } from 'angular2-csv';
     CustomMaterialModule,
     CustomFormsModule,
     SharedModule,
-    Angular2CsvModule
+    Angular2CsvModule,
+    NgbModule
   ],
   declarations: [
     ExamConfigComponent,
@@ -47,6 +49,7 @@ import { Angular2CsvModule } from 'angular2-csv';
     ResultComponent,
     ResultDashboardComponent    
   ],
+  exports: [ExamConfigComponent],
   bootstrap: [ ExamConfigComponent ]
 })
 export class ThemeModule { }

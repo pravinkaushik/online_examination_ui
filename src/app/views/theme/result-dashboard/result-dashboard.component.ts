@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import * as moment from 'moment';
+import "moment-timezone";
 
 import { first } from 'rxjs/operators';
 import { ExamConfig } from '../../../_models/exam_config';
@@ -39,7 +40,13 @@ export class ResultDashboardComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {      
-          this.examConfigs = data;  
+          this.examConfigs = data;
+          this.examConfigs.forEach(entry => {
+            var displayStartTime = (entry.start_time * 1000) 
+            var displayEndTime = (entry.end_time * 1000)
+            entry.start_time = displayStartTime;
+            entry.end_time = displayEndTime;
+          });
           this.spinner.hide();
         },
         error => {

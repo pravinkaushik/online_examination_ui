@@ -90,6 +90,7 @@ export class QuestionComponent implements OnInit {
           if(this.exam_question.id == 0){
             this.isCreate = true;
             this.exam_question.question_type = 1;
+            this.spinner.hide();
           }else{
             this.examConfigService.get_exam_question(this.exam_question.id)
             .pipe()

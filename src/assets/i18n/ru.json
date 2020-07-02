@@ -105,6 +105,13 @@
 "start_in" : "Start In" ,
 "remain_time" : "Оставшееся время" ,
 "confirm_delete" : "Вы уверены, что хотите это сделать?" ,
+"image_upload_hint1": "To upload large image visit image hosting or a similar site and generate html-embed-thumbnail. Like ",
+"image_upload_hint2":"Then Copy and Paste code into the input in HTML code mode. ",
+"image_upload_hint3":"For more detail visit - ",
+"image_upload_hint4":"How to upload a large image?",
+"note_subjective":"Note: If subjective answer applicable.",
+"find_timezone":"Find Timezone - ",
+"timezone" :"Timezone",
 
 "submit" : "Отправить" ,
 "reset" : "сброс" ,

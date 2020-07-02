@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, retry } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
 import { ExamConfig } from '../_models/exam_config';
@@ -25,14 +25,14 @@ export class ExamConfigService {
   // exam_config Changes
   get_exam_config_list() {
     return this.http.get<ExamConfig[]>(`${environment.apiUrl}/exam_config_all`)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }
 
   get_exam_config(exam_id) {
     return this.http.get<ExamConfig>(`${environment.apiUrl}/exam_config/`+exam_id)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }
@@ -60,14 +60,14 @@ export class ExamConfigService {
 
   get_exam_result_list(exam_config_id) {
     return this.http.get<ExamResult[]>(`${environment.apiUrl}/exam_result_all/`+exam_config_id)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }
 
   get_exam_result(exam_config_id, candidate_id) {
     return this.http.get<Result[]>(`${environment.apiUrl}/exam_result/`+exam_config_id+`/`+candidate_id)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }
@@ -82,7 +82,7 @@ export class ExamConfigService {
   // candidate Changes
   get_candidate_list(exam_config_id) {
     return this.http.get<Candidate[]>(`${environment.apiUrl}/candidate_all/`+exam_config_id)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }
@@ -110,14 +110,14 @@ export class ExamConfigService {
   // exam_question Changes
   get_exam_question_list(exam_config_id) {
     return this.http.get<ExamQuestion[]>(`${environment.apiUrl}/exam_question_all/`+exam_config_id)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }
 
   get_exam_question(exam_question_id) {
     return this.http.get<ExamQuestion>(`${environment.apiUrl}/exam_question/`+exam_question_id)
-      .pipe(
+      .pipe(retry(3),
         tap(_ => console.log('fetched heroes'))
       );
   }

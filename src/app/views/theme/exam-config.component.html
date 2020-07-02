@@ -98,12 +98,18 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="time_zone">{{'select_timezone' | translate}}</label>
                 <div class="col-md-9">
-                  <select id="time_zone" name="time_zone" class="form-control" [(ngModel)]="exam_config.time_zone" required #time_zone="ngModel">
+                  <input id="time_zone" type="text" name="time_zone" class="form-control" placement="top-left" autocomplete="true"
+                    [(ngModel)]="exam_config.time_zone" [ngbTypeahead]="search"
+                    (focus)="focus$.next($any($event).target.value)"
+                    (click)="click$.next($any($event).target.value)" #instance="ngbTypeahead" required #time_zone="ngModel" />
+
+   <!--              <select id="time_zone" name="time_zone" class="form-control" [(ngModel)]="exam_config.time_zone" required #time_zone="ngModel">
                     <option [value]="time_zone" *ngFor="let time_zone of timezones"> {{time_zone}}</option>
-                  </select>
+                  </select> -->
                   <div *ngIf="time_zone.invalid && (time_zone.dirty || time_zone.touched)" class="text-danger">
                     <div *ngIf="time_zone.errors.required">{{'required' | translate}}</div>
                   </div>
+                  <span class="help-block">{{'find_timezone' | translate}}<a href="https://www.zeitverschiebung.net/en/all-time-zones.html" target="_blank">https://www.zeitverschiebung.net/en/all-time-zones.html</a></span>
                 </div>
               </div>
               

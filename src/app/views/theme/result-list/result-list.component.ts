@@ -59,12 +59,19 @@ export class ResultListComponent implements OnInit {
     this.translate.get('te_sm').subscribe((text:string) => {this.examResultHeader.total_sub = text})
     this.exam_results = []
     this.spinner.show();
-    console.log(this.examResultHeader)
     this.examConfigService.get_exam_result_list(this.exam_config.id)
     .pipe(first())
     .subscribe(
         data => {
           this.exam_results = data;
+          this.exam_results.forEach(entry => {
+            var displayStartTime = (entry.start_time * 1000)
+            var displayEndTime = (entry.end_time * 1000)
+            console.log(displayStartTime)
+            console.log(displayEndTime)
+            entry.start_time = displayStartTime;
+            entry.end_time = displayEndTime;
+          });
           this.options = {
             fieldSeparator: ',',
             quoteStrings: '"',

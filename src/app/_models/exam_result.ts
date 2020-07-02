@@ -5,6 +5,7 @@ export class ExamResult {
     c_name: string;
     start_time: any;
     end_time: any;
+    time_zone: any;
     total_pos: number;
     total_neg: number;
     total_sub: number;
