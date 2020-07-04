@@ -38,7 +38,7 @@
               <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="question">{{'question' | translate}}</label>
                 <div class="col-md-9">               
-                  <angular-editor [placeholder]="'Enter Question here...'" [config]="editorConfig" [(ngModel)]="exam_question.question" name="question" required #question="ngModel"></angular-editor>                     
+                  <angular-editor [placeholder]="'Enter Question here...'" [config]="editorConfig" [(ngModel)]="exam_question.question" name="question" required #question="ngModel"></angular-editor>                                        
                   <div *ngIf="question.invalid && (question.dirty || question.touched)" class="text-danger">
                     <div *ngIf="question.errors.required">{{'required' | translate}}</div>
                   </div>
@@ -47,6 +47,13 @@
                     {{'image_upload_hint2' | translate}}
                     {{'image_upload_hint3' | translate}}<a target='_blank' href='https://youtu.be/srdYUSjbBGs'>{{'image_upload_hint4' | translate}}</a>
                   </span>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="voice_supported">
+                <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
+                <div class="col-md-9">
+                  <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(0)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >0">
@@ -62,6 +69,13 @@
                     </span></div>
                 </div>
               </div>
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >0 && voice_supported">
+                <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
+                <div class="col-md-9">
+                  <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(1)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+              </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >1">
                 <label class="col-md-3 col-form-label" for="choice1">{{'choice' | translate}} 2</label>
                 <div class="col-md-9">
@@ -73,6 +87,13 @@
                     <input class="form-check-input" type="checkbox" id="checkboxchoice2" name="checkboxchoice2" [(ngModel)]="exam_question.is_choice2_correct" ng-true-value="1" ng-false-value="0">
                     <label class="form-check-label" for="checkboxchoice2">{{'is_above_correct' | translate}}</label>
                     </span></div>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >1 && voice_supported">
+                <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
+                <div class="col-md-9">
+                  <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(2)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >2">
@@ -88,6 +109,13 @@
                 </span></div>
                 </div>
               </div>
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >2 && voice_supported">
+                <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
+                <div class="col-md-9">
+                  <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(3)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+              </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >3">
                 <label class="col-md-3 col-form-label" for="choice4">{{'choice' | translate}} 4</label>
                 <div class="col-md-9">
@@ -101,6 +129,13 @@
                 </span></div>
                 </div>
               </div>
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >3 && voice_supported">
+                <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
+                <div class="col-md-9">
+                  <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(4)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+              </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >4">
                 <label class="col-md-3 col-form-label" for="choice5">{{'choice' | translate}} 5</label>
                 <div class="col-md-9">
@@ -112,6 +147,13 @@
                     <input class="form-check-input" type="checkbox" id="checkboxchoice5" name="checkboxchoice5" [(ngModel)]="exam_question.is_choice5_correct" ng-true-value="1" ng-false-value="0">
                     <label class="form-check-label" for="checkboxchoice5">{{'is_above_correct' | translate}}</label>
                 </span></div>
+                </div>
+              </div>
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >4 && voice_supported">
+                <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
+                <div class="col-md-9">
+                  <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(5)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
+                  <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
                 </div>
               </div>
               <div class="form-group row">

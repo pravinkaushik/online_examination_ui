@@ -112,6 +112,9 @@
     "note_subjective":"Note: If subjective answer applicable.",
     "find_timezone":"Find Timezone - ",
     "timezone" :"Timezone",
+    "speech_input" :"Speech recognition input",
+    "start" :"Start",
+    "end" :"End",
     
     "soumettre" : "Soumettre" ,
     "reset" : "Reset" ,

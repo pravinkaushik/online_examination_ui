@@ -69,7 +69,9 @@ import { CustomMaterialModule } from './_components/custom-material/custom-mater
 import { ConfirmDialogComponent } from './_components/confirm-dialog/confirm-dialog.component';
 import { ActivationComponent } from './views/activation/activation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {
+  SpeechRecognitionModule,
+} from '@kamiazya/ngx-speech-recognition';
 @NgModule({
   imports: [
     BrowserModule,
@@ -95,6 +97,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeModule,
     LoginModule,
     NgxSpinnerModule,
+    SpeechRecognitionModule.withConfig({
+      lang: 'en-US',
+      interimResults: true,
+      maxAlternatives: 1,
+      continuous: true
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

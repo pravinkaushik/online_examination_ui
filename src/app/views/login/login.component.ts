@@ -9,7 +9,6 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 import { CustomValidators } from 'ng2-validation';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
- 
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +19,7 @@ export class LoginComponent implements OnInit {
   signUpForm: FormGroup;
   submitted = false;
   returnUrl: string;
-
+  message = '';
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
