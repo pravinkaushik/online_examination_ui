@@ -9,30 +9,12 @@ import { ExamQuestion } from '../../../_models/exam_question';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {
-  SpeechRecognitionLang,
-  SpeechRecognitionMaxAlternatives,
-  SpeechRecognitionGrammars,
-  SpeechRecognitionService,
-  resultList,
-} from '@kamiazya/ngx-speech-recognition';
-import { Subscription, Subject } from 'rxjs';
 
 declare const annyang: any;
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css'],
-  providers: [   {
-    provide: SpeechRecognitionLang,
-    useValue: 'en-US',
-  },
-  {
-    provide: SpeechRecognitionMaxAlternatives,
-    useValue: 1,
-  },
-  SpeechRecognitionService
-  ]
+  styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
 
@@ -46,69 +28,6 @@ export class QuestionComponent implements OnInit {
   initialText =  "";
   sequence = 0;
   voice_supported = false;
-  langs = 
-[['Afrikaans',       ['af-ZA']],
- ['Bahasa Indonesia',['id-ID']],
- ['Bahasa Melayu',   ['ms-MY']],
- ['Català',          ['ca-ES']],
- ['Čeština',         ['cs-CZ']],
- ['Deutsch',         ['de-DE']],
- ['English',         ['en-AU', 'Australia'],
-                     ['en-CA', 'Canada'],
-                     ['en-IN', 'India'],
-                     ['en-NZ', 'New Zealand'],
-                     ['en-ZA', 'South Africa'],
-                     ['en-GB', 'United Kingdom'],
-                     ['en-US', 'United States']],
- ['Español',         ['es-AR', 'Argentina'],
-                     ['es-BO', 'Bolivia'],
-                     ['es-CL', 'Chile'],
-                     ['es-CO', 'Colombia'],
-                     ['es-CR', 'Costa Rica'],
-                     ['es-EC', 'Ecuador'],
-                     ['es-SV', 'El Salvador'],
-                     ['es-ES', 'España'],
-                     ['es-US', 'Estados Unidos'],
-                     ['es-GT', 'Guatemala'],
-                     ['es-HN', 'Honduras'],
-                     ['es-MX', 'México'],
-                     ['es-NI', 'Nicaragua'],
-                     ['es-PA', 'Panamá'],
-                     ['es-PY', 'Paraguay'],
-                     ['es-PE', 'Perú'],
-                     ['es-PR', 'Puerto Rico'],
-                     ['es-DO', 'República Dominicana'],
-                     ['es-UY', 'Uruguay'],
-                     ['es-VE', 'Venezuela']],
- ['Euskara',         ['eu-ES']],
- ['Français',        ['fr-FR']],
- ['Galego',          ['gl-ES']],
- ['Hrvatski',        ['hr_HR']],
- ['IsiZulu',         ['zu-ZA']],
- ['Íslenska',        ['is-IS']],
- ['Italiano',        ['it-IT', 'Italia'],
-                     ['it-CH', 'Svizzera']],
- ['Magyar',          ['hu-HU']],
- ['Nederlands',      ['nl-NL']],
- ['Norsk bokmål',    ['nb-NO']],
- ['Polski',          ['pl-PL']],
- ['Português',       ['pt-BR', 'Brasil'],
-                     ['pt-PT', 'Portugal']],
- ['Română',          ['ro-RO']],
- ['Slovenčina',      ['sk-SK']],
- ['Suomi',           ['fi-FI']],
- ['Svenska',         ['sv-SE']],
- ['Türkçe',          ['tr-TR']],
- ['български',       ['bg-BG']],
- ['Pусский',         ['ru-RU']],
- ['Српски',          ['sr-RS']],
- ['한국어',            ['ko-KR']],
- ['中文',             ['cmn-Hans-CN', '普通话 (中国大陆)'],
-                     ['cmn-Hans-HK', '普通话 (香港)'],
-                     ['cmn-Hant-TW', '中文 (台灣)'],
-                     ['yue-Hant-HK', '粵語 (香港)']],
- ['日本語',           ['ja-JP']],
- ['Lingua latīna',   ['la']]];
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -164,14 +83,10 @@ export class QuestionComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private examConfigService: ExamConfigService,
     private spinner: NgxSpinnerService,
-    private service: SpeechRecognitionService,
     public translate: TranslateService,
     private alertService: AlertService
   ) {
-    debugger
-      if(this.getBrowserName() == "chrome"){
-        this.voice_supported = true;
-      }
+    console.log("Question.....")
       this.route.paramMap.subscribe(params => {
         this.spinner.show();
         if(params.get('exam_config_id'))
@@ -206,74 +121,9 @@ export class QuestionComponent implements OnInit {
           this.spinner.hide();
         }       
       });
-      if(this.voice_supported){
-        this.service.onstart = (e) => {
-          console.log('onstart');
-        };
-        this.service.onresult = (e) => {
-          this.listen_loop(e)
-        };
-        this.service.onend = (e) => {
-          console.log('onend');
-          this.started = false;
-        };
-        this.service.onerror = (e) => {
-          console.log('onerror');
-          this.started = false;
-        };
-      }
-  }
-  public getBrowserName() {
-    const agent = window.navigator.userAgent.toLowerCase()
-    switch (true) {
-      case agent.indexOf('edge') > -1:
-        return 'edge';
-      case agent.indexOf('opr') > -1 && !!(<any>window).opr:
-        return 'opera';
-      case agent.indexOf('chrome') > -1 && !!(<any>window).chrome:
-        return 'chrome';
-      case agent.indexOf('trident') > -1:
-        return 'ie';
-      case agent.indexOf('firefox') > -1:
-        return 'firefox';
-      case agent.indexOf('safari') > -1:
-        return 'safari';
-      default:
-        return 'other';
-    }
-}
-  start(seq) {
-    this.sequence = seq
-    switch (this.sequence) {
-      case 0:
-        this.initialText =  this.exam_question.question;
-        break;
-      case 1:
-        this.initialText =  this.exam_question.choice1;
-        break;
-      case 2:
-        this.initialText =  this.exam_question.choice2;
-        break;
-      case 3:
-        this.initialText =  this.exam_question.choice3;
-        break;
-      case 4:
-        this.initialText =  this.exam_question.choice4;
-        break;
-      case 5:
-        this.initialText =  this.exam_question.choice5;
-        break;
-      default:
-    }
-    this.service.lang = this.voice_language;
-    this.started = true;
-    this.service.start();
+
   }
 
-  stop() {
-    this.started = false;
-    this.service.stop();
-  }
   ngOnInit(): void {
     this.questionForm = this.formBuilder.group({
       question: ['', Validators.required],

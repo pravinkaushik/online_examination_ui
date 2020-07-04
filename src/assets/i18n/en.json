@@ -116,6 +116,8 @@
     "start":"Start",
     "end":"End",
     "key9": "Artificial intelligence enabled, Voice based typing.(Working in Chrome browser)",
+    "speech_not_support": "Web Speech API is not supported by this browser, You can improve user experience by upgrade to chrome version 25 or later.",
+    "input_language": "Select voice input language",
 
     "submit": "Submit",
     "reset": "Reset",

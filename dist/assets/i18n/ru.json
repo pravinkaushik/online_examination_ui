@@ -112,6 +112,11 @@
 "note_subjective":"Note: If subjective answer applicable.",
 "find_timezone":"Find Timezone - ",
 "timezone" :"Timezone",
+"speech_input" :"Speech recognition input",
+"start" :"Start",
+"end" :"End",
+"key9": "Artificial intelligence enabled, Voice based typing.(Working in Chrome browser)",
+"speech_not_support": "Web Speech API is not supported by this browser, Upgrade to version 25 or later.",
 
 "submit" : "Отправить" ,
 "reset" : "сброс" ,

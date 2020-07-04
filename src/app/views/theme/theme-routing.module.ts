@@ -9,6 +9,7 @@ import { QuestionComponent } from './question/question.component';
 import { ResultDashboardComponent } from './result-dashboard/result-dashboard.component';
 import { ResultListComponent } from './result-list/result-list.component';
 import { ResultComponent } from './result/result.component';
+import { QuestionVoiceSwitchComponent } from './question-voice-switch.component';
 
 const routes: Routes = [
   {
@@ -72,7 +73,7 @@ const routes: Routes = [
       },
       {
         path: 'question/:exam_config_id/:id',
-        component: QuestionComponent,
+        component: QuestionVoiceSwitchComponent,
         data: {
           title: 'Add Question'
         }

@@ -22,6 +22,8 @@ import { ResultDashboardComponent } from './result-dashboard/result-dashboard.co
 import { SharedModule } from '../../shared.module';
 import { Angular2CsvModule } from 'angular2-csv';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionVoiceComponent } from './question/question-voice.component';
+import { QuestionVoiceSwitchComponent } from './question-voice-switch.component';
 
 @NgModule({
   imports: [
@@ -43,13 +45,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ExamConfigComponent,
     CandidateComponent,
     CandidateListComponent,
-    QuestionComponent,
     QuestionListComponent,
     ResultListComponent,
     ResultComponent,
-    ResultDashboardComponent    
+    ResultDashboardComponent,
+    QuestionComponent,
+    QuestionVoiceComponent,
+    QuestionVoiceSwitchComponent    
   ],
   exports: [ExamConfigComponent],
+  entryComponents: [
+    QuestionComponent,
+    QuestionVoiceComponent
+  ],
   bootstrap: [ ExamConfigComponent ]
 })
 export class ThemeModule { }

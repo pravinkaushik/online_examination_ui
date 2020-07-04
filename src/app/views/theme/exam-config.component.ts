@@ -77,7 +77,7 @@ export class ExamConfigComponent implements OnInit {
     this.exam_config.exam_owner_id = 0;
     this.exam_config.start_time = this.convertToTimestamp(this.start_time.value);
     this.exam_config.end_time = this.convertToTimestamp(this.end_time.value);
-    debugger
+
     this.examConfigService.create_exam_config(this.exam_config)
     .pipe(first())
     .subscribe(
@@ -98,7 +98,7 @@ export class ExamConfigComponent implements OnInit {
     this.exam_config.exam_owner_id = 0;
     this.exam_config.start_time = this.convertToTimestamp(this.start_time.value);
     this.exam_config.end_time = this.convertToTimestamp(this.end_time.value);
-    debugger
+
     this.examConfigService.edit_exam_config(this.exam_config)
     .pipe(first())
     .subscribe(

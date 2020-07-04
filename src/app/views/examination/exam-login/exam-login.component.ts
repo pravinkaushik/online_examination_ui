@@ -61,7 +61,6 @@ onSubmit() {
     }
 
     this.spinner.show();
-    debugger
     this.authenticationService.login_exam(this.f.c_exam_config_id.value, this.f.c_email.value, this.f.c_password.value)
         .pipe(first())
         .subscribe(

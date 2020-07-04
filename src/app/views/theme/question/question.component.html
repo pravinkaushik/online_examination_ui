@@ -6,6 +6,25 @@
           <div class="card-header">
             <strong>{{'question' | translate}}</strong>
           </div>
+
+          <div class="card-header" *ngIf="voice_supported">
+            <div class="form-group row">
+              <div class="col-md-3">
+                <strong>{{'input_language' | translate}}</strong>
+              </div>
+              <div class="col-md-3">
+                <select id="language" name="language" class="form-control" [(ngModel)]="language" (ngModelChange)="updateCountry()">
+                  <option *ngFor="let x of languageList; let idx = index" value="{{idx}}">{{x}}</option>
+                </select>
+              </div>
+              <div class="col-md-3" *ngIf="countryList.length >1">
+                <select id="country" name="country" class="form-control" [(ngModel)]="country" (ngModelChange)="updateLanguage()">
+                  <option *ngFor="let x of countryList" value="{{x[0]}}">{{x[1]}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           <form #questionForm="ngForm">
           <div class="card-body">
              <div class="form-group row" *ngIf="!isCreate">
@@ -49,11 +68,14 @@
                   </span>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="voice_supported">
+              <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="voice_supported">
                   <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(0)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
                   <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+                <div class="col-md-9 text-danger" *ngIf="!voice_supported">
+                  {{'speech_not_support' | translate}}
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >0">
@@ -69,11 +91,14 @@
                     </span></div>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >0 && voice_supported">
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >0">
                 <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="voice_supported">
                   <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(1)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
                   <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+                <div class="col-md-9 text-danger" *ngIf="!voice_supported">
+                  {{'speech_not_support' | translate}}
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >1">
@@ -89,11 +114,14 @@
                     </span></div>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >1 && voice_supported">
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >1">
                 <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="voice_supported">
                   <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(2)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
                   <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+                <div class="col-md-9 text-danger" *ngIf="!voice_supported">
+                  {{'speech_not_support' | translate}}
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >2">
@@ -109,11 +137,14 @@
                 </span></div>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >2 && voice_supported">
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >2">
                 <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="voice_supported">
                   <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(3)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
                   <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+                <div class="col-md-9 text-danger" *ngIf="!voice_supported">
+                  {{'speech_not_support' | translate}}
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >3">
@@ -129,11 +160,14 @@
                 </span></div>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >3 && voice_supported">
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >3">
                 <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="voice_supported">
                   <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(4)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
                   <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+                <div class="col-md-9 text-danger" *ngIf="!voice_supported">
+                  {{'speech_not_support' | translate}}
                 </div>
               </div>
               <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >4">
@@ -149,11 +183,14 @@
                 </span></div>
                 </div>
               </div>
-              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >4 && voice_supported">
+              <div class="form-group row" *ngIf="exam_question.question_type!=3 && total_question >4">
                 <label class="col-md-3 col-form-label" for="question">{{'speech_input' | translate}}</label>
-                <div class="col-md-9">
+                <div class="col-md-9" *ngIf="voice_supported">
                   <button class="btn btn-sm btn-primary" *ngIf="!started" (click)="start(5)"><i class="fa fa-microphone"></i>{{'start' | translate}}</button>
                   <button class="btn btn-sm btn-danger" *ngIf="started" (click)="stop()"><i class="fa fa-microphone-slash"></i>{{'end' | translate}}</button>
+                </div>
+                <div class="col-md-9 text-danger" *ngIf="!voice_supported">
+                  {{'speech_not_support' | translate}}
                 </div>
               </div>
               <div class="form-group row">
