@@ -86,7 +86,6 @@ export class QuestionComponent implements OnInit {
     public translate: TranslateService,
     private alertService: AlertService
   ) {
-    console.log("Question.....")
       this.route.paramMap.subscribe(params => {
         this.spinner.show();
         if(params.get('exam_config_id'))
@@ -163,8 +162,6 @@ export class QuestionComponent implements OnInit {
             break;
           default:
         }
-
-        console.log('RxComponent:onresult', this.sequence, e);
 
   }
 

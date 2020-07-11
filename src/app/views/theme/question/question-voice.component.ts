@@ -271,10 +271,11 @@ export class QuestionVoiceComponent implements OnInit {
 
   updateCountry(){
     var tmpCountry = this.langs[this.language]
-    console.log(tmpCountry.length)
+    this.countryList = []
     if(tmpCountry.length > 2){
       for (let index = 1; index < tmpCountry.length; index++) {
         this.countryList.push(tmpCountry[index]);
+        this.voice_language = tmpCountry[1][0]
       }
     }else{
       this.voice_language = tmpCountry[1][0]
@@ -330,36 +331,55 @@ export class QuestionVoiceComponent implements OnInit {
   listen_loop(e: SpeechRecognitionEvent) {
 
         let tmp ="";
-        
-        for(let i=0; i< e.results.length; i++) {
-          tmp = tmp + e.results[i].item(0).transcript;
+        if(this.isMobileDevice()){
+          tmp = e.results[e.results.length-1].item(0).transcript;
+        }else{
+          for(let i=0; i< e.results.length; i++) {
+            tmp = tmp + e.results[i].item(0).transcript;
+          }
         }
+
+
         switch (this.sequence) {
           case 0:
-            this.exam_question.question = this.initialText + tmp;
+            this.exam_question.question = this.initialText + this.encode(tmp);
             break;
           case 1:
-            this.exam_question.choice1 = this.initialText + tmp;
+            this.exam_question.choice1 = this.initialText + this.encode(tmp);
             break;
           case 2:
-            this.exam_question.choice2 = this.initialText + tmp;
+            this.exam_question.choice2 = this.initialText + this.encode(tmp);
             break;
           case 3:
-            this.exam_question.choice3 = this.initialText + tmp;
+            this.exam_question.choice3 = this.initialText + this.encode(tmp);
             break;
           case 4:
-            this.exam_question.choice4 = this.initialText + tmp;
+            this.exam_question.choice4 = this.initialText + this.encode(tmp);
             break;
           case 5:
-            this.exam_question.choice5;
+            this.exam_question.choice5 = this.initialText + this.encode(tmp);;
             break;
           default:
         }
 
-        console.log('RxComponent:onresult', this.sequence, e);
-
   }
+  encode(string) { 
+    var i = string.length, 
+        a = []; 
 
+    while (i--) { 
+        var iC = string[i].charCodeAt(); 
+        if (iC < 65 || iC > 127 || (iC > 90 && iC < 97)) { 
+            a[i] = '&#' + iC + ';'; 
+        } else { 
+            a[i] = string[i]; 
+        } 
+    } 
+    return a.join(''); 
+  } 
+  isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+  }
   onSubmitCreate() {
     if(this.preProcess()){
       this.submitted = true;

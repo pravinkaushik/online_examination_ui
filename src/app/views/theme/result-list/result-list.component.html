@@ -6,7 +6,23 @@
             {{'c_result_header' | translate}}: {{exam_config.exam_title}}
           </div>
           <div class="card-body">
-            <table class="table table-responsive-sm table-hover table-outline mb-0">
+            <table class="table table-responsive-sm table-hover table-condensed table-outline mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th class="text-center"><i class="icon-people"></i></th>
+                  <th class="text-left"></th>
+                  <th class="text-left"><input type="text" class="form-control" name="c_name" [(ngModel)]="filter.c_name" placeholder="{{'name' | translate}}"></th>
+                  <th class="text-left"><input type="text" class="form-control" name="email" [(ngModel)]="filter.email" placeholder="{{'email' | translate}}"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>
+                  <th class="text-center"></th>          
+                </tr> 
+              </thead>
               <thead class="thead-light">
                 <tr>
                   <th class="text-center"><i class="icon-people"></i></th>
@@ -20,11 +36,15 @@
                   <th class="text-center">{{'te_sm' | translate}}</th>
                   <th class="text-center">{{'overall_m' | translate}}</th>
                   <th class="text-center">{{'check_review_result' | translate}}</th>
-     <!--       <th class="text-center">{{'publish_result' | translate}}</th>      -->      
+                  <th class="text-center"> 
+<!--                    <button type="button" (click)="publishAllResult()" class="btn btn-block btn-dark">
+                      {{'publish_all' | translate}}
+                    </button>  -->
+                </th>          
                 </tr> 
               </thead>
               <tbody>
-                 <tr *ngFor="let exam_result of exam_results; let idx = index" class="danger">
+                 <tr *ngFor="let exam_result of exam_results | bookfilter:filter; let idx = index" [ngClass]="{'table-success': exam_result.is_completed == '0'}">
                   <td class="text-center">
                     <strong>{{idx+1}}</strong>  
                   </td>
@@ -58,11 +78,16 @@
                   </td>
                   <td class="text-center">
                     <strong *ngIf="exam_result.is_completed == '0'">{{exam_result.total_pos + exam_result.total_sub - exam_result.total_neg}}</strong>
-                    <strong *ngIf="exam_result.is_completed == '-1'">{{'review_pending' | translate}}</strong> 
+                    <strong *ngIf="0 > exam_result.is_completed">{{'review_pending' | translate}}</strong> 
                   </td>
                   <td>           
                     <button type="button" (click)="reviewResult(exam_result.candidate_id)" class="btn btn-block btn-info">
                       {{'check_review_result' | translate}}
+                    </button>                 
+                  </td>
+                  <td>           
+                    <button [disabled]="0 > exam_result.is_completed" type="button" (click)="publishResult(exam_result.candidate_id, exam_result.total_pos + exam_result.total_sub - exam_result.total_neg)" class="btn btn-block btn-warning">
+                      {{'publish_result' | translate}}
                     </button>                 
                   </td>
                 </tr>

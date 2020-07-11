@@ -115,9 +115,19 @@
     "speech_input" :"Speech recognition input",
     "start" :"Start",
     "end" :"End",
-    "key9": "Artificial intelligence enabled, Voice based typing.(Working in Chrome browser)",
+    "key9": "Artificial intelligence-enabled, Voice-based typing. (Working in Chrome browser)",
     "speech_not_support": "Web Speech API is not supported by this browser, Upgrade to version 25 or later.",
-
+    "input_language": "Select voice input language",
+    
+    "Arabic": "عربى",
+    "Chinese": "中文",
+    "Dutch": "Dutch",
+    "English":"English",
+    "French":"française",
+    "Hindi":"हिन्दी",
+    "Russian":"русский",
+    "Spanish":"española",
+    
     "submit":"提交" ,
     "reset":"重启" ,
     "create_account":"创建帐户" ,

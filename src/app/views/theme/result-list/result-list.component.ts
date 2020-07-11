@@ -22,7 +22,8 @@ export class ResultListComponent implements OnInit {
   examResultHeader: ExamResultHeader  = new ExamResultHeader();
   exam_results: ExamResult[];
   options: any;
-
+  search_txt: String;
+  filter: ExamResult = new ExamResult();
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -67,8 +68,6 @@ export class ResultListComponent implements OnInit {
           this.exam_results.forEach(entry => {
             var displayStartTime = (entry.start_time * 1000)
             var displayEndTime = (entry.end_time * 1000)
-            console.log(displayStartTime)
-            console.log(displayEndTime)
             entry.start_time = displayStartTime;
             entry.end_time = displayEndTime;
           });
@@ -91,10 +90,24 @@ export class ResultListComponent implements OnInit {
             this.spinner.hide();
         });
   }
-  publishResult(candidate_id){
-
+  publishResult(candidate_id, mark){
+    this.spinner.show();
+    this.examConfigService.publish_result(candidate_id, mark)
+        .pipe(first())
+        .subscribe(
+            data => {
+                this.alertService.success("SUC0015");
+                this.spinner.hide();
+            },
+            error => {
+                this.alertService.error(error);
+                this.spinner.hide();
+            });
   }
   reviewResult(candidate_id){
     this.router.navigate(['/theme/exam_result', this.exam_config.id, candidate_id]);
+  }
+  onSearchChange(txt) {
+    console.log(txt)
   }
 }

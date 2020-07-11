@@ -1,7 +1,7 @@
 export class ExamQuestion {
     id: number;
     exam_owner_id: number;
-    question: string;
+    question: any;
     choice1: string = "";
     choice2: string = "";
     choice3: string = "";

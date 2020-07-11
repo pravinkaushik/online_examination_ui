@@ -29,11 +29,11 @@
             </div>
           </div>
     </div>
-    <div class="row" *ngFor="let exam_question of candidateExamQuestionArr" >
+    <div class="row" *ngFor="let exam_question of candidateExamQuestionArr; let idx = index" >
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-                <label class="col-md-3 col-form-label">{{exam_question.id}}:<div [innerHTML]="exam_question.question"></div> </label>
+                <label class="col-md-3 col-form-label">{{(page -1) * exam_config.question_per_page + (idx+1)}}:<div [innerHTML]="exam_question.question"></div> </label>
             </div>
             <div class="card-body" *ngIf="exam_question.question_type == 3" >
               <label class="col-md-3 col-form-label" for="answer">{{'answer' | translate}}</label>

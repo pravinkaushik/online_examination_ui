@@ -24,6 +24,7 @@ import { Angular2CsvModule } from 'angular2-csv';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionVoiceComponent } from './question/question-voice.component';
 import { QuestionVoiceSwitchComponent } from './question-voice-switch.component';
+import { ExamResultFilterPipe } from '../../_components/exam_result-filter.pipe';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { QuestionVoiceSwitchComponent } from './question-voice-switch.component'
     NgbModule
   ],
   declarations: [
+    ExamResultFilterPipe,
     ExamConfigComponent,
     CandidateComponent,
     CandidateListComponent,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, catchError, retry } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, concat, throwError } from 'rxjs';
+import { tap, catchError, retry, retryWhen, delay, take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { User } from '../_models/user';
 import { ExamConfig } from '../_models/exam_config';
@@ -44,7 +44,20 @@ export class ExamProcessService {
   prepare_candidate_exam(exam_config_id) {
     return this.http.post<any>(`${environment.apiUrl}/prepare_candidate_exam`, JSON.stringify({'exam_config_id':exam_config_id}))
       .pipe(
-        tap(_ => console.log('fetched heroes'))
+        tap(_ => console.log('fetched heroes')),
+        retryWhen(errors =>
+          errors.pipe(
+            delay(1000),   
+            tap(errorStatus => {
+              if (!errorStatus.startsWith('Unknown Error')) {
+                throw errorStatus;
+              }
+              console.log('Retrying...');
+            }),
+            take(3),
+            o => concat(o, throwError(`Sorry, We found some problem while processing. Please try after sometime.`))
+          )
+        )
       );
   }
 
@@ -58,14 +71,40 @@ export class ExamProcessService {
   update_exam_question(candidateExamQuestionArr) {
     return this.http.put<any>(`${environment.apiUrl}/candidate_exam`, JSON.stringify(candidateExamQuestionArr))
       .pipe(retry(3),
-        tap(_ => console.log('fetched heroes'))
+        tap(_ => console.log('fetched heroes')),
+        retryWhen(errors =>
+          errors.pipe(
+            delay(1000),   
+            tap(errorStatus => {
+              if (!errorStatus.startsWith('Unknown Error')) {
+                throw errorStatus;
+              }
+              console.log('Retrying...');
+            }),
+            take(3),
+            o => concat(o, throwError(`Sorry, We found some problem while processing. Please try after sometime.`))
+          )
+        )
       );
   }
 
   finish_exam_question(exam_config_id) {
     return this.http.put<any>(`${environment.apiUrl}/candidate_exam_finish`, JSON.stringify({"exam_config_id":exam_config_id}))
-      .pipe(retry(3),
-        tap(_ => console.log('fetched heroes'))
+      .pipe(
+        tap(_ => console.log('fetched heroes')),
+        retryWhen(errors =>
+          errors.pipe(
+            delay(1000),   
+            tap(errorStatus => {
+              if (!errorStatus.startsWith('Unknown Error')) {
+                throw errorStatus;
+              }
+              console.log('Retrying...');
+            }),
+            take(3),
+            o => concat(o, throwError(`Sorry, We found some problem while processing. Please try after sometime.`))
+          )
+        )
       );
   }
 }

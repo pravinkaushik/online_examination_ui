@@ -52,19 +52,26 @@ export class ResultComponent implements OnInit {
         });
   }
 
-  updateMarks(id, subjective_mark){
-    this.spinner.hide();
+  updateMarks(id, subjective_mark, positive_marks){
+    this.alertService.clear()
+    if(!subjective_mark || !(subjective_mark >=0) || subjective_mark > positive_marks ){
+      this.alertService.error("val_invalid");
+      return;
+    }
+    this.spinner.show();
     this.examConfigService.update_exam_marks(id, subjective_mark, this.exam_config_id)
     .pipe()
     .subscribe(
         (data) => {
-          this.results =  data;
+          this.alertService.success("SUC0016", true);
           this.spinner.hide();
-          alert(this.translate.instant('SUC0005'))
         },
         error => {
             this.alertService.error(error);
             this.spinner.hide();
         });
+  }
+  onBackClick(){
+    this.router.navigate(['/theme/exam_results', this.exam_config_id]);
   }
 }

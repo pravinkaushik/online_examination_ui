@@ -74,13 +74,16 @@
                     result.is_choice4_selected != 0 || result.is_choice5_selected != 0 ) ">-{{result.negative_marks}}</strong> 
                   </td>
                   <td>
-                    <button *ngIf="result.question_type == 3" type="button" (click)="updateMarks(result.id, result.subjective_mark)" class="btn btn-block btn-warning">
+                    <button *ngIf="result.question_type == 3" type="button" (click)="updateMarks(result.id, result.subjective_mark, result.positive_marks)" class ="btn btn-block " [ngClass]="{'btn-warning' : !result.subjective_mark && result.subjective_mark != 0, 'btn-success' : result.subjective_mark >= 0}">
                       {{'update' | translate}}
                     </button>                
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class="card-footer">
+            <button type="button" (click)="onBackClick()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>{{'back' | translate}}</button>
           </div>
         </div>
       </div><!--/.col-->
